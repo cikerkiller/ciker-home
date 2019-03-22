@@ -1,0 +1,44 @@
+@charset "UTF-8";
+/*默认移动CSS代码*/
+.jumbotron {
+	margin-top: 50px;
+	height: 1000px;
+	min-height: 200px;
+}
+
+.jumbotron h1 {
+	font-size: 26px;
+	padding-left: 20px;
+}
+
+.jumbotron h4 {
+	font-size: 15px;
+	padding-left: 20px;
+}
+
+/* 小屏幕（平板，大于等于768px） */
+@media ( min-width : 768px) {
+	.jumbotron h1 {
+		font-size: 26px;
+	}
+	.jumbotron h4 {
+		font-size: 15px;
+	}
+}
+
+/* 中等屏幕（桌面显示器，大于等于992px） */
+@media ( min-width : 992px) {
+	.jumbotron h1 {
+		font-size: 36px;
+	}
+	.jumbotron h4 {
+		font-size: 18px;
+	}
+}
+
+.center{
+	text-align: center;
+    float: none;
+    height:800px;
+    vertical-align: middle;
+}
