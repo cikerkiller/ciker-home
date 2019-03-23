@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-	<%-- <jsp:include page="content.jsp" flush="true"/> --%>
-	<jsp:include page="home-show.jsp" flush="true"/>
+	<!-- 文章标题 -->
+			
+	<!-- 文章内容 -->
 </body>
 </html>

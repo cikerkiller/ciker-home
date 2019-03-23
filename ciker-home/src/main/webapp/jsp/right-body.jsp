@@ -9,9 +9,9 @@
 	line-height:2;
 /* 	padding:.2em 3em .3em; */
 }
-.panel{
+/* .panel{
 	margin : 15px 0;
-}
+} */
 </style>
 
 <div class="panel-group" >
