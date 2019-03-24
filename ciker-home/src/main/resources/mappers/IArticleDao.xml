@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hf.ciker.dao.IArticleDao" >
+  
+  <sql id="baseInsertSql" >
+    
+    	ARTICLE_ID ,
+    	
+		CLASSIFY_ID	,
+		
+		ARTICLE_THEME,
+		
+		ARTICLE_TITLE,
+	
+		CONTENT
+
+  </sql>
+  <sql id="baseSql" >
+    
+    	ARTICLE_ID 			as articleId,
+    	
+		CLASSIFY_ID			as classifyId,
+		
+		ARTICLE_THEME		as articleTheme,
+		
+		ARTICLE_TITLE 		as articleTitle,
+	
+		CONTENT 			as content,
+	
+		CREATION_DATE 		as creationDate,
+	
+		CREATION_BY 		as creationBy,
+	
+		LAST_UPDATE_DATE 	as lastUpdateDate,
+	
+		LAST_UPDATE_BY 		as lastUpdateBy,
+	
+		STATUS 				as status,
+    	
+    	VIEWING_COUNT		as viewingCount
+  </sql>
+  <select id="selectArticles" resultType="com.hf.ciker.vo.ArticleVO">
+	    select 
+	    <include refid="baseSql" />
+	    from CH_ARTICLE
+  </select>
+  <select id="selectArticleById" resultType="com.hf.ciker.vo.ArticleVO" parameterType="long">
+	    select 
+	    <include refid="baseSql" />
+	    from CH_ARTICLE where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </select>
+  
+  <!-- 模糊查询 -->
+  <select id="selectArticleByMatch" resultType="com.hf.ciker.vo.ArticleVO" parameterType="java.lang.String">
+	    select 
+	    <include refid="baseSql" /> 
+	    from CH_ARTICLE where 
+	    	ARTICLE_THEME LIKE CONCAT('%',#{articleTheme,jdbcType=VARCHAR},'%')
+	    OR
+	    	ARTICLE_TITLE LIKE CONCAT('%',#{articleTitle,jdbcType=VARCHAR},'%')
+	    OR
+	    	CONTENT LIKE CONCAT('%',#{content,jdbcType=LONGVARCHAR},'%')
+  </select>
+  
+  <update id="deleteArticle" parameterType="long">
+		update CH_ARTICLE set STATUS=0 where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateArticle" parameterType="com.hf.ciker.vo.ArticleVO" >
+	    update CH_ARTICLE
+	    <set >
+	      <if test="classifyId != null" >
+	        CLASSIFY_ID = #{classifyId,jdbcType=BIGINT},
+	      </if>
+	      <if test="articleTheme != null" >
+	        ARTICLE_THEME = #{articleTheme,jdbcType=VARCHAR},
+	      </if>
+	      <if test="articleTitle != null" >
+	        ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
+	      </if>
+	      <if test="content != null" >
+	        CONTENT = #{content,jdbcType=LONGVARCHAR},
+	      </if>
+	      <if test="lastUpdateDate != null" >
+	        LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="lastUpdateBy != null" >
+	        LAST_UPDATE_BY = #{lastUpdateBy,jdbcType=BIGINT},
+	      </if>
+	      <if test="status != null" >
+	        STATUS = #{status,jdbcType=INTEGER},
+	      </if>
+	    </set>
+	    where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateViewingCount">
+  	update CH_ARTICLE set VIEWING_COUNT = #{viewingCount,jdbcType=INTEGER} where  ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectViewingCount" resultType="long">
+  	select VIEWING_COUNT from CH_ARTICLE where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </select>
+  
+  <insert id="addArticle" parameterType="com.hf.ciker.vo.ArticleVO" >
+    insert into CH_ARTICLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        ARTICLE_ID,
+      </if>
+      <if test="classifyId != null" >
+        CLASSIFY_ID,
+      </if>
+      <if test="articleTheme != null" >
+        ARTICLE_THEME,
+      </if>
+      <if test="articleTitle != null" >
+        ARTICLE_TITLE,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="creationDate != null" >
+        CREATION_DATE,
+      </if>
+      <if test="creationBy != null" >
+        CREATION_BY,
+      </if>
+      <if test="lastUpdateDate != null" >
+        LAST_UPDATE_DATE,
+      </if>
+      <if test="lastUpdateBy != null" >
+        LAST_UPDATE_BY,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+         <if test="articleId != null" >
+        	ARTICLE_ID = #{articleId,jdbcType=BIGINT},
+      	</if>
+         <if test="classifyId != null" >
+	        CLASSIFY_ID = #{classifyId,jdbcType=BIGINT},
+	      </if>
+	      <if test="articleTheme != null" >
+	        ARTICLE_THEME = #{articleTheme,jdbcType=VARCHAR},
+	      </if>
+	      <if test="articleTitle != null" >
+	        ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
+	      </if>
+	      <if test="content != null" >
+	        CONTENT = #{content,jdbcType=LONGVARCHAR},
+	      </if>
+	      <if test="creationDate != null" >
+	        CREATION_DATE = #{creationDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="creationBy != null" >
+	        CREATION_BY = #{creationBy,jdbcType=BIGINT},
+	      </if>
+	      <if test="lastUpdateDate != null" >
+	        LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="lastUpdateBy != null" >
+	        LAST_UPDATE_BY = #{lastUpdateBy,jdbcType=BIGINT},
+	      </if>
+	      <if test="status != null" >
+	        STATUS = #{status,jdbcType=INTEGER},
+	      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insert" parameterType="com.hf.ciker.vo.ArticleVO" >
+    insert into CH_ARTICLE (  <include refid="baseInsertSql" /> )
+    values (#{articleId,jdbcType=BIGINT},#{classifyId,jdbcType=BIGINT}, #{articleTheme,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+
+  
+  
+  </mapper>
+  

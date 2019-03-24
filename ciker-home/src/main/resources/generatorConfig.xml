@@ -69,7 +69,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="mmall_shipping" domainObjectName="Shipping" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="CH_ARTICLE" domainObjectName="CH_ARTICLE" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
   
 
         <!-- geelynote mybatis插件的搭建 -->

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hf.ciker.dao.IClassifyDao" >
+
+	<sql id="baseSql">
+		CLASSIFY_ID as classifyId,
+		PARENT_ID as parentId,
+		CLASSIFY_NAME as classifyName
+	</sql>
+
+	<select id="queryClassifyByLevelOne" resultType="com.hf.ciker.vo.ClassifyVO">
+		
+		select <include refid="baseSql" /> from CH_CLASSIFY_INFO where PARENT_ID = 0
+	
+	</select>
+
+	<select id="queryClassifyByLevelSecond" resultType="com.hf.ciker.vo.ClassifyVO">
+		select <include refid="baseSql" /> from CH_CLASSIFY_INFO where PARENT_ID = #{parentId,jdbcType=BIGINT}
+	</select>
+	<select id="queryClassifyChildId" resultType="long">
+		select CLASSIFY_ID from CH_CLASSIFY_INFO where PARENT_ID = #{parentId,jdbcType=BIGINT}
+	</select>
+
+	<insert id="addClassify" parameterType="com.hf.ciker.vo.ClassifyVO" >
+	    insert into CH_CLASSIFY_INFO ( CLASSIFY_ID, PARENT_ID,CLASSIFY_NAME)
+	    values (#{classifyId,jdbcType=BIGINT},#{parentId,jdbcType=BIGINT}, #{classifyName,jdbcType=VARCHAR})
+  	</insert>
+  	
+  	<delete id="deleteClassify">
+  		delete from CH_CLASSIFY_INFO where CLASSIFY_ID in
+  		<foreach collection="classifys" item="item" index="index" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+  	</delete>
+</mapper>

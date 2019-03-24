@@ -12,7 +12,7 @@ public class LoginController {
 	
 	@RequestMapping(value="login.do",method = RequestMethod.POST)
 	public void login(String username, String password, HttpSession session) {
-		
+		System.out.println("==============================================");
 	}
 	
 }

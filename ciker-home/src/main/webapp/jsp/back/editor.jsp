@@ -8,8 +8,51 @@
 
 <script type="text/javascript">
 	$(function() {
-		$("#summernote").summernote();
-	});
+       	$('#summernote').summernote();
+       	findClassify();
+        $(".self-sub").click(function(){
+        	var summernoteHtml = $('#summernote').summernote('code');
+        	alert(summernoteHtml);
+        	var s=$('#self-select-one').val();
+        	alert(s);
+        	var ArticleVO=new Object();
+        	ArticleVO.articleId = 123;
+        	ArticleVO.classifyId = 123;
+        	ArticleVO.articleTheme = '123';
+        	ArticleVO.articleTitle = '123';
+        	ArticleVO.content = summernoteHtml;
+        	/* $.ajax({
+                 url: "../../it/back/save.do",
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 type: 'POST',
+                 data: JSON.stringify(ArticleVO),//必要
+                 dataType:"json",
+                 contentType:"application/json",
+                 success: function (data) {
+                	 var messageEntity = JSON.stringify(data);
+                	 alert(messageEntity);
+                 }
+             }); */
+        });
+    		
+    });
+ 
+	function findClassify(){
+		$.ajax({
+            url: "../../it/back/searchClassifyOne.do",
+            cache: false,
+            contentType: false,
+            processData: false,
+            type: 'GET',
+            success: function (data) {
+           	 var messageEntity = JSON.stringify(data);
+           	 alert(messageEntity);
+            }
+        });
+		
+	}
 </script>
 
 <style type="text/css">
@@ -51,7 +94,7 @@
 	                <div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="self-operating">
-								<button type="button" class="btn btn-success self-button">提交</button>
+								<button type="button" class="btn btn-success self-button self-sub">提交</button>
 								<button type="button" class="btn btn-info self-button "  data-dismiss="modal">取消</button>
 							</div>
 						</div>
@@ -59,7 +102,16 @@
 							<form role="form">
 								<div class="form-group">
 									<label>分类</label> 
-									<select class="form-control self-control">
+									<select id="self-select-one" class="form-control self-control">
+										<option>踢足球</option>
+										<option>游泳</option>
+										<option>慢跑</option>
+										<option>跳舞</option>
+									</select>
+								</div>
+								<div class="form-group hidden">
+									<label>子类</label> 
+									<select id="self-select-second" class="form-control self-control">
 										<option>踢足球</option>
 										<option>游泳</option>
 										<option>慢跑</option>
@@ -67,8 +119,12 @@
 									</select>
 								</div>
 								<div class="form-group">
+									<label>主题</label> 
+									<input type="text" class="form-control self-control" placeholder="请输入主题">
+								</div>
+								<div class="form-group">
 									<label>标题</label> 
-									<input type="password" class="form-control self-control" placeholder="请输入分类子标题">
+									<input type="text" class="form-control self-control" placeholder="请输入标题">
 								</div>
 							</form>
 						</div>
