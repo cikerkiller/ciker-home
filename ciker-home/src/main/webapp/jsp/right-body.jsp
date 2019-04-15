@@ -16,8 +16,8 @@
 
 <div class="panel-group" >
 	<jsp:include page="myself.jsp" flush="true"/>
-	<jsp:include page="TagCloud.jsp" flush="true"/>
-	<jsp:include page="TagCloud.jsp" flush="true"/>
-	<jsp:include page="guess.jsp" flush="true"/>
-	<jsp:include page="guess.jsp" flush="true"/>
+	<jsp:include page="tag-cloud.jsp" flush="true"/>
+	<jsp:include page="tag-cloud.jsp" flush="true"/>
+	<jsp:include page="guess-love.jsp" flush="true"/>
+	<jsp:include page="guess-love.jsp" flush="true"/>
 </div>

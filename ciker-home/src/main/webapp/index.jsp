@@ -5,8 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/utils/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="js/utils/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/utils/Hogan.js"></script>
+
+<script type="text/javascript" src="js/utils/ciker.js"></script>
+<script type="text/javascript" src="js/service/hot-ranking.js"></script>
+<!-- <script type="text/javascript" src="js/service/article-service.js"></script> -->
+<script type="text/javascript" src="js/service/pagination.js"></script>
+<script type="text/javascript" src="js/page/portal.js"></script>
+
+
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="css/common.css" />
@@ -115,7 +124,8 @@ body{
 			    	</div>
 			    
 			    </div>
-			</div>
+			</div> 
+			<%-- <jsp:include page="jsp/content.jsp" flush="true"/> --%>
 	</div>
 
 </body>

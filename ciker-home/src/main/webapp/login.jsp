@@ -4,8 +4,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/utils/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="js/utils/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/utils/mm.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <style type="text/css">

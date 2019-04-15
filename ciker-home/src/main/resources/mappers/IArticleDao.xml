@@ -25,7 +25,7 @@
 		
 		ARTICLE_TITLE 		as articleTitle,
 	
-		CONTENT 			as content,
+		CONCAT(REPLACE(LEFT(CONTENT,100)," ",""),'...')			as content,
 	
 		CREATION_DATE 		as creationDate,
 	

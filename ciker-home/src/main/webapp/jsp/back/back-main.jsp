@@ -4,9 +4,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ciker后台管理系统</title>
-<script type="text/javascript" src="../../js/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../js/adminlte.js"></script>
+<script type="text/javascript" src="../../js/utils/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../js/utils/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/utils/adminlte.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../../css/bootstrap.min.css" />
 
