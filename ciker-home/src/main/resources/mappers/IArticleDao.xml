@@ -4,8 +4,6 @@
   
   <sql id="baseInsertSql" >
     
-    	ARTICLE_ID ,
-    	
 		CLASSIFY_ID	,
 		
 		ARTICLE_THEME,
@@ -190,10 +188,38 @@
     </trim>
   </insert>
   
-  <insert id="insert" parameterType="com.hf.ciker.vo.ArticleVO" >
+  <insert id="insert" parameterType="com.hf.ciker.vo.ArticleVO" useGeneratedKeys="true" keyProperty="id">
     insert into CH_ARTICLE (  <include refid="baseInsertSql" /> )
-    values (#{articleId,jdbcType=BIGINT},#{classifyId,jdbcType=BIGINT}, #{articleTheme,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+    values (#{classifyId,jdbcType=BIGINT}, #{articleTheme,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
   </insert>
+
+  <select id="queryHotRank" resultType="com.hf.ciker.vo.HotRankVO">
+  	 SELECT 
+ 		@rowno:=@rowno+1 AS rank,
+	    ARTICLE_ID 			AS articleId,
+    	
+		ARTICLE_TITLE 		AS articleTitle,
+	
+    	VIEWING_COUNT		AS viewingCount
+	    FROM CH_ARTICLE,(SELECT @rowno:=0) t ORDER BY VIEWING_COUNT DESC LIMIT 5
+  </select>
+  <select id="queryRecommendArticle" resultType="com.hf.ciker.vo.ArticleVO">
+  	 SELECT 
+	    ARTICLE_ID 			AS articleId,
+    	
+		ARTICLE_TITLE 		AS articleTitle
+	
+	    FROM CH_ARTICLE where RECOMMEND=1 ORDER BY LAST_UPDATE_DATE DESC LIMIT 10
+  </select>
+  
+  <update id="recommendArticle">
+  	update CH_ARTICLE set RECOMMEND=1 where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="unRecommendArticle">
+  	update CH_ARTICLE set RECOMMEND=0 where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </update>
+
 
   
   

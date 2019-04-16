@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hf.ciker.dao.IBulletinDao">
+
+	<select id="queryBulletin" resultType="com.hf.ciker.vo.BulletinVO">
+		SELECT BULLETIN_CONTENT AS bulletinContent FROM CH_BULLETIN WHERE
+		IS_BULLETIN=1 ORDER BY create_date DESC LIMIT 1
+	</select>
+
+	<select id="queryBulletins">
+		SELECT BULLETIN_ID as bulletinId,
+		BULLETIN_CONTENT AS bulletinContent,
+		CREATE_BY as createBy,
+		CREATE_DATE as createDate,
+		IS_BULLETIN as isBulletin FROM CH_BULLETIN ORDER BY create_date DESC
+	</select>
+
+	<insert id="addBulletin" parameterType="com.hf.ciker.vo.BulletinVO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into CH_BULLETIN (BULLETIN_CONTENT,
+		CREATE_BY,CREATE_DATE,IS_BULLETIN)
+		values (#{bulletinContent,jdbcType=VARCHAR},
+		#{CREATE_BY,jdbcType=BIGINT},now(), #{IS_BULLETIN,jdbcType=BIGINT})
+	</insert>
+
+	<update id="releaseBulletin">
+		UPDATE CH_BULLETIN SET IS_BULLETIN=1 WHERE
+		BULLETIN_ID=#{bulletinId,jdbcType=BIGINT}
+	</update>
+</mapper>

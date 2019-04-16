@@ -13,22 +13,33 @@ var portal = {
     },
     bindEvent : function(){
         var _this = this;
-       var  articleContent=$("#article-content").html();
-        // 文章详情
-        $(document).on('click', '.articile-details', function(){
-            var $this = $(this),
-            articleContentHtml = '';
-            var data = $this.data('value');
-            article.articleDetails({articleId : data},function(res){
-            	$("#main-content").hide();
-            	$("#article-content").show();
-            	articleContentHtml = ciker.renderHtml(articleContent, res);
-            	$("#article-content").html(articleContentHtml);
-            	 _this.loadCommentList();
-            },function(errMsg){
-            	
-            });
+        var loadArticle = function(){
+	       	var $this = $(this),
+	       	articleContentHtml = '';
+	       	var data = $this.data('value');
+	       	var articleContent = $("#article-content").html();
+	       	article.articleDetails({articleId : data},function(res){
+	       		$(".main").hide();
+	       		$("#article-content").show();
+	       		articleContentHtml = ciker.renderHtml(articleContent, res);
+	       		$("#article-content").html(articleContentHtml);
+	       		_this.loadCommentList();
+	       	},function(errMsg){
+	       		
+	       	});
+        }
+        // 去掉公告
+        $(document).on('click', '.bulletin-remove', function(){
+        	$(".toptip").css('display','none'); 
+        	$(".main").css('marginTop','60px'); 
+        	$("#article-content").css('marginTop','60px'); 
         });
+        // 热门文章详情
+        $(document).on('click', '.hot-rank', loadArticle);
+        // 推荐文章详情
+        $(document).on('click', '.recommend-article', loadArticle);
+        // 文章详情
+        $(document).on('click', '.articile-details', loadArticle);
         $(document).on('click', '.comment-sub', function(){
             var commentContent = $("#commentContent").val();
             var articleId = $("#articleId").val();
@@ -48,16 +59,69 @@ var portal = {
        
     },
     onLoad : function(){
+    	this.onLoadHtml();
+    	this.loadBulletin();
+    	this.loadHotArticle();
         this.loadArtileList();
-        this.onLoadHtml();
+        this.loadRecommendArticle();
     },
     onLoadHtml:function(){
     	this.pageHtml.ins				 = $('.articile-list').html(),
-    	this.pageHtml.commentHtml			  = $(".comment-container").html(),
-    	this.pageHtml.articlepaginationHtml = $(".article-pagination").html(),
-    	this.pageHtml.commentpaginationHtml = $(".comment-pagination").html();
-
+    	this.pageHtml.commentHtml		 = $(".comment-container").html();
+    	this.pageHtml.hotArticleHtml	 = $(".hot-article").html();
+    	this.pageHtml.recommend	 		= $(".recommend").html();
+    	this.pageHtml.bulletinHtml	 		= $(".bulletin").html();
     },
+    // 加载热门文章
+    loadHotArticle: function(){
+    	var _this           = this,
+    	hotArticle   	= '',
+    	$listCon        	= $('.hot-article');
+    	article.queryHotRank(function(res){
+    		// 渲染html
+    		hotArticle = ciker.renderHtml(_this.pageHtml.hotArticleHtml, res);
+    		$listCon.html(hotArticle);
+    		$(".rank").each(function(){
+    			var rank = $(this).data('value');
+    			if(rank == 1){
+    				$(this).addClass("first");
+    			}else if(rank == 2){
+    				$(this).addClass("second");
+    			}else if(rank == 3){
+    				$(this).addClass("third");
+    			}
+    		});
+    	}, function(errMsg){
+    		$listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
+    	});
+    },
+    // 加载推荐文章
+    loadRecommendArticle: function(){
+    	var _this           = this,
+    	recommendHtml   	= '',
+    	$listCon        	= $('.recommend');
+    	article.queryRecommendArticle(function(res){
+    		// 渲染html
+    		recommendHtml = ciker.renderHtml(_this.pageHtml.recommend, res);
+    		$listCon.html(recommendHtml);
+    	}, function(errMsg){
+    		$listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
+    	});
+    },
+    // 加载公告
+    loadBulletin: function(){
+    	var _this           = this,
+    	bulletinHtml   	= '',
+    	$listCon        	= $('.bulletin');
+    	bulletin.queryBulletin(function(res){
+    		// 渲染html
+    		bulletinHtml = ciker.renderHtml(_this.pageHtml.bulletinHtml, res);
+    		$listCon.html(bulletinHtml);
+    	}, function(errMsg){
+    		$listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
+    	});
+    },
+    // 加载文章列表
     loadArtileList: function(){
         	var _this           = this,
         	artileListHtml   	= '',
@@ -85,6 +149,7 @@ var portal = {
             $listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
         });
     },
+    // 加载评论列表
     loadCommentList: function(){
     	var _this           = this,
     	commentListHtml   	= '',

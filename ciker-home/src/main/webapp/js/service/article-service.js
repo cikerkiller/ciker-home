@@ -22,6 +22,22 @@ var article = {
 			success : resolve,
 			error :reject
 		});
+	},
+	queryHotRank   : function(resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/article/queryHotRank.do'),
+			method : 'GET',
+			success : resolve,
+			error :reject
+		});
+	},
+	queryRecommendArticle   : function(resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/article/queryRecommendArticle.do'),
+			method : 'GET',
+			success : resolve,
+			error :reject
+		});
 	}
 
 }

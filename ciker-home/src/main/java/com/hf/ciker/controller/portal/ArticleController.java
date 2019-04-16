@@ -13,6 +13,8 @@ import com.github.pagehelper.PageInfo;
 import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.services.IArticleService;
 import com.hf.ciker.vo.ArticleVO;
+import com.hf.ciker.vo.HotRankListVO;
+import com.hf.ciker.vo.RecommendVO;
 
 @Controller
 @RequestMapping("/it/article")
@@ -46,4 +48,31 @@ public class ArticleController {
 	public ServerResponse<String> updateViewCount( HttpSession session,Long articleId) {
 		return articleService.updateViewCount(articleId);
 	}
+	
+	@RequestMapping(value="queryHotRank.do",method = RequestMethod.GET)
+	@ResponseBody
+	public ServerResponse<HotRankListVO> queryHotRank() {
+		return articleService.queryHotRank();
+	}
+	
+	@RequestMapping(value="queryRecommendArticle.do",method = RequestMethod.GET)
+	@ResponseBody
+	public ServerResponse<RecommendVO> queryRecommendArticle() {
+		return articleService.queryRecommendArticle();
+	}
+	
+	@RequestMapping(value="recommendArticle.do",method = RequestMethod.GET)
+	@ResponseBody
+	public ServerResponse<String> recommendArticle(Long articleId) {
+		return articleService.recommendArticle(articleId);
+	}
+	
+	@RequestMapping(value="unRecommendArticle.do",method = RequestMethod.GET)
+	@ResponseBody
+	public ServerResponse<String> unRecommendArticle(Long articleId) {
+		return articleService.unRecommendArticle(articleId);
+	}
+	
+	
+	
 }
