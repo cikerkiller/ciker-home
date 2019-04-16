@@ -25,7 +25,7 @@
 		
 		ARTICLE_TITLE 		as articleTitle,
 	
-		CONCAT(REPLACE(LEFT(CONTENT,100)," ",""),'...')			as content,
+		CONTENT		as content,
 	
 		CREATION_DATE 		as creationDate,
 	
@@ -41,7 +41,27 @@
   </sql>
   <select id="selectArticles" resultType="com.hf.ciker.vo.ArticleVO">
 	    select 
-	    <include refid="baseSql" />
+	    ARTICLE_ID 			as articleId,
+    	
+		CLASSIFY_ID			as classifyId,
+		
+		ARTICLE_THEME		as articleTheme,
+		
+		ARTICLE_TITLE 		as articleTitle,
+	
+		CONCAT(REPLACE(LEFT(CONTENT,100)," ",""),'...')			as content,
+	
+		CREATION_DATE 		as creationDate,
+	
+		CREATION_BY 		as creationBy,
+	
+		LAST_UPDATE_DATE 	as lastUpdateDate,
+	
+		LAST_UPDATE_BY 		as lastUpdateBy,
+	
+		STATUS 				as status,
+    	
+    	VIEWING_COUNT		as viewingCount
 	    from CH_ARTICLE
   </select>
   <select id="selectArticleById" resultType="com.hf.ciker.vo.ArticleVO" parameterType="long">

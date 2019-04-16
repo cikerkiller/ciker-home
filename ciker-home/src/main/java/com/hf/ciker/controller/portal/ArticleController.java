@@ -15,7 +15,7 @@ import com.hf.ciker.services.IArticleService;
 import com.hf.ciker.vo.ArticleVO;
 
 @Controller
-@RequestMapping("/it")
+@RequestMapping("/it/article")
 public class ArticleController {
 	
 	@Autowired

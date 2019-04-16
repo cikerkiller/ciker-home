@@ -28,8 +28,5 @@
 	   		<jsp:include page="content-main.jsp" flush="true"/>
 	   </div>
 	 </div>
-	
-	
-	
 </body>
 </html>

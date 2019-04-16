@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hf.ciker.dao.IArticleCommentDao" >
+ 
+  <sql id="baseSql">
+    COMMENT_ID 		as commentId, 
+    COMMENTATOR 	as commentator, 
+    COMMENT_CONTENT	as commentContent,
+    ARTICLE_ID 		as articleId, 
+    COMMENT_DATE  	as commentDate
+  </sql>
+  
+  
+  <insert id="insertComment" parameterType="com.hf.ciker.vo.CommentVO" useGeneratedKeys="true" keyProperty="id">
+    insert into CH_ARTICLE_COMMENT (COMMENTATOR, COMMENTATOR_IP, 
+      ARTICLE_ID, COMMENT_DATE, COMMENT_CONTENT
+      )
+    values (#{commentator,jdbcType=BIGINT}, #{commentatorIp,jdbcType=VARCHAR}, 
+      #{articleId,jdbcType=BIGINT}, now(), #{commentContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+ 
+ <select id="queryComments" resultType="com.hf.ciker.vo.CommentVO">
+ 	select <include refid="baseSql"/> from CH_ARTICLE_COMMENT where ARTICLE_ID = #{articleId,jdbcType=BIGINT} ORDER BY COMMENT_DATE DESC
+ </select>
+ 
+</mapper>

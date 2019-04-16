@@ -1,0 +1,174 @@
+body {
+	background-color: #eee;
+}
+
+.main {
+	padding-top: 5px;
+	float: none;
+}
+
+.toptip {
+	margin-top: 50px;
+	float: none;
+}
+
+/* div{
+	border:1px solid black
+} */
+.right-content {
+	margin-left: -18px;
+}
+
+.self-bulletin {
+	padding-bottom: 5px;
+	font-size: 16px;
+	color: black;
+	padding-left: 10px;
+}
+
+.self-panel {
+	margin: 10px 0;
+	padding: 0 10px;
+	background-color: #fff;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.text {
+	position: relative;
+	display: inline-block;
+	white-space: nowrap;
+	/*animation:scroll 5s 0s linear infinite;*/
+	animation-name: scroll;
+	animation-duration: 5s;
+	animation-delay: 10ms;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	-webkit-animation-name: scroll;
+	-webkit-animation-delay: 10ms;
+	-webkit-animation-duration: 5s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+	-moz-animation-name: scroll;
+	-moz-animation-delay: 10ms;
+	-moz-animation-duration: 5s;
+	-moz-animation-timing-function: linear;
+	-moz-animation-iteration-count: infinite;
+}
+
+@
+-webkit-keyframes scroll { 36% {
+	margin-left: 36%;
+}
+
+}
+@
+-moz-keyframes scroll { 36% {
+	margin-left: 36%;
+}
+
+}
+@
+-ms-keyframes scroll { 36% {
+	margin-left: 36%;
+}
+
+}
+.text:hover {
+	-webkit-animation-play-state: paused;
+}
+
+.first {
+	background-color: red;
+}
+
+.second {
+	background-color: green;
+}
+
+.third {
+	background-color: blue;
+}
+
+.articile {
+	margin: 5px 0;
+}
+
+.pg-content {
+	text-align: center
+}
+
+.self-view {
+	text-align: center;
+}
+
+.query {
+	background-color: 87, 250, 255;
+	padding: 2px 30px;
+}
+
+.self-img {
+	text-align: center;
+}
+
+.self-info {
+	text-align: center;
+}
+
+img {
+	width: auto;
+	height: auto;
+	max-width: 50%;
+	max-height: 50%;
+}
+
+.label{
+	text-align: center;
+	margin-left: 15px;
+	font-size:100%;
+	line-height:2;
+}
+
+.comment-sub{
+	margin: 3px 0;
+	float: right;
+}
+.comment-list{
+	margin-top: 3px;
+}
+
+.comment-body{
+   padding: 10px 15px;
+	line-height: 25px;
+	margin-top: -2px;
+	margin-left: 72px;
+	border-radius: 3px;
+	position: relative;
+	background: #fbfdfb;
+	border: 1px #eee solid;
+	font-size: 15px;
+	min-height: 60px;
+}
+.comment-body:before{
+	content: '';
+	display: inline-block;
+	border-top: 9px solid transparent;
+	border-bottom: 9px solid transparent;
+	border-right: 9px solid #eee;
+	position: absolute;
+	top: 15px;
+	left: -9px
+}
+.comment-people{
+	position: absolute;
+	width: 60px;
+    height: 60px;
+    border-radius: 2px;
+}
+.comment-date{
+    font-size: 14px;
+    /* position: absolute; */
+    text-align: right;
+ }
