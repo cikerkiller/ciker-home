@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hf.ciker.dao.IImageDao">
+	<sql id="baseSql">
+		IMAGE_ID as imageId,
+		IMAGE_TITLE as imageTitle,
+		IMAGE_CONTENT as imageContent,
+		CREATE_BY as createBy,
+		CREATE_DATE as createDate,
+		IS_RELEASE as isRelease
+	</sql>
+	
+	<select id="queryImageByReleased" resultType="com.hf.ciker.vo.ImageVO">
+		SELECT @rowno:=@rowno+1 AS rowno,IMAGE_TITLE as imageTitle,
+		IMAGE_CONTENT as imageContent FROM CH_IMAGE,(SELECT @rowno:=0) t WHERE IS_RELEASE=1
+	</select>
+	
+	<select id="queryImageByReleasedCount">
+		SELECT max(IMAGE_CONTENT) as imageCount FROM CH_IMAGE WHERE IS_RELEASE=1
+	</select>
+	
+	<select id="queryImages" resultType="com.hf.ciker.vo.ImageVO">
+		SELECT <include refid="baseSql"/> FROM CH_IMAGE 
+	</select>
+	
+	<insert id="saveImage" parameterType="com.hf.ciker.vo.ImageVO" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO CH_IMAGE(IMAGE_TITLE,IMAGE_CONTENT,CREATE_BY,CREATE_DATE,IS_RELEASE) VALUES(#{imageTitle,jdbcType=VARCHAR},#{imageContent,jdbcType=VARCHAR},#{CREATE_BY,jdbcType=BIGINT},now(), #{IS_RELEASE,jdbcType=BIGINT})
+	</insert>
+	
+	<update id="releaseImage">
+		UPDATE CH_IMAGE SET IS_RELEASE=1 WHERE IMAGE_ID=#{imageId,jdbcType=BIGINT}
+	</update>
+	
+	<update id="unReleaseImage">
+		UPDATE CH_IMAGE SET IS_RELEASE=0 WHERE IMAGE_ID=#{imageId,jdbcType=BIGINT}
+	</update>
+	
+	<update id="batchReleaseImage" parameterType="list">
+	 update CH_IMAGE set IS_RELEASE=1 where IMAGE_ID in
+ 		<foreach collection="imageIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+	</update>
+	
+	<update id="batchUnReleaseImage" parameterType="list">
+	 update CH_IMAGE set IS_RELEASE=0 where IMAGE_ID in
+ 		<foreach collection="imageIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+	</update>
+	
+</mapper>

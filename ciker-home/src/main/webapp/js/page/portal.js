@@ -64,6 +64,7 @@ var portal = {
     	this.loadHotArticle();
         this.loadArtileList();
         this.loadRecommendArticle();
+        this.loadImages();
     },
     onLoadHtml:function(){
     	this.pageHtml.ins				 = $('.articile-list').html(),
@@ -71,6 +72,7 @@ var portal = {
     	this.pageHtml.hotArticleHtml	 = $(".hot-article").html();
     	this.pageHtml.recommend	 		= $(".recommend").html();
     	this.pageHtml.bulletinHtml	 		= $(".bulletin").html();
+    	this.pageHtml.imageHtml	 		= $("#myCarousel").html();
     },
     // 加载热门文章
     loadHotArticle: function(){
@@ -91,6 +93,21 @@ var portal = {
     				$(this).addClass("third");
     			}
     		});
+    	}, function(errMsg){
+    		$listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
+    	});
+    },
+    // 加载首页图片
+    loadImages: function(){
+    	var _this           = this,
+    	imageHtml   	= '',
+    	$listCon        	= $('#myCarousel');
+    	imageService.queryImageByReleased(function(res){
+    		// 渲染html
+    		imageHtml = ciker.renderHtml(_this.pageHtml.imageHtml, res);
+    		$listCon.html(imageHtml);
+    		$(".image-no").first().addClass("active");
+    		$(".image-content").first().addClass("active");
     	}, function(errMsg){
     		$listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
     	});
