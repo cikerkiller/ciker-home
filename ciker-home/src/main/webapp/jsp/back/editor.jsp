@@ -6,15 +6,13 @@
 <link rel="stylesheet" type="text/css" href="../../css/summernote.css" />
 <script type="text/javascript" src="../../js/utils/summernote.min.js"></script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(function() {
        	$('#summernote').summernote();
        	findClassify();
         $(".self-sub").click(function(){
         	var summernoteHtml = $('#summernote').summernote('code');
-        	alert(summernoteHtml);
         	var s=$('#self-select-one').val();
-        	alert(s);
         	var ArticleVO=new Object();
         	ArticleVO.articleId = 123;
         	ArticleVO.classifyId = 123;
@@ -48,12 +46,11 @@
             type: 'GET',
             success: function (data) {
            	 var messageEntity = JSON.stringify(data);
-           	 alert(messageEntity);
             }
         });
 		
 	}
-</script>
+</script> -->
 
 <style type="text/css">
 .title {

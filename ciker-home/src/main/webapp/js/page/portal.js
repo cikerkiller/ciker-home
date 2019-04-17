@@ -67,12 +67,12 @@ var portal = {
         this.loadImages();
     },
     onLoadHtml:function(){
-    	this.pageHtml.ins				 = $('.articile-list').html(),
-    	this.pageHtml.commentHtml		 = $(".comment-container").html();
-    	this.pageHtml.hotArticleHtml	 = $(".hot-article").html();
-    	this.pageHtml.recommend	 		= $(".recommend").html();
-    	this.pageHtml.bulletinHtml	 		= $(".bulletin").html();
-    	this.pageHtml.imageHtml	 		= $("#myCarousel").html();
+    	this.pageHtml.ins				 = 	$('.articile-list').html(),
+    	this.pageHtml.commentHtml		 = 	$(".comment-container").html();
+    	this.pageHtml.hotArticleHtml	 = 	$(".hot-article").html();
+    	this.pageHtml.recommend	 		 = 	$(".recommend").html();
+    	this.pageHtml.bulletinHtml	 	 = 	$(".bulletin").html();
+    	this.pageHtml.imageHtml	 		 = 	$("#myCarousel").html();
     },
     // 加载热门文章
     loadHotArticle: function(){

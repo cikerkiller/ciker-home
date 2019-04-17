@@ -1,0 +1,21 @@
+body {
+	background-color: black;
+}
+#search-btn{
+	 padding: 9px 10px;
+	 border-right: solid 1px black;
+}
+.divider{
+	height: 1px;
+}
+
+.self-form{
+	margin-left: 10px;
+}
+.menu-list{
+	padding-left: 30px;
+}
+/* .treeview li {
+	margin: 0;
+	padding: 3px 0pt 3px 16px;
+} */

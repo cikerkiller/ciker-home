@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hf.ciker.dao.IMenuDao" >
+  
+  <sql id="baseSql">
+    MENU_ID, MENU_PARENT_ID, MENU_NAME, MENU_URL, MENU_DESC, CREATE_BY, CREATE_DATE, 
+    LAST_UPDATE_BY, LAST_UPDATE_DATE, IS_DELETED, IS_RELEASE
+  </sql>
+  
+  
+  <select id="selectByMenuId" resultType="com.hf.ciker.vo.MenuVO" parameterType="java.lang.Long" >
+    select 
+    MENU_ID as menuId,
+    MENU_PARENT_ID as menuParentId,
+    MENU_NAME as menuName,
+    MENU_URL as menuUrl,
+    MENU_DESC as menuDesc
+    from CH_MENU
+    where MENU_ID = #{menuId,jdbcType=BIGINT}
+  </select>
+  <select id="queryChildMenus" resultType="com.hf.ciker.vo.MenuVO" parameterType="java.lang.Long" >
+    select 
+    MENU_ID as menuId,
+    MENU_PARENT_ID as menuParentId,
+    MENU_NAME as menuName,
+    IS_RELEASE as isRelease
+    from CH_MENU
+    where IS_DELETED=0 and MENU_PARENT_ID = #{menuParentId,jdbcType=BIGINT}
+  </select>
+  <select id="queryChildReleasedMenus" resultType="com.hf.ciker.vo.MenuVO" parameterType="java.lang.Long" >
+    select 
+    MENU_ID as menuId,
+    MENU_PARENT_ID as menuParentId,
+    MENU_URL as menuUrl,
+    MENU_NAME as menuName
+    from CH_MENU
+    where IS_DELETED=0 and IS_RELEASE=1 AND MENU_PARENT_ID = #{menuParentId,jdbcType=BIGINT}
+  </select>
+  
+  <select id="queryLowestLevel" parameterType="java.lang.Long" resultType="string">
+  	select MENU_URL as menuUrl from CH_MENU where MENU_PARENT_ID = #{menuParentId,jdbcType=BIGINT}
+  </select>
+  
+  
+  
+  <insert id="addMenu" parameterType="com.hf.ciker.vo.MenuVO"  useGeneratedKeys="true" keyProperty="id">
+    insert into CH_MENU (MENU_PARENT_ID, MENU_NAME, 
+      MENU_URL, MENU_DESC, CREATE_BY, 
+      CREATE_DATE, LAST_UPDATE_BY, LAST_UPDATE_DATE)
+    values (#{menuParentId,jdbcType=BIGINT}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{menuDesc,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, 
+      now(), #{lastUpdateBy,jdbcType=BIGINT}, now())
+  </insert>
+  
+  
+  <update id="updateMenu" parameterType="com.hf.ciker.vo.MenuVO">
+    update CH_MENU
+    <set >
+      <if test="menuName != null" >
+        MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDesc != null" >
+        MENU_DESC = #{menuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateBy != null" >
+        LAST_UPDATE_BY = #{lastUpdateBy,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateDate != null" >
+        LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where MENU_ID = #{menuId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="deleteMenu" parameterType="com.hf.ciker.vo.MenuVO" >
+    update CH_MENU
+    set 
+      IS_DELETED = 1
+    where MENU_ID = #{menuId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="releaseMenu">
+    update CH_MENU
+    set 
+      IS_RELEASE = 1
+    where MENU_ID = #{menuId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="unReleaseMenu">
+    update CH_MENU
+    set 
+      IS_RELEASE = 0
+    where MENU_ID = #{menuId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="batchDeleteMenu" parameterType="list">
+	 update CH_MENU set IS_DELETED=1 where MENU_ID in
+ 		<foreach collection="menuIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+  </update>
+	
+  <update id="batchReleaseMenu" parameterType="list">
+	 update CH_MENU set IS_RELEASE=1 where MENU_ID in
+ 		<foreach collection="menuIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+	</update>
+	
+	<update id="batchUnReleaseMenu" parameterType="list">
+	 update CH_MENU set IS_RELEASE=0 where MENU_ID in
+ 		<foreach collection="menuIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+	</update>
+  
+  	
+  
+</mapper>

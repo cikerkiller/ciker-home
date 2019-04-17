@@ -1,126 +1,75 @@
-// 表单里的错误提示
-var formError = {
-    show : function(errMsg){
-        $('.error-item').show().find('.err-msg').text(errMsg);
-    },
-    hide : function(){
-        $('.error-item').hide().find('.err-msg').text('');
-    }
-};
 
-// page 逻辑部分
-var page = {
+var back = {
+	data: {
+        listParam : {
+            pageNum     : 1,
+            pageSize    : 5
+        }
+    },
+    pageHtml : {},
     init: function(){
+        this.onLoad();
         this.bindEvent();
     },
     bindEvent : function(){
         var _this = this;
-        // 验证username
-        $('#username').blur(function(){
-            var username = $.trim($(this).val());
-            // 如果用户名为空，我们不做验证
-            if(!username){
-                return;
-            }
-            // 异步验证用户名是否存在
-            _user.checkUsername(username, function(res){
-                formError.hide();
-            }, function(errMsg){
-                formError.show(errMsg);
-            });
+        $(document).on('click', 'ul.sidebar-menu li', function(){
+        	var li = $('ul.sidebar-menu li.active');
+			li.removeClass('active');
+			$(this).addClass('active');
         });
-        // 注册按钮的点击
-        $('#submit').click(function(){
-            _this.submit();
-        });
-        // 如果按下回车，也进行提交
-        $('.user-content').keyup(function(e){
-            // keyCode == 13 表示回车键
-            if(e.keyCode === 13){
-                _this.submit();
-            }
+        $(document).on('click', '.myLeftMenu', function(){
+        	var url = $(this).attr('data');
+			$('#container').load(url);
         });
     },
-    // 提交表单
-    submit : function(){
-        var formData = {
-                username        : $.trim($('#username').val()),
-                password        : $.trim($('#password').val()),
-                passwordConfirm : $.trim($('#password-confirm').val()),
-                phone           : $.trim($('#phone').val()),
-                email           : $.trim($('#email').val()),
-                question        : $.trim($('#question').val()),
-                answer          : $.trim($('#answer').val())
-            },
-            // 表单验证结果
-            validateResult = this.formValidate(formData);
-        // 验证成功
-        if(validateResult.status){
-            _user.register(formData, function(res){
-                window.location.href = './result.html?type=register';
-            }, function(errMsg){
-                formError.show(errMsg);
-            });
-        }
-        // 验证失败
-        else{
-            // 错误提示
-            formError.show(validateResult.msg);
-        }
-
+    onLoad : function(){
+    	this.onLoadHtml();
+        this.loadMenus();
+        this.onLoadWelcomeHtml();
     },
-    // 表单字段的验证
-    formValidate : function(formData){
-        var result = {
-            status  : false,
-            msg     : ''
-        };
-        // 验证用户名是否为空
-        if(!ciker.validate(formData.username, 'require')){
-            result.msg = '用户名不能为空';
-            return result;
-        }
-        // 验证密码是否为空
-        if(!ciker.validate(formData.password, 'require')){
-            result.msg = '密码不能为空';
-            return result;
-        }
-        // 验证密码长度
-        if(formData.password.length < 6){
-            result.msg = '密码长度不能少于6位';
-            return result;
-        }
-        // 验证两次输入的密码是否一致
-        if(formData.password !== formData.passwordConfirm){
-            result.msg = '两次输入的密码不一致';
-            return result;
-        }
-        // 验证手机号
-        if(!ciker.validate(formData.phone, 'phone')){
-            result.msg = '手机号格式不正确';
-            return result;
-        }
-        // 验证邮箱格式
-        if(!ciker.validate(formData.email, 'email')){
-            result.msg = '邮箱格式不正确';
-            return result;
-        }
-        // 验证密码提示问题是否为空
-        if(!ciker.validate(formData.question, 'require')){
-            result.msg = '密码提示问题不能为空';
-            return result;
-        }
-        // 验证密码提示问题答案是否为空
-        if(!ciker.validate(formData.answer, 'require')){
-            result.msg = '密码提示问题答案不能为空';
-            return result;
-        }
-        // 通过验证，返回正确提示
-        result.status   = true;
-        result.msg      = '验证通过';
-        return result;
+    onLoadWelcomeHtml:function(){
+    	$('#container').load("menu.jsp");
+    },
+    onLoadHtml:function(){
+    	this.pageHtml.menuHtml				 = 	$('.sidebar-menu').html();
+    },
+    // 加载menu
+    loadMenus: function(){
+        	var _this           = this,
+        	menuHtml   	= '',
+            $listCon        	= $('.sidebar-menu');
+        menuService.queryChildReleasedMenus(function(res){
+        	_this.forEachBuildMenus(res);
+        }, function(errMsg){
+            $listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
+        });
+    },
+    forEachBuildMenus:function(res){
+    	var _this           = this;
+    	if(res.childMenus !=null){
+    		res.childMenus.forEach(function(value){
+    			if(value.menuParentId == 0){
+    				$(".sidebar-menu").append("<li class=\"menu-node-"+value.menuId+"\"><a href=\"#\"><i class=\"fa fa-link\"></i><span>"+value.menuName+"</span></a></li>");
+    			}else{
+    				$(".menu-node-"+value.menuParentId+">ul").append("<li class=\"menu-node-"+value.menuId+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-link\"></i>"+value.menuName+"</a></li>");
+    			}
+    			if(value.childMenus != null){
+    				$(".menu-node-"+value.menuId+">a").append("<span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span> ");
+    				$(".menu-node-"+value.menuId).append("<ul class=\"lte-treeview-menu menu-list\"></ul>");
+    				$(".menu-node-"+value.menuId).addClass("lte-treeview");
+    				_this.forEachBuildMenus(value);
+    			}else{
+    				if(value.menuUrl != null){
+    					$(".menu-node-"+value.menuId+">a").addClass("myLeftMenu");
+    					$(".menu-node-"+value.menuId+">a").attr("data",value.menuUrl);
+    				}
+    			}
+    		})
+    	}
     }
+
 };
 $(function(){
-    page.init();
+	back.init();
 });

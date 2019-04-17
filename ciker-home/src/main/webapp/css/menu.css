@@ -1,0 +1,26 @@
+li{
+   list-style-type :none;
+}
+.filetree span.folder{
+    display: inline-block;
+}
+
+.list-menu-head{
+	display:inline-block;
+	width: 30%;
+}
+.list-menu-body{
+	display:inline-block;
+	vertical-align: top;
+	width: 50%;
+}
+.op-btn{
+	margin: 5 15px;
+}
+.list-menu-item{
+	cursor:pointer;
+}
+
+.menu-detail-input{
+	max-width: 100%;
+}

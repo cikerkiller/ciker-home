@@ -1001,13 +1001,13 @@ throw new Error('AdminLTE requires jQuery')
     animationSpeed: 500,
     accordion     : true,
     followLink    : false,
-    trigger       : '.treeview a'
+    trigger       : '.lte-treeview a'
   };
 
   var Selector = {
     tree        : '.tree',
-    treeview    : '.treeview',
-    treeviewMenu: '.treeview-menu',
+    lteTreeview    : '.lte-treeview',
+    lteTreeviewMenu: '.lte-treeview-menu',
     open        : '.menu-open, .active',
     li          : 'li',
     data        : '[data-widget="tree"]',
@@ -1032,17 +1032,17 @@ throw new Error('AdminLTE requires jQuery')
 
     $(this.element).addClass(ClassName.tree);
 
-    $(Selector.treeview + Selector.active, this.element).addClass(ClassName.open);
+    $(Selector.lteTreeview + Selector.active, this.element).addClass(ClassName.open);
 
     this._setUpListeners();
   };
 
   Tree.prototype.toggle = function (link, event) {
-    var treeviewMenu = link.next(Selector.treeviewMenu);
+    var lteTreeviewMenu = link.next(Selector.lteTreeviewMenu);
     var parentLi     = link.parent();
     var isOpen       = parentLi.hasClass(ClassName.open);
 
-    if (!parentLi.is(Selector.treeview)) {
+    if (!parentLi.is(Selector.lteTreeview)) {
       return;
     }
 
@@ -1051,9 +1051,9 @@ throw new Error('AdminLTE requires jQuery')
     }
 
     if (isOpen) {
-      this.collapse(treeviewMenu, parentLi);
+      this.collapse(lteTreeviewMenu, parentLi);
     } else {
-      this.expand(treeviewMenu, parentLi);
+      this.expand(lteTreeviewMenu, parentLi);
     }
   };
 
@@ -1062,7 +1062,7 @@ throw new Error('AdminLTE requires jQuery')
 
     if (this.options.accordion) {
       var openMenuLi = parent.siblings(Selector.open);
-      var openTree   = openMenuLi.children(Selector.treeviewMenu);
+      var openTree   = openMenuLi.children(Selector.lteTreeviewMenu);
       this.collapse(openTree, openMenuLi);
     }
 
@@ -1078,7 +1078,7 @@ throw new Error('AdminLTE requires jQuery')
     //tree.find(Selector.open).removeClass(ClassName.open);
     parentLi.removeClass(ClassName.open);
     tree.slideUp(this.options.animationSpeed, function () {
-      //tree.find(Selector.open + ' > ' + Selector.treeview).slideUp();
+      //tree.find(Selector.open + ' > ' + Selector.lteTreeview).slideUp();
       $(this.element).trigger(collapsedEvent);
     }.bind(this));
   };
