@@ -9,6 +9,7 @@ var menuListService = {
         var _this = this;
         $(".list-menu-body").hide();
         $(document).on('click', '.list-menu-item', function(){
+        	/*$(this).addClass("menu-active");*/
         	var menuId = $(this).data('value');
         	if(menuId != 0){
         		$(".list-menu-body").html("");
