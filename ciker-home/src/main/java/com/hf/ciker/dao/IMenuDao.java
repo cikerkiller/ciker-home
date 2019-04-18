@@ -37,4 +37,6 @@ public interface IMenuDao {
 	List<Long> queryChildMenuIds(Long menuParentId);
 	
 	Long queryParentMenuId(Long menuId);
+	
+	MenuVO queryParentMenu(Long menuId);
 }

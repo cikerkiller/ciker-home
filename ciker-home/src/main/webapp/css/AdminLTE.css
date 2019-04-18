@@ -318,7 +318,7 @@ a:focus {
   padding-left: 4px;
   font-weight: 300;
 }
-.content-header > .breadcrumb {
+/* .content-header > .breadcrumb {
   float: right;
   background: transparent;
   margin-top: 0;
@@ -329,7 +329,7 @@ a:focus {
   top: 15px;
   right: 10px;
   border-radius: 2px;
-}
+} */
 .content-header > .breadcrumb > li > a {
   color: #444;
   text-decoration: none;

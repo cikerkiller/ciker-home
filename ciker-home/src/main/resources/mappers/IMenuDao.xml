@@ -39,6 +39,18 @@
     from CH_MENU
     where IS_DELETED=0 and MENU_PARENT_ID = #{menuParentId,jdbcType=BIGINT}
   </select>
+  <select id="queryParentMenu" resultType="com.hf.ciker.vo.MenuVO" parameterType="java.lang.Long" >
+    	 select 
+    	 MENU_ID as menuId,
+    MENU_PARENT_ID as menuParentId,
+     MENU_NAME as menuName
+    from CH_MENU
+    where IS_DELETED=0 AND MENU_ID = #{menuId,jdbcType=BIGINT}
+    
+  </select>
+  
+  
+  
   <select id="queryChildReleasedMenus" resultType="com.hf.ciker.vo.MenuVO" parameterType="java.lang.Long" >
     select 
     MENU_ID as menuId,

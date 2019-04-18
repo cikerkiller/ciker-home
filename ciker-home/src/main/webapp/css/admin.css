@@ -19,3 +19,16 @@ body {
 	margin: 0;
 	padding: 3px 0pt 3px 16px;
 } */
+
+.content-header > .breadcrumb {
+  background: transparent;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+  padding: 7px 5px;
+  border-radius: 2px;
+  color: #3c8dbc;
+}
+.content-header > .breadcrumb > li > a{
+	color: black;
+}

@@ -28,6 +28,15 @@ var menuService = {
 			error :reject
 		});
 	},
+	queryNavMenu : function(listParam,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/back/menu/queryNavMenu.do'),
+			method : 'POST',
+			data    : listParam,
+			success : resolve,
+			error :reject
+		});
+	},
 	deleteMenu : function(listParam,resolve,reject){
 		ciker.request({
 			url : ciker.getServerUrl('/it/back/menu/deleteMenu.do'),

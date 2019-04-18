@@ -95,9 +95,11 @@
 		<div class="content-wrapper">
 			<!-- 内容header -->
 			<section class="content-header">
-				<h1>
-					Page Header
-				</h1>
+				<ol class="breadcrumb nav-menu">
+				{{#list}}
+				  <li><a href="#" data-value="{{menuId}}">{{menuName}}</a></li>
+				{{/list}}
+				</ol>
 			</section>
 			
 			

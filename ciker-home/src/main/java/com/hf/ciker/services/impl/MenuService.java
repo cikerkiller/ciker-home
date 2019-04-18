@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.dao.IMenuDao;
 import com.hf.ciker.services.IMenuService;
+import com.hf.ciker.vo.MenuNavVO;
 import com.hf.ciker.vo.MenuTreeVO;
 import com.hf.ciker.vo.MenuVO;
 
@@ -163,4 +164,23 @@ public class MenuService implements IMenuService{
 		}
 		return ServerResponse.createByError();
 	}
+
+	@Override
+	public ServerResponse<MenuNavVO> queryNavMenu(Long menuId) {
+		MenuNavVO menuNavVO = new MenuNavVO();
+		addNavTree(menuNavVO, menuId);
+		return ServerResponse.createBySuccess(menuNavVO);
+	}
+	
+	private void addNavTree(MenuNavVO menuNavVO,Long menuId) {
+		MenuVO selfMenu = menuDao.queryParentMenu(menuId);
+		if(selfMenu != null) {
+			menuNavVO.addMenuVO(selfMenu);
+			Long parentId = selfMenu.getMenuParentId();
+			if(parentId != 0) {
+				addNavTree(menuNavVO, parentId);
+			}
+		}
+	}
+	
 }

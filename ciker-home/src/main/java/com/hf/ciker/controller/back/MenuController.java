@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hf.ciker.common.CikerConstant;
 import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.services.IMenuService;
+import com.hf.ciker.vo.MenuNavVO;
 import com.hf.ciker.vo.MenuTreeVO;
 import com.hf.ciker.vo.MenuVO;
 import com.hf.ciker.vo.UserVO;
@@ -75,5 +76,11 @@ public class MenuController {
 	@ResponseBody
 	public ServerResponse<String> deleteMenu(Long menuId) {
 		return menuService.deleteMenu(menuId);
+	}
+	
+	@RequestMapping(value="queryNavMenu.do",method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse<MenuNavVO> queryNavMenu(Long menuId) {
+		return menuService.queryNavMenu(menuId);
 	}
 }

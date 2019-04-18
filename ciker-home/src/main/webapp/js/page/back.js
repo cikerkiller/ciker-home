@@ -19,9 +19,25 @@ var back = {
 			$(this).addClass('active');
         });
         $(document).on('click', '.myLeftMenu', function(){
+        	var navTitle = $(this).text();
+        	var menuId = $(this).parent().attr('data');
         	var url = $(this).attr('data');
 			$('#container').load(url);
+			_this.loadNavMenu({menuId : menuId});
+			
         });
+    },
+    loadNavMenu : function(param){
+    	var _this           = this,
+    	navMenuHtml   	= '',
+        $listCon        	= $('.nav-menu');
+    	menuService.queryNavMenu(param,function(res){
+    		// 渲染html
+    		navMenuHtml = ciker.renderHtml(_this.pageHtml.navMenuHtml, res);
+    		$listCon.html(navMenuHtml);
+    	},function(msg){
+    		$listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
+    	})
     },
     onLoad : function(){
     	this.onLoadHtml();
@@ -29,10 +45,12 @@ var back = {
         this.onLoadWelcomeHtml();
     },
     onLoadWelcomeHtml:function(){
+    	$('.nav-menu').html("欢迎来到刺客空间!");
     	$('#container').load("menu.jsp");
     },
     onLoadHtml:function(){
     	this.pageHtml.menuHtml				 = 	$('.sidebar-menu').html();
+    	this.pageHtml.navMenuHtml				 = 	$('.nav-menu').html();
     },
     // 加载menu
     loadMenus: function(){
@@ -63,6 +81,7 @@ var back = {
     				if(value.menuUrl != null){
     					$(".menu-node-"+value.menuId+">a").addClass("myLeftMenu");
     					$(".menu-node-"+value.menuId+">a").attr("data",value.menuUrl);
+    					$(".menu-node-"+value.menuId).attr("data",value.menuId);
     				}
     			}
     		})
