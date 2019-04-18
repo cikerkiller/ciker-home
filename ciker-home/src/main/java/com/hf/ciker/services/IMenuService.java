@@ -8,11 +8,14 @@ import com.hf.ciker.vo.MenuVO;
 
 public interface IMenuService {
 	ServerResponse<String> batchDeleteMenu(List<Long> menuIds);
+	ServerResponse<String> deleteMenu(Long menuId);
 	ServerResponse<String> addMenu(MenuVO menuVO);
 	ServerResponse<String> updateMenu(MenuVO menuVO);
 	ServerResponse<MenuVO> selectByMenuId(Long menuId);
-	ServerResponse<String> batchReleaseMenu(List<Long> menuIds);
-	ServerResponse<String> batchUnReleaseMenu(List<Long> menuIds);
+	
+	ServerResponse<MenuVO> selectByNotDeletedMenuId(Long menuId);
+	ServerResponse<String> releaseMenu(Long menuId);
+	ServerResponse<String> unReleaseMenu(Long menuId);
 	ServerResponse<MenuTreeVO> queryMenus();
 	ServerResponse<MenuTreeVO> queryChildReleasedMenus();
 }

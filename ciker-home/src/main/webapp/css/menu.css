@@ -7,13 +7,13 @@ li{
 
 .list-menu-head{
 	display:inline-block;
-	width: 30%;
+	min-width: 30%;
 }
 .list-menu-body{
 	display:inline-block;
 	vertical-align: top;
-	width: 50%;
 }
+
 .op-btn{
 	margin: 5 15px;
 }
@@ -23,4 +23,16 @@ li{
 
 .menu-detail-input{
 	max-width: 100%;
+}
+.err-tip{
+	color: red;
+}
+.error-msg{
+	position: absolute;
+	display:inline-block;
+	padding: 10px;
+}
+
+.del-line {
+	text-decoration : line-through;
 }

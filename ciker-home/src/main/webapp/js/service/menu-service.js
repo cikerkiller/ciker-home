@@ -6,6 +6,7 @@ var menuService = {
 		ciker.request({
 			url : ciker.getServerUrl('/it/back/menu/queryMenus.do'),
 			method : 'GET',
+			cache	: false,
 			success : resolve,
 			error :reject
 		});
@@ -27,9 +28,9 @@ var menuService = {
 			error :reject
 		});
 	},
-	batchDeleteMenu : function(listParam,resolve,reject){
+	deleteMenu : function(listParam,resolve,reject){
 		ciker.request({
-			url : ciker.getServerUrl('/it/back/menu/batchDeleteMenu.do'),
+			url : ciker.getServerUrl('/it/back/menu/deleteMenu.do'),
 			method : 'POST',
 			data    : listParam,
 			success : resolve,
@@ -54,18 +55,27 @@ var menuService = {
 			error :reject
 		});
 	},
-	batchReleaseMenu : function(listParam,resolve,reject){
+	selectByNotDeletedMenuId : function(listParam,resolve,reject){
 		ciker.request({
-			url : ciker.getServerUrl('/it/back/menu/batchReleaseMenu.do'),
+			url : ciker.getServerUrl('/it/back/menu/selectByNotDeletedMenuId.do'),
 			method : 'POST',
 			data    : listParam,
 			success : resolve,
 			error :reject
 		});
 	},
-	batchUnReleaseMenu : function(listParam,resolve,reject){
+	releaseMenu : function(listParam,resolve,reject){
 		ciker.request({
-			url : ciker.getServerUrl('/it/back/menu/batchUnReleaseMenu.do'),
+			url : ciker.getServerUrl('/it/back/menu/releaseMenu.do'),
+			method : 'POST',
+			data    : listParam,
+			success : resolve,
+			error :reject
+		});
+	},
+	unReleaseMenu : function(listParam,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/back/menu/unReleaseMenu.do'),
 			method : 'POST',
 			data    : listParam,
 			success : resolve,

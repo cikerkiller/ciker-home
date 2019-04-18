@@ -14,9 +14,21 @@
     MENU_PARENT_ID as menuParentId,
     MENU_NAME as menuName,
     MENU_URL as menuUrl,
+     IS_RELEASE as isRelease,
     MENU_DESC as menuDesc
     from CH_MENU
     where MENU_ID = #{menuId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByNotDeletedMenuId" resultType="com.hf.ciker.vo.MenuVO" parameterType="java.lang.Long" >
+    select 
+    MENU_ID as menuId,
+    MENU_PARENT_ID as menuParentId,
+    MENU_NAME as menuName,
+    MENU_URL as menuUrl,
+     IS_RELEASE as isRelease,
+    MENU_DESC as menuDesc
+    from CH_MENU
+    where IS_DELETED=0 and MENU_ID = #{menuId,jdbcType=BIGINT}
   </select>
   <select id="queryChildMenus" resultType="com.hf.ciker.vo.MenuVO" parameterType="java.lang.Long" >
     select 
@@ -36,9 +48,15 @@
     from CH_MENU
     where IS_DELETED=0 and IS_RELEASE=1 AND MENU_PARENT_ID = #{menuParentId,jdbcType=BIGINT}
   </select>
+  <select id="queryChildMenuIds" resultType="long" parameterType="java.lang.Long" >
+    select 
+    MENU_ID as menuId
+    from CH_MENU
+    where IS_DELETED=0 AND MENU_PARENT_ID = #{menuParentId,jdbcType=BIGINT}
+  </select>
   
   <select id="queryLowestLevel" parameterType="java.lang.Long" resultType="string">
-  	select MENU_URL as menuUrl from CH_MENU where MENU_PARENT_ID = #{menuParentId,jdbcType=BIGINT}
+  	select MENU_URL as menuUrl from CH_MENU where MENU_ID = #{menuParentId,jdbcType=BIGINT}
   </select>
   
   
@@ -54,25 +72,9 @@
   
   
   <update id="updateMenu" parameterType="com.hf.ciker.vo.MenuVO">
-    update CH_MENU
-    <set >
-      <if test="menuName != null" >
-        MENU_NAME = #{menuName,jdbcType=VARCHAR},
-      </if>
-      <if test="menuUrl != null" >
-        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="menuDesc != null" >
-        MENU_DESC = #{menuDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="lastUpdateBy != null" >
-        LAST_UPDATE_BY = #{lastUpdateBy,jdbcType=BIGINT},
-      </if>
-      <if test="lastUpdateDate != null" >
-        LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where MENU_ID = #{menuId,jdbcType=BIGINT}
+    update CH_MENU set MENU_NAME = #{menuName,jdbcType=VARCHAR},MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+     LAST_UPDATE_BY = #{lastUpdateBy,jdbcType=BIGINT},LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP}
+     where MENU_ID = #{menuId,jdbcType=BIGINT}
   </update>
   
   <update id="deleteMenu" parameterType="com.hf.ciker.vo.MenuVO" >
@@ -116,7 +118,12 @@
             #{item}
         </foreach>
 	</update>
-  
+  <select id="queryParentMenuId" resultType="long" parameterType="long">
+  	 select 
+    MENU_PARENT_ID as menuParentId
+    from CH_MENU
+    where IS_DELETED=0 and MENU_PARENT_ID not in (0) AND MENU_ID = #{menuId,jdbcType=BIGINT}
+  </select>
   	
   
 </mapper>

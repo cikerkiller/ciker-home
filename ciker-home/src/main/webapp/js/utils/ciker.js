@@ -9,17 +9,19 @@ var ciker = {
 			url			: param.url		||	'',
 			dataType	: param.type 	||	'json',
 			data 		: param.data 	||	'',
+			async 		: param.async 	||	true,
+			cache		: param.cache 	||	false,
 			success		: function(res){
-				if(0 === res.status){
-					typeof param.success === 'function' && param.success(res.data);
-				}else if(10 === res.status){
+				if(0 == res.status){
+					typeof param.success == 'function' && param.success(res.data);
+				}else if(10 == res.status){
 					_this.doLogin();
-				}else if(1 === res.status){
-					typeof param.error === 'function' && param.error(res.msg);
+				}else if(1 == res.status){
+					typeof param.error == 'function' && param.error(res.msg);
 				}
 			},
 			error		: function(err){
-				typeof param.error === 'function' && param.error(err.statusText); 
+				typeof param.error == 'function' && param.error(err.statusText); 
 			}
 		});
 	},
