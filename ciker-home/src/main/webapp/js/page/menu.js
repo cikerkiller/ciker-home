@@ -133,31 +133,46 @@ var menuListService = {
     	if(param == 1){
     		menuId = menuListService.saveOpParam.menuParentId;
     		menuService.addMenu({
+    			async : false,
+    			data : {
     			menuParentId 	: menuId,
     			menuName		:	$(".menu-detail-input-name").val(),	
     			menuUrl			:	$(".menu-detail-input-url").val(),	
     			menuDesc		:	$(".menu-detail-input-desc").val()
+    		}
+    			
     		},success,error );
     	}else if(param == 2){
     		menuId = $(".menu-detail-input-id").val();
-    		menuService.updateMenu({
-    			menuId 			: 	menuId,	
-    			menuName		:	$(".menu-detail-input-name").val(),	
-    			menuUrl			:	$(".menu-detail-input-url").val(),	
-    			menuDesc		:	$(".menu-detail-input-desc").val()
-    		},success,error );
+    		menuService.updateMenu(
+    				{
+    					async : false,
+    					data :{
+    		    			menuId 			: 	menuId,	
+    		    			menuName		:	$(".menu-detail-input-name").val(),	
+    		    			menuUrl			:	$(".menu-detail-input-url").val(),	
+    		    			menuDesc		:	$(".menu-detail-input-desc").val()
+    		    		}
+    				}
+    			,success,error );
     		
     	}else if(param == 3){
-    		
     		menuId = $(".menu-detail-input-id").val();
     		menuService.deleteMenu({
-    			menuId 			: 	menuId	
+    			async 	: false,
+    			data	: {menuId : menuId}
     		},success,error );
+    		$('.op-btn-delete').text('删除菜单');
+        	$(".del-line").removeClass('del-line');
+        	menuListService.saveOpParam.param=1;
     	}
 		$("#tree").html("");
 		menuListService.loadMenus();
-		$(".list-menu-body").html("");
-		if(menuId != undefined && menuId != 0){
+		$(".list-menu-body").hide();
+		if(menuId != undefined && menuId != 0 && param != 3){
+			$("#tree span").removeClass("menu-active");
+			$(".menu-list-node-"+menuId+">span").addClass("menu-active");
+			$(".list-menu-body").html("");
 			setTimeout( function(){
 				menuListService.queryMenu(menuId);
 				$(".list-menu-body").show();
@@ -199,12 +214,15 @@ var menuListService = {
     onLoadHtml:function(){
     	this.pageHtml.menuDetailHtml				 = 	$('.list-menu-body').html();
     },
-    queryMenu:function(data){
+    queryMenu:function(menuId){
     	var _this           = this,
     	menuDetailHtml   	= '',
     	$listCon        	= $('.list-menu-body');
-    	var param = {menuId:data};
-    	menuService.selectByNotDeletedMenuId(param, function(res){
+    	var data = {menuId:menuId};
+    	menuService.selectByNotDeletedMenuId({
+    		async:false,
+    		data : data
+    	}, function(res){
     		if(res.isRelease == 1){
     			res.operate = "取消发布";
     		}else{
@@ -232,7 +250,10 @@ var menuListService = {
     // 加载menu
     loadMenus: function(){
         	var _this           = this;
-        menuService.queryMenus(function(res){
+        menuService.queryMenus({
+        	cache	:	false,
+        	async	:	false
+        },function(res){
         	_this.forEachBuildMenus(res);
         }, function(errMsg){
             $listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');

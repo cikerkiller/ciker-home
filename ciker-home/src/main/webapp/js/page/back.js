@@ -45,7 +45,7 @@ var back = {
         this.onLoadWelcomeHtml();
     },
     onLoadWelcomeHtml:function(){
-    	$('.nav-menu').html("欢迎来到刺客空间!");
+    	$('.nav-menu').html("<h3>欢迎来到刺客空间!</h3>");
     	$('#container').load("menu.jsp");
     },
     onLoadHtml:function(){

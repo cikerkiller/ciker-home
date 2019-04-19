@@ -2,13 +2,14 @@
  * 菜单
  */
 var menuService = {
-	queryMenus : function(resolve,reject){
+	queryMenus : function(param,resolve,reject){
 		ciker.request({
 			url : ciker.getServerUrl('/it/back/menu/queryMenus.do'),
-			method : 'GET',
-			cache	: false,
+			method 	: 'GET',
+			cache	: param.cache || false,
+			async 	: param.async || true,
 			success : resolve,
-			error :reject
+			error 	:reject
 		});
 	},	
 	queryChildReleasedMenus : function(resolve,reject){
@@ -19,11 +20,12 @@ var menuService = {
 			error :reject
 		});
 	},	
-	addMenu : function(listParam,resolve,reject){
+	addMenu : function(param,resolve,reject){
 		ciker.request({
 			url : ciker.getServerUrl('/it/back/menu/addMenu.do'),
 			method : 'POST',
-			data    : listParam,
+			async 	: param.async || true,
+			data    : param.data,
 			success : resolve,
 			error :reject
 		});
@@ -37,20 +39,22 @@ var menuService = {
 			error :reject
 		});
 	},
-	deleteMenu : function(listParam,resolve,reject){
+	deleteMenu : function(param,resolve,reject){
 		ciker.request({
 			url : ciker.getServerUrl('/it/back/menu/deleteMenu.do'),
 			method : 'POST',
-			data    : listParam,
+			data    : param.data,
+			async 	: param.async || true,
 			success : resolve,
 			error :reject
 		});
 	},
-	updateMenu : function(listParam,resolve,reject){
+	updateMenu : function(param,resolve,reject){
 		ciker.request({
 			url : ciker.getServerUrl('/it/back/menu/updateMenu.do'),
 			method : 'POST',
-			data    : listParam,
+			data    : param.data,
+			async 	: param.async || true,
 			success : resolve,
 			error :reject
 		});
@@ -64,11 +68,12 @@ var menuService = {
 			error :reject
 		});
 	},
-	selectByNotDeletedMenuId : function(listParam,resolve,reject){
+	selectByNotDeletedMenuId : function(param,resolve,reject){
 		ciker.request({
 			url : ciker.getServerUrl('/it/back/menu/selectByNotDeletedMenuId.do'),
 			method : 'POST',
-			data    : listParam,
+			async 	: param.async || true,
+			data    : param.data,
 			success : resolve,
 			error :reject
 		});

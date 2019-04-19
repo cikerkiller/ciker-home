@@ -84,7 +84,7 @@
   
   
   <update id="updateMenu" parameterType="com.hf.ciker.vo.MenuVO">
-    update CH_MENU set MENU_NAME = #{menuName,jdbcType=VARCHAR},MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+    update CH_MENU set MENU_NAME = #{menuName,jdbcType=VARCHAR},MENU_URL = #{menuUrl,jdbcType=VARCHAR},MENU_DESC = #{menuDesc,jdbcType=VARCHAR},
      LAST_UPDATE_BY = #{lastUpdateBy,jdbcType=BIGINT},LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP}
      where MENU_ID = #{menuId,jdbcType=BIGINT}
   </update>
