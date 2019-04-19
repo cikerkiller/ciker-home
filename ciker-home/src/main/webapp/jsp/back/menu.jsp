@@ -3,8 +3,8 @@
 <html>
   <head>
     <title>tree.html</title>
-	<script type="text/javascript" src="../../js/page/menu.js"></script>
 	<script type="text/javascript" src="../../js/utils/jquery.treeview.js"></script>
+	<script type="text/javascript" src="../../js/page/menu.js"></script>
 	<link rel="stylesheet" type="text/css" href="../../css/jquery.treeview.css" />
 	<link rel="stylesheet" type="text/css" href="../../css/menu.css" />
   </head>

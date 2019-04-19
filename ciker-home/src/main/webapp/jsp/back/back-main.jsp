@@ -8,8 +8,8 @@
 <script type="text/javascript" src="../../js/utils/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../js/utils/adminlte.js"></script>
 <script type="text/javascript" src="../../js/utils/Hogan.js"></script>
-<script type="text/javascript" src="../../js/utils/ciker.js"></script>
 <script type="text/javascript" src="../../js/service/menu-service.js"></script>
+<script type="text/javascript" src="../../js/utils/ciker.js"></script>
 <script type="text/javascript" src="../../js/page/back.js"></script>
 
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
@@ -17,6 +17,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/ionicons.css">
 <link rel="stylesheet" type="text/css" href="../../css/AdminLTE.css">
 <link rel="stylesheet" type="text/css" href="../../css/admin.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap-select.css" />
 <style type="text/css">
 
 </style>

@@ -6,8 +6,6 @@
     
 		CLASSIFY_ID	,
 		
-		ARTICLE_THEME,
-		
 		ARTICLE_TITLE,
 	
 		CONTENT
@@ -18,8 +16,6 @@
     	ARTICLE_ID 			as articleId,
     	
 		CLASSIFY_ID			as classifyId,
-		
-		ARTICLE_THEME		as articleTheme,
 		
 		ARTICLE_TITLE 		as articleTitle,
 	
@@ -42,8 +38,6 @@
 	    ARTICLE_ID 			as articleId,
     	
 		CLASSIFY_ID			as classifyId,
-		
-		ARTICLE_THEME		as articleTheme,
 		
 		ARTICLE_TITLE 		as articleTitle,
 	
@@ -73,8 +67,6 @@
 	    select 
 	    <include refid="baseSql" /> 
 	    from CH_ARTICLE where 
-	    	ARTICLE_THEME LIKE CONCAT('%',#{articleTheme,jdbcType=VARCHAR},'%')
-	    OR
 	    	ARTICLE_TITLE LIKE CONCAT('%',#{articleTitle,jdbcType=VARCHAR},'%')
 	    OR
 	    	CONTENT LIKE CONCAT('%',#{content,jdbcType=LONGVARCHAR},'%')
@@ -89,9 +81,6 @@
 	    <set >
 	      <if test="classifyId != null" >
 	        CLASSIFY_ID = #{classifyId,jdbcType=BIGINT},
-	      </if>
-	      <if test="articleTheme != null" >
-	        ARTICLE_THEME = #{articleTheme,jdbcType=VARCHAR},
 	      </if>
 	      <if test="articleTitle != null" >
 	        ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
@@ -129,9 +118,6 @@
       <if test="classifyId != null" >
         CLASSIFY_ID,
       </if>
-      <if test="articleTheme != null" >
-        ARTICLE_THEME,
-      </if>
       <if test="articleTitle != null" >
         ARTICLE_TITLE,
       </if>
@@ -161,9 +147,6 @@
          <if test="classifyId != null" >
 	        CLASSIFY_ID = #{classifyId,jdbcType=BIGINT},
 	      </if>
-	      <if test="articleTheme != null" >
-	        ARTICLE_THEME = #{articleTheme,jdbcType=VARCHAR},
-	      </if>
 	      <if test="articleTitle != null" >
 	        ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
 	      </if>
@@ -190,7 +173,7 @@
   
   <insert id="insert" parameterType="com.hf.ciker.vo.ArticleVO" useGeneratedKeys="true" keyProperty="id">
     insert into CH_ARTICLE (  <include refid="baseInsertSql" /> )
-    values (#{classifyId,jdbcType=BIGINT}, #{articleTheme,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+    values (#{classifyId,jdbcType=BIGINT},  #{articleTitle,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
   </insert>
 
   <select id="queryHotRank" resultType="com.hf.ciker.vo.HotRankVO">

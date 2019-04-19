@@ -46,7 +46,7 @@ var back = {
     },
     onLoadWelcomeHtml:function(){
     	$('.nav-menu').html("<h3>欢迎来到刺客空间!</h3>");
-    	$('#container').load("menu.jsp");
+    	/*$('#container').load("menu.jsp");*/
     },
     onLoadHtml:function(){
     	this.pageHtml.menuHtml				 = 	$('.sidebar-menu').html();

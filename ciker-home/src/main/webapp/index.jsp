@@ -102,12 +102,6 @@
 								</ol>
 								<!-- 轮播（Carousel）项目 -->
 								<div class="carousel-inner">
-									{{#list}}
-									<div class="item image-content">
-										<img src="{{imageContent}}" alt="First slide">
-										<div class="carousel-caption">{{imageTitle}}</div>
-									</div>
-									{{/list}}
 								</div>
 								<!-- 轮播（Carousel）导航 -->
 								<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> 

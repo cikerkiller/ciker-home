@@ -103,9 +103,16 @@ var portal = {
     	imageHtml   	= '',
     	$listCon        	= $('#myCarousel');
     	imageService.queryImageByReleased(function(res){
-    		// 渲染html
+    		var list = res.list;
     		imageHtml = ciker.renderHtml(_this.pageHtml.imageHtml, res);
     		$listCon.html(imageHtml);
+    		for(var i=0;i<list.length;i++){
+    			$(".carousel-inner").append(
+    					"<div class=\"item image-content\">"+
+    			"<img src=\""+list[i].imageContent+"\" alt=\"First slide\">"+
+    			"<div class=\"carousel-caption\">"+list[i].imageTitle+"</div></div>"
+    			);
+    		}
     		$(".image-no").first().addClass("active");
     		$(".image-content").first().addClass("active");
     	}, function(errMsg){
