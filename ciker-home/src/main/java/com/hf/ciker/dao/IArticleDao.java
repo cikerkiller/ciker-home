@@ -11,8 +11,6 @@ public interface IArticleDao {
 	
 	int addArticle(ArticleVO articleVO);
 	
-	int insert(ArticleVO articleVO);
-	
 	int updateArticle(ArticleVO articleVO);
 	
 	int deleteArticle(Long articleId);

@@ -8,7 +8,11 @@
 		
 		ARTICLE_TITLE,
 	
-		CONTENT
+		CONTENT,
+		
+		CREATION_BY ,
+	
+		LAST_UPDATE_BY 
 
   </sql>
   <sql id="baseSql" >
@@ -109,71 +113,9 @@
   	select VIEWING_COUNT from CH_ARTICLE where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
   </select>
   
-  <insert id="addArticle" parameterType="com.hf.ciker.vo.ArticleVO" >
-    insert into CH_ARTICLE
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="articleId != null" >
-        ARTICLE_ID,
-      </if>
-      <if test="classifyId != null" >
-        CLASSIFY_ID,
-      </if>
-      <if test="articleTitle != null" >
-        ARTICLE_TITLE,
-      </if>
-      <if test="content != null" >
-        CONTENT,
-      </if>
-      <if test="creationDate != null" >
-        CREATION_DATE,
-      </if>
-      <if test="creationBy != null" >
-        CREATION_BY,
-      </if>
-      <if test="lastUpdateDate != null" >
-        LAST_UPDATE_DATE,
-      </if>
-      <if test="lastUpdateBy != null" >
-        LAST_UPDATE_BY,
-      </if>
-      <if test="status != null" >
-        STATUS,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-         <if test="articleId != null" >
-        	ARTICLE_ID = #{articleId,jdbcType=BIGINT},
-      	</if>
-         <if test="classifyId != null" >
-	        CLASSIFY_ID = #{classifyId,jdbcType=BIGINT},
-	      </if>
-	      <if test="articleTitle != null" >
-	        ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
-	      </if>
-	      <if test="content != null" >
-	        CONTENT = #{content,jdbcType=LONGVARCHAR},
-	      </if>
-	      <if test="creationDate != null" >
-	        CREATION_DATE = #{creationDate,jdbcType=TIMESTAMP},
-	      </if>
-	      <if test="creationBy != null" >
-	        CREATION_BY = #{creationBy,jdbcType=BIGINT},
-	      </if>
-	      <if test="lastUpdateDate != null" >
-	        LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
-	      </if>
-	      <if test="lastUpdateBy != null" >
-	        LAST_UPDATE_BY = #{lastUpdateBy,jdbcType=BIGINT},
-	      </if>
-	      <if test="status != null" >
-	        STATUS = #{status,jdbcType=INTEGER},
-	      </if>
-    </trim>
-  </insert>
-  
-  <insert id="insert" parameterType="com.hf.ciker.vo.ArticleVO" useGeneratedKeys="true" keyProperty="id">
+  <insert id="addArticle" parameterType="com.hf.ciker.vo.ArticleVO" useGeneratedKeys="true" keyProperty="id">
     insert into CH_ARTICLE (  <include refid="baseInsertSql" /> )
-    values (#{classifyId,jdbcType=BIGINT},  #{articleTitle,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+    values (#{classifyId,jdbcType=BIGINT},  #{articleTitle,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR},#{creationBy,jdbcType=BIGINT},#{lastUpdateBy,jdbcType=BIGINT})
   </insert>
 
   <select id="queryHotRank" resultType="com.hf.ciker.vo.HotRankVO">

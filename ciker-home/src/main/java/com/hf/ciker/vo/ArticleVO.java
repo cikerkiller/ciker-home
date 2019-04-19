@@ -8,8 +8,6 @@ public class ArticleVO {
 	
 	private Long classifyId;
 	
-	private String articleTheme;
-	
 	private String articleTitle;
 
 	private String content;
@@ -35,12 +33,6 @@ public class ArticleVO {
 	}
 	public void setClassifyId(Long classifyId) {
 		this.classifyId = classifyId;
-	}
-	public String getArticleTheme() {
-		return articleTheme;
-	}
-	public void setArticleTheme(String articleTheme) {
-		this.articleTheme = articleTheme;
 	}
 	public String getArticleTitle() {
 		return articleTitle;

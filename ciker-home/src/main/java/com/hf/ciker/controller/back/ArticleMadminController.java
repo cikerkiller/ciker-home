@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
+import com.hf.ciker.common.CikerConstant;
 import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.services.IArticleService;
 import com.hf.ciker.vo.ArticleVO;
+import com.hf.ciker.vo.UserVO;
 
 @Controller
-@RequestMapping("/it/back")
+@RequestMapping("/it/back/article")
 public class ArticleMadminController {
 	
 	@Autowired
@@ -25,6 +27,11 @@ public class ArticleMadminController {
 	@RequestMapping(value="save.do",method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<String> save( HttpSession session,@RequestBody ArticleVO articleVO) {
+		UserVO user = (UserVO) session.getAttribute(CikerConstant.CURRENT_USER);
+        if(user != null){
+        	articleVO.setLastUpdateBy(user.getUserId());
+        	articleVO.setCreationBy(user.getUserId());
+        }
 		return articleService.saveArticle(articleVO);
 	}
 	

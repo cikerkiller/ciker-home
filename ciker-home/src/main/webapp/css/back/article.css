@@ -1,0 +1,25 @@
+.pg-content {
+	text-align: center
+}
+.title {
+	text-align: center;
+}
+
+.self-operating {
+	text-align: center;
+}
+
+.self-button {
+	margin: 0 15px;
+}
+.self-control{
+	display :inline-block;
+	width: 80%;
+	margin-left: 50px;
+}
+.modal-dialog{
+	width: 80%;
+}
+.err-tip{
+	color: red;
+}

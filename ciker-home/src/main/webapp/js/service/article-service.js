@@ -38,6 +38,28 @@ var article = {
 			success : resolve,
 			error :reject
 		});
+	},
+	queryArticleList   : function(listParam,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/back/article/queryByPage.do'),
+			method : 'POST',
+			data    : listParam,
+			success : resolve,
+			error :reject
+		});
+	},
+	saveArticle   : function(param,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/back/article/save.do'),
+			method : 'POST',
+			cache	: false,
+			data    : JSON.stringify(param),
+			dataType:"json",
+            processData: false,
+            contentType:"application/json",
+			success : resolve,
+			error :reject
+		});
 	}
 
 }

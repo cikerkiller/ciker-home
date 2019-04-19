@@ -23,7 +23,7 @@ public class ArticleService implements IArticleService{
 	
 	@Override
 	public ServerResponse<String> saveArticle(ArticleVO articleVO) {
-		int status = articleDao.insert(articleVO);
+		int status = articleDao.addArticle(articleVO);
 		if(status > 0) {
 			return ServerResponse.createBySuccess();
 		}
