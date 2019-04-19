@@ -6,6 +6,8 @@ var Pagination = function(){
         pageRange       : 3,
         onSelectPage    : null
     };
+    // 先解除绑定，以免跟前面的分页绑定事件叠加
+    $(document).off('click','.pg-item');
     // 事件的处理
     $(document).on('click', '.pg-item', function(){
         var $this = $(this);

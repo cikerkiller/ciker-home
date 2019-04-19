@@ -1,5 +1,5 @@
 /**
- * 公告
+ * 图片
  */
 var imageService = {
 	queryImageByReleased : function(resolve,reject){
