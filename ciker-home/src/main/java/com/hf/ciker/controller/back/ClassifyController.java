@@ -1,7 +1,5 @@
 package com.hf.ciker.controller.back;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,10 +8,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.services.IClassifyService;
+import com.hf.ciker.vo.ClassifyListVO;
 import com.hf.ciker.vo.ClassifyVO;
 
 @Controller
-@RequestMapping("/it/back")
+@RequestMapping("/it/back/classify")
 public class ClassifyController {
 
 	@Autowired
@@ -25,16 +24,10 @@ public class ClassifyController {
 		return classifyService.addClassifys(classifyVO);
 	}
 	
-	@RequestMapping(value="searchClassifyOne.do",method = RequestMethod.GET)
+	@RequestMapping(value="queryClassifyList.do",method = RequestMethod.GET)
 	@ResponseBody
-	public ServerResponse<List<ClassifyVO>> searchClassifyOne(){
-		return classifyService.queryClassifyByLevelOne();
-	}
-	
-	@RequestMapping(value="searchClassifySecond.do",method = RequestMethod.GET)
-	@ResponseBody
-	public ServerResponse<List<ClassifyVO>> searchClassifySecond(Long parentId){
-		return classifyService.queryClassifyByLevelSecond(parentId);
+	public ServerResponse<ClassifyListVO> queryClassifyList(){
+		return classifyService.queryClassifyList();
 	}
 	
 	@RequestMapping(value="deleteClassify.do",method = RequestMethod.GET)

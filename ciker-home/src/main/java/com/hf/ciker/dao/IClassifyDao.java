@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import com.hf.ciker.vo.ClassifyVO;
 
 public interface IClassifyDao {
-	List<ClassifyVO> queryClassifyByLevelOne();
-	List<ClassifyVO> queryClassifyByLevelSecond(Long parentId);
+	
+	List<ClassifyVO> queryChildNode(Long parentId);
 	
 	int addClassify(ClassifyVO classifyVO);
 	

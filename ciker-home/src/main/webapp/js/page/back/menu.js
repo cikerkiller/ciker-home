@@ -14,6 +14,7 @@ var menuListService = {
         var _this = this;
         $(".list-menu-body").hide();
         // 菜单点击事件
+        $(document).off('click', '.list-menu-item,.hitarea');
         $(document).on('click', '.list-menu-item,.hitarea', function(){
         	$("#tree span").removeClass("menu-active");
         	$(this).addClass("menu-active");

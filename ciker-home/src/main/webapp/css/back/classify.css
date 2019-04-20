@@ -5,11 +5,11 @@ li{
     display: inline-block;
 }
 
-.list-menu-head{
+.list-classify-head{
 	display:inline-block;
 	min-width: 30%;
 }
-.list-menu-body{
+.list-classify-body{
 	display:inline-block;
 	vertical-align: top;
 }
@@ -17,11 +17,11 @@ li{
 .op-btn{
 	margin: 5 15px;
 }
-.list-menu-item{
+.list-classify-item{
 	cursor:pointer;
 }
 
-.menu-detail-input{
+.classify-detail-input{
 	max-width: 100%;
 }
 

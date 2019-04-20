@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.dao.IClassifyDao;
 import com.hf.ciker.services.IClassifyService;
+import com.hf.ciker.vo.ClassifyListVO;
 import com.hf.ciker.vo.ClassifyVO;
 
 @Service
@@ -16,17 +17,6 @@ public class ClassifyService implements IClassifyService{
 	@Autowired
 	private IClassifyDao classifyDao;
 	
-	@Override
-	public ServerResponse<List<ClassifyVO>> queryClassifyByLevelOne() {
-		List<ClassifyVO> classifyByLevelOnes = classifyDao.queryClassifyByLevelOne();
-		return ServerResponse.createBySuccess(classifyByLevelOnes);
-	}
-
-	@Override
-	public ServerResponse<List<ClassifyVO>> queryClassifyByLevelSecond(Long parentId) {
-		List<ClassifyVO> classifyByLevelOnes = classifyDao.queryClassifyByLevelSecond(parentId);
-		return ServerResponse.createBySuccess(classifyByLevelOnes);
-	}
 
 	@Override
 	public ServerResponse<String> addClassifys(ClassifyVO classifyVO) {
@@ -49,6 +39,27 @@ public class ClassifyService implements IClassifyService{
 			return ServerResponse.createBySuccess();
 		}
 		return ServerResponse.createByError();
+	}
+
+	@Override
+	public ServerResponse<ClassifyListVO> queryClassifyList() {
+		ClassifyListVO rootRlassifyVO = new ClassifyListVO();
+		rootRlassifyVO.setClassifyId(new Long(0));
+		rootRlassifyVO.setClassifyName("分类列表");
+		queryChildNode(rootRlassifyVO,rootRlassifyVO.getClassifyId());
+		return ServerResponse.createBySuccess(rootRlassifyVO);
+	}
+	
+	private void queryChildNode(ClassifyListVO classifyListVO,Long parentId) {
+		List<ClassifyVO> topClassifys = classifyDao.queryChildNode(parentId);
+		for(ClassifyVO topClassify : topClassifys) {
+			ClassifyListVO classifyTreeVO = new ClassifyListVO();
+			classifyTreeVO.setClassifyId(topClassify.getClassifyId());
+			classifyTreeVO.setClassifyName(topClassify.getClassifyName());
+			classifyTreeVO.setParentId(topClassify.getParentId());
+			queryChildNode(classifyTreeVO, classifyTreeVO.getClassifyId());
+			classifyListVO.addChildClassify(classifyTreeVO);
+		}
 	}
 
 }
