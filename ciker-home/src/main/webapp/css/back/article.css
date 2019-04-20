@@ -20,6 +20,6 @@
 .modal-dialog{
 	width: 80%;
 }
-.err-tip{
-	color: red;
+a {
+    cursor: pointer;
 }

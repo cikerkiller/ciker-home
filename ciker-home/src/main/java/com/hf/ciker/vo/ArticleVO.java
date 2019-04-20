@@ -1,9 +1,19 @@
 package com.hf.ciker.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ArticleVO {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
+public class ArticleVO  implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7962325241260001859L;
+
 	private Long articleId;
 	
 	private Long classifyId;
@@ -21,6 +31,12 @@ public class ArticleVO {
 	private Long lastUpdateBy;
 	
 	private Integer status;
+	
+	private Integer recommend;
+	
+	private Integer likeNumber;
+	
+	private Integer commentNumber;
 	
 	public Long getArticleId() {
 		return articleId;
@@ -76,4 +92,23 @@ public class ArticleVO {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	public Integer getLikeNumber() {
+		return likeNumber;
+	}
+	public void setLikeNumber(Integer likeNumber) {
+		this.likeNumber = likeNumber;
+	}
+	public Integer getCommentNumber() {
+		return commentNumber;
+	}
+	public void setCommentNumber(Integer commentNumber) {
+		this.commentNumber = commentNumber;
+	}
+	public Integer getRecommend() {
+		return recommend;
+	}
+	public void setRecommend(Integer recommend) {
+		this.recommend = recommend;
+	}
+	
 }

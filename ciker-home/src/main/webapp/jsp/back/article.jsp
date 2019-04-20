@@ -39,29 +39,32 @@
 
 	<div class="panel-body">
 		<div class="panel panel-article">
-			<button type="button" class="btn btn-success add-editor"
-				data-toggle="modal" data-target="#myModal">
+			<button type="button" class="btn btn-success add-editor">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 			</button>
-			<button type="button" class="btn btn-danger">
+			<button type="button" class="btn btn-danger btn-del">
 				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 			</button>
 			<button type="button" class="btn btn-info">
 				<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>模板
 			</button>
+			<span class="error-msg"></span>
 		</div>
 		<div class="article-list">
 			<table class="table articleDetail">
 				<tr>
 					<th><input type="checkbox" class="article-check-all" /></th>
 					<th>文档名称</th>
+					<th>文档分类</th>
 					<th>创建人</th>
 					<th>创建时间</th>
 					<th>最后更新人</th>
 					<th>最后更新时间</th>
 					<th>浏览量</th>
-					<th>文档状态</th>
+					<th>点赞数</th>
+					<th>评论数</th>
 					<th>是否推荐</th>
+					<th>文档状态</th>
 				</tr>
 			</table>
 			<div class="pg-content">
@@ -82,7 +85,7 @@
 	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 	                    ×
 	                </button>
-	                <h4 class="modal-title" id="myModalLabel"> 模态框（Modal）标题</h4>
+	                <h4 class="modal-title" id="myModalLabel">新增文档</h4>
 	            </div>
 	            <form id="form_data">
 	            <div class="modal-body">
@@ -95,6 +98,7 @@
 						</div>
 						<div class="panel-heading">
 							<form role="form">
+								<input type="hidden" class="model-article-id"/>
 								<div class="form-group">
 									<label>分类</label> 
 									<select id="self-select-one" class="form-control self-control">

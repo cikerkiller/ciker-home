@@ -64,10 +64,10 @@ var ciker = {
 
 	},
 	doLogin	: function(){
-		window.location.href = './user-login.html?redirect=' + encodeURIComponent(window.location.href);
+		window.location.href = './login.jsp?redirect=' + encodeURIComponent(window.location.href);
 	},
 	//回到首页
 	goHome : function(){
-		window.location.href = './index.html';
+		window.location.href = './index.jsp';
 	}
 };

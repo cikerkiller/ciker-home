@@ -26,21 +26,21 @@ public class ArticleController {
 	@RequestMapping(value="query.do",method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<ArticleVO> query(HttpSession session,Long articleId) {
-		return articleService.queryArticle(articleId);
+		return articleService.queryArticleById(articleId);
 	}
 	
 	@RequestMapping(value="queryByPage.do",method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo<ArticleVO>> queryByPage( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
 			@RequestParam(value="pageSize",defaultValue="10") Integer pageSize) {
-		return articleService.queryArticles(pageNum,pageSize);
+		return articleService.commonQueryArticles(pageNum,pageSize);
 	}
 	
 	@RequestMapping(value="match.do",method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<PageInfo<ArticleVO>> queryByPage( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
 			@RequestParam(value="pageSize",defaultValue="10") Integer pageSize,String match) {
-		return articleService.queryArticles(pageNum,pageSize);
+		return articleService.commonQueryArticles(pageNum,pageSize);
 	}
 	
 	@RequestMapping(value="updateViewCount.do",method = RequestMethod.POST)
@@ -61,17 +61,6 @@ public class ArticleController {
 		return articleService.queryRecommendArticle();
 	}
 	
-	@RequestMapping(value="recommendArticle.do",method = RequestMethod.GET)
-	@ResponseBody
-	public ServerResponse<String> recommendArticle(Long articleId) {
-		return articleService.recommendArticle(articleId);
-	}
-	
-	@RequestMapping(value="unRecommendArticle.do",method = RequestMethod.GET)
-	@ResponseBody
-	public ServerResponse<String> unRecommendArticle(Long articleId) {
-		return articleService.unRecommendArticle(articleId);
-	}
 	
 	
 	

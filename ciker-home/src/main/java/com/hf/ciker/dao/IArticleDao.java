@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hf.ciker.vo.ArticleVO;
+import com.hf.ciker.vo.DetailsArticleVO;
 import com.hf.ciker.vo.HotRankVO;
 
 public interface IArticleDao {
@@ -15,13 +16,17 @@ public interface IArticleDao {
 	
 	int deleteArticle(Long articleId);
 	
-	int recommendArticle(Long articleId);
+	int batchDeleteArticle(@Param("articleIds")List<Long> articleIds);
 	
-	int unRecommendArticle(Long articleId);
+	List<ArticleVO> commonQueryArticles();
 	
-	List<ArticleVO> selectArticles();
+	List<DetailsArticleVO> detailsQueryArticles();
+	
+	List<ArticleVO> portalQueryArticles();
 	
 	ArticleVO selectArticleById(Long articleId);
+	
+	ArticleVO selectArticleDetailsById(Long articleId);
 	
 	List<ArticleVO> selectArticleByMatch(String match);
 	

@@ -37,7 +37,7 @@
     	
     	VIEWING_COUNT		as viewingCount
   </sql>
-  <select id="selectArticles" resultType="com.hf.ciker.vo.ArticleVO">
+  <select id="commonQueryArticles" resultType="com.hf.ciker.vo.ArticleVO">
 	    select 
 	    ARTICLE_ID 			as articleId,
     	
@@ -60,6 +60,33 @@
     	VIEWING_COUNT		as viewingCount
 	    from CH_ARTICLE
   </select>
+  <select id="detailsQueryArticles" resultType="com.hf.ciker.vo.DetailsArticleVO">
+	      SELECT 
+		    t1.ARTICLE_ID as articleId,
+		    t6.classify_name as classifyName,
+		    t1.ARTICLE_TITLE as articleTitle,
+		    t1.CREATION_DATE as creationDate,
+		    t4.creator as creatior,
+		    t1.LAST_UPDATE_DATE as lastUpdateDate,
+		    t5.lastupdateor as lastUpdator,
+		    t1.STATUS as status,
+		    t1.RECOMMEND as recommend,
+		    t1.VIEWING_COUNT as viewingCount,
+		    t2.LIKE_NUMBER as likeNumber,
+		    t3.comment_number as commentNumber
+		 FROM CH_ARTICLE t1
+		LEFT JOIN  
+		 CH_ARTICLE_LIKE t2 ON  t1.ARTICLE_ID=t2.ARTICLE_ID 
+		 LEFT JOIN 
+		(SELECT ARTICLE_ID,COUNT(COMMENT_CONTENT) AS COMMENT_NUMBER FROM CH_ARTICLE_COMMENT GROUP BY ARTICLE_ID) t3 ON t1.ARTICLE_ID=t3.ARTICLE_ID
+		LEFT JOIN 
+		(SELECT USER_ID,USERNAME AS creator FROM CH_USER) t4 ON t1.CREATION_BY AND t4.user_id
+		LEFT JOIN 
+		(SELECT USER_ID,USERNAME  AS lastupdateor FROM CH_USER) t5 ON t1.LAST_UPDATE_BY=t5.user_id
+		LEFT JOIN 
+		(SELECT classify_id ,classify_name FROM CH_CLASSIFY_INFO) t6 ON t1.classify_id=t6.classify_id
+		WHERE STATUS &lt;&gt; -1 order by  t1.LAST_UPDATE_DATE desc
+  </select>
   <select id="selectArticleById" resultType="com.hf.ciker.vo.ArticleVO" parameterType="long">
 	    select 
 	    <include refid="baseSql" />
@@ -77,8 +104,15 @@
   </select>
   
   <update id="deleteArticle" parameterType="long">
-		update CH_ARTICLE set STATUS=0 where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+		update CH_ARTICLE set STATUS=-1 where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
   </update>
+  <update id="batchDeleteArticle" parameterType="list">
+		update CH_ARTICLE set STATUS=-1 where ARTICLE_ID in
+ 		<foreach collection="articleIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+  </update>
+  
   
   <update id="updateArticle" parameterType="com.hf.ciker.vo.ArticleVO" >
 	    update CH_ARTICLE
@@ -100,6 +134,9 @@
 	      </if>
 	      <if test="status != null" >
 	        STATUS = #{status,jdbcType=INTEGER},
+	      </if>
+	      <if test="recommend != null" >
+	        RECOMMEND = #{recommend,jdbcType=INTEGER},
 	      </if>
 	    </set>
 	    where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
@@ -136,15 +173,15 @@
 	
 	    FROM CH_ARTICLE where RECOMMEND=1 ORDER BY LAST_UPDATE_DATE DESC LIMIT 10
   </select>
+  <select id="selectArticleDetailsById" resultType="com.hf.ciker.vo.ArticleVO">
+  	 SELECT 
+	    ARTICLE_ID 			AS articleId,
+    	CLASSIFY_ID			as classifyId,
+		ARTICLE_TITLE 		AS articleTitle,
+		CONTENT				as content
+	    FROM CH_ARTICLE  where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+  </select>
   
-  <update id="recommendArticle">
-  	update CH_ARTICLE set RECOMMEND=1 where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
-  </update>
-  
-  <update id="unRecommendArticle">
-  	update CH_ARTICLE set RECOMMEND=0 where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
-  </update>
-
 
   
   

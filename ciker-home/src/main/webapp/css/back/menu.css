@@ -24,14 +24,6 @@ li{
 .menu-detail-input{
 	max-width: 100%;
 }
-.err-tip{
-	color: red;
-}
-.error-msg{
-	position: absolute;
-	display:inline-block;
-	padding: 10px;
-}
 
 .del-line {
 	text-decoration : line-through;

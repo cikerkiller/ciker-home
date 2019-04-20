@@ -39,9 +39,45 @@ var article = {
 			error :reject
 		});
 	},
-	queryArticleList   : function(listParam,resolve,reject){
+	queryDetailsArticleList   : function(listParam,resolve,reject){
 		ciker.request({
-			url : ciker.getServerUrl('/it/back/article/queryByPage.do'),
+			url : ciker.getServerUrl('/it/back/article/queryDetailsArticleByPage.do'),
+			method : 'POST',
+			data    : listParam,
+			success : resolve,
+			error :reject
+		});
+	},
+	batchRemove   : function(listParam,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/back/article/batchRemove.do'),
+			method : 'POST',
+			data    : listParam,
+			success : resolve,
+			error :reject
+		});
+	},
+	recommendArticle   : function(listParam,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/back/article/recommendArticle.do'),
+			method : 'POST',
+			data    : listParam,
+			success : resolve,
+			error :reject
+		});
+	},
+	changeArticleStatus   : function(listParam,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/back/article/changeArticleStatus.do'),
+			method : 'POST',
+			data    : listParam,
+			success : resolve,
+			error :reject
+		});
+	},
+	selectArticleDetailsById   : function(listParam,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/back/article/selectArticleDetailsById.do'),
 			method : 'POST',
 			data    : listParam,
 			success : resolve,
