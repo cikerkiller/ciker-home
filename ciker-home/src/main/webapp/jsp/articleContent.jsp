@@ -50,7 +50,7 @@
 		<div class="divider"></div>
 		<!-- 文章主体 -->
 		<div class="panel-body">
-			<p class="article-body">{{{content}}}</p>
+			<div class="article-body">{{{content}}}</div>
 		</div>
 	</div>
 </div>
