@@ -14,11 +14,21 @@ var articleList = {
     bindEvent : function(){
         var _this = this;
         
-        $(document).on('click', '.articile-details', function(){
+        $(document).on('click', '.articile-details,.article-auth-comment', function(){
 	       	var data = $(this).data('value');
-        	sessionStorage.setItem("articleId", data);
+	       	sessionStorage.setItem("articleId", data);
         	$(".content-container").load("../jsp/articleDetails.jsp");
         });
+        $(document).off('click','.article-list-like');
+    	$(document).on('click','.article-list-like',function(){
+    		var $this = $(this);
+    		var articleId =  $(this).data('value');
+    		article.updateLikeNumber({articleId:articleId},function(res){
+    			$this.children('span').html(res);
+    		},function(msg){
+    			$this.children('span').html('<p class="err-tip">加载失败，请刷新后重试</p>');
+    		});
+    	});
 
        
     },

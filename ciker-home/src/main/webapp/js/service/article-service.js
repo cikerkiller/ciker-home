@@ -105,6 +105,28 @@ var article = {
 			success : resolve,
 			error :reject
 		});
+	},
+	updateViewCount   : function(param,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/article/updateViewCount.do'),
+			method : 'POST',
+			data    : param,
+			async 	: false,
+			cache	: false,
+			success : resolve,
+			error :reject
+		});
+	},
+	updateLikeNumber   : function(param,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/article/updateLikeNumber.do'),
+			method : 'POST',
+			data    : param,
+			async 	: false,
+			cache	: false,
+			success : resolve,
+			error :reject
+		});
 	}
 
 }

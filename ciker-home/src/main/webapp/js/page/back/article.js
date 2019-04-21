@@ -35,6 +35,7 @@ var articleManage = {
         	 	focus		: 	true
         });
         // 文档提交
+        $(document).off('click', '.self-model-sub');
         $(document).on('click', '.self-model-sub', function(){
         	var summernoteHtml = $('#summernote').summernote('code');
         	var param=new Object();

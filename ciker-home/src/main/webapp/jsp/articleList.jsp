@@ -7,6 +7,7 @@
 <script type="text/javascript" src="../js/service/article-service.js"></script>
 <script type="text/javascript" src="../js/service/pagination.js"></script>
 <script type="text/javascript" src="../js/page/portal/articleList.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/portal/articleList.css" />
 </head>
 <div class="col-sm-12 articleList">
 	{{#list}}
@@ -14,7 +15,41 @@
 		<div class="panel-heading">
 			<a href="#" class="articile-details" data-value="{{articleId}}">{{{articleTitle}}}</a>
 		</div>
-		<div class="panel-body">{{{content}}}</div>
+		<div class="panel-body article-body">
+			<span class="article-content">{{{content}}}</span>
+			<p class="article-auth">
+				<span class="article-auth-element">
+					<i class="fa fa-user"></i>
+					<a class="article-auth-user">{{creatior}}</a>
+				</span>
+				<span class="article-auth-element">
+					<i class="fa fa-clock-o"></i>
+					<span class="article-auth-time">{{lastUpdateDate}}</span>
+				</span>
+				<span class="article-auth-element">
+					<i class="fa fa-eye"></i>
+					<span class="article-auth-scan">
+						<span class="count">{{viewingCount}}</span>
+						浏览
+					</span>
+					
+				</span>
+				<span class="article-auth-element">
+					<i class="fa fa-comments-o"></i>
+					<a class="article-auth-comment" data-value="{{articleId}}">
+					<span class="count">{{commentNumber}}</span>
+					评论
+					</a>
+					
+				</span>
+				<span class="article-auth-element">
+					<i class="fa fa-thumbs-up"></i>
+					<a class="article-auth-like article-list-like"  data-value="{{articleId}}">
+						<span class="count">{{likeNumber}}</span>点赞
+					</a>
+				</span>
+			</p>
+		</div>
 	</div>
 	{{/list}}
 	<div class="pg-content">

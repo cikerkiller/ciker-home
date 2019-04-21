@@ -5,6 +5,9 @@ var portal = {
         this.bindEvent();
     },
     bindEvent : function(){
+    	$(document).on('click', '.portal-home',function(){
+    		window.location.href = '../jsp/portal.jsp';
+    	});
     },
     onLoad : function(){
     	$(".photo-show").load("../jsp/photoShow.jsp");

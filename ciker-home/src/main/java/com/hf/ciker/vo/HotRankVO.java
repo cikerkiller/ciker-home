@@ -9,6 +9,8 @@ public class HotRankVO {
 	private String articleTitle;
 	
 	private Long viewingCount;
+	
+	private Integer likeNumber;
 
 	public int getRank() {
 		return rank;
@@ -40,6 +42,14 @@ public class HotRankVO {
 
 	public void setViewingCount(Long viewingCount) {
 		this.viewingCount = viewingCount;
+	}
+
+	public Integer getLikeNumber() {
+		return likeNumber;
+	}
+
+	public void setLikeNumber(Integer likeNumber) {
+		this.likeNumber = likeNumber;
 	}
 	
 }

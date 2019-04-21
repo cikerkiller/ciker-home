@@ -11,6 +11,7 @@
 <script type="text/javascript" src="../js/page/portal/portal.js"></script>
 
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/font-awesome.css" />
 <link rel="stylesheet" type="text/css" href="../css/common.css" />
 <link rel="stylesheet" type="text/css" href="../css/portal/portal.css" />
 </head>
@@ -20,7 +21,7 @@
 		<!-- 100%适应屏幕 -->
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"><span
+				<a class="navbar-brand portal-home"><span
 					class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
 			</div>
 

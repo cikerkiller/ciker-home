@@ -33,8 +33,8 @@ public class ArticleService implements IArticleService{
 	}
 
 	@Override
-	public ServerResponse<ArticleVO> queryArticleById(Long articleId) {
-		ArticleVO articleVO = articleDao.selectArticleById(articleId);
+	public ServerResponse<DetailsArticleVO> queryArticleById(Long articleId) {
+		DetailsArticleVO articleVO = articleDao.selectArticleById(articleId);
 		if(articleVO != null) {
 			return ServerResponse.createBySuccess(articleVO);
 		}
@@ -51,10 +51,10 @@ public class ArticleService implements IArticleService{
 	}
 
 	@Override
-	public ServerResponse<PageInfo<ArticleVO>> commonQueryArticles(Integer pageNum, Integer pageSize) {
+	public ServerResponse<PageInfo<DetailsArticleVO>> commonQueryArticles(Integer pageNum, Integer pageSize) {
 	   PageHelper.startPage(pageNum,pageSize);
-	   List<ArticleVO> articles = articleDao.commonQueryArticles();
-       PageInfo<ArticleVO> pageResult = new PageInfo<ArticleVO>(articles);
+	   List<DetailsArticleVO> articles = articleDao.commonQueryArticles();
+       PageInfo<DetailsArticleVO> pageResult = new PageInfo<DetailsArticleVO>(articles);
        return ServerResponse.createBySuccess(pageResult);
 	}
 
@@ -161,6 +161,18 @@ public class ArticleService implements IArticleService{
 	    List<ArticleVO> articleVOs = articleDao.selectArticleByName(articleName);
         PageInfo<ArticleVO> pageResult = new PageInfo<ArticleVO>(articleVOs);
 			return ServerResponse.createBySuccess(pageResult);
+	}
+
+	@Override
+	public ServerResponse<Integer> updateLikeNumber(Long articleId) {
+		ArticleVO articleVO = new ArticleVO();
+		articleVO.setArticleId(articleId);
+		articleVO.setLikeNumber(articleDao.selectLikeNumber(articleId) + 1);
+		int status = articleDao.updateArticle(articleVO);
+		if(status > 0) {
+			return ServerResponse.createBySuccess(articleVO.getLikeNumber());
+		}
+		return ServerResponse.createByError();
 	}
 
 }

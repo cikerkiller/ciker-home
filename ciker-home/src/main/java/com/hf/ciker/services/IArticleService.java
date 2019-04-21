@@ -14,9 +14,10 @@ public interface IArticleService {
 	ServerResponse<String> saveArticle(ArticleVO articleVO); 
 	ServerResponse<String> updateArticle(ArticleVO articleVO); 
 	
-	ServerResponse<ArticleVO> queryArticleById(Long articleId); 
+	ServerResponse<DetailsArticleVO> queryArticleById(Long articleId); 
 	
 	ServerResponse<ArticleVO> selectArticleDetailsById(Long articleId); 
+	
 	ServerResponse<PageInfo<ArticleVO>>  selectArticleByName(Integer pageNum,Integer pageSize,String articleName); 
 	
 	ServerResponse<RecommendVO> queryRecommendArticle(); 
@@ -29,7 +30,9 @@ public interface IArticleService {
 	
 	ServerResponse<String> updateViewCount(Long articleId); 
 	
-	ServerResponse<PageInfo<ArticleVO>> commonQueryArticles(Integer pageNum,Integer pageSize); 
+	ServerResponse<Integer> updateLikeNumber(Long articleId); 
+	
+	ServerResponse<PageInfo<DetailsArticleVO>> commonQueryArticles(Integer pageNum,Integer pageSize); 
 	
 	ServerResponse<PageInfo<DetailsArticleVO>> detailsQueryArticles(Integer pageNum,Integer pageSize); 
 	

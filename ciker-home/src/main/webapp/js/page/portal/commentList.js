@@ -22,6 +22,7 @@ var commentList = {
              }
              comment.submit(commentVO,function(res){
              	$("#commentContent").val("");
+             	articleContent.loadArticle();
              	// 重新加载评论列表
              	_this.loadCommentList();	
              },function(errMsg){

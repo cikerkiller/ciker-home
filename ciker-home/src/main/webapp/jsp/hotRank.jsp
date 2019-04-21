@@ -17,6 +17,13 @@
 		<div class="panel-body">
 			<span class="badge rank" data-value="{{rank}}">{{rank}}</span> 
 			<a class="hot-rank-a" data-value="{{articleId}}">{{articleTitle}}</a>
+			
+			<a class="article-auth-like hotrank-like" data-value="">
+				<input type="hidden" value="{{articleId}}"/>
+				<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+				<span class="count">{{likeNumber}}</span>
+				点赞
+			</a>
 		</div>
 		{{/list}}
 	</div>

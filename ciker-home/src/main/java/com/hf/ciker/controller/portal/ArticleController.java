@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.services.IArticleService;
-import com.hf.ciker.vo.ArticleVO;
+import com.hf.ciker.vo.DetailsArticleVO;
 import com.hf.ciker.vo.HotRankListVO;
 import com.hf.ciker.vo.RecommendVO;
 
@@ -25,20 +25,20 @@ public class ArticleController {
 	
 	@RequestMapping(value="query.do",method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<ArticleVO> query(HttpSession session,Long articleId) {
+	public ServerResponse<DetailsArticleVO> query(HttpSession session,Long articleId) {
 		return articleService.queryArticleById(articleId);
 	}
 	
 	@RequestMapping(value="queryByPage.do",method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<PageInfo<ArticleVO>> queryByPage( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
+	public ServerResponse<PageInfo<DetailsArticleVO>> queryByPage( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
 			@RequestParam(value="pageSize",defaultValue="10") Integer pageSize) {
 		return articleService.commonQueryArticles(pageNum,pageSize);
 	}
 	
 	@RequestMapping(value="match.do",method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<PageInfo<ArticleVO>> queryByPage( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
+	public ServerResponse<PageInfo<DetailsArticleVO>> queryByPage( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
 			@RequestParam(value="pageSize",defaultValue="10") Integer pageSize,String match) {
 		return articleService.commonQueryArticles(pageNum,pageSize);
 	}
@@ -47,6 +47,11 @@ public class ArticleController {
 	@ResponseBody
 	public ServerResponse<String> updateViewCount( HttpSession session,Long articleId) {
 		return articleService.updateViewCount(articleId);
+	}
+	@RequestMapping(value="updateLikeNumber.do",method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse<Integer> updateLikeNumber( HttpSession session,Long articleId) {
+		return articleService.updateLikeNumber(articleId);
 	}
 	
 	@RequestMapping(value="queryHotRank.do",method = RequestMethod.GET)

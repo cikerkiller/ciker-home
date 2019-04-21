@@ -49,7 +49,7 @@ public class ArticleMadminController {
 	
 	@RequestMapping(value="query.do",method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<ArticleVO> query(HttpSession session,Long articleId) {
+	public ServerResponse<DetailsArticleVO> query(HttpSession session,Long articleId) {
 		return articleService.queryArticleById(articleId);
 	}
 	
@@ -66,14 +66,14 @@ public class ArticleMadminController {
 	
 	@RequestMapping(value="queryByPage.do",method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<PageInfo<ArticleVO>> queryByPage( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
+	public ServerResponse<PageInfo<DetailsArticleVO>> queryByPage( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
 			@RequestParam(value="pageSize",defaultValue="10") Integer pageSize) {
 		return articleService.commonQueryArticles(pageNum,pageSize);
 	}
 	
 	@RequestMapping(value="match.do",method = RequestMethod.POST)
 	@ResponseBody
-	public ServerResponse<PageInfo<ArticleVO>> queryByPage( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
+	public ServerResponse<PageInfo<DetailsArticleVO>> queryByPage( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
 			@RequestParam(value="pageSize",defaultValue="10") Integer pageSize,String match) {
 		return articleService.commonQueryArticles(pageNum,pageSize);
 	}

@@ -18,13 +18,13 @@ public interface IArticleDao {
 	
 	int batchDeleteArticle(@Param("articleIds")List<Long> articleIds);
 	
-	List<ArticleVO> commonQueryArticles();
+	List<DetailsArticleVO> commonQueryArticles();
 	
 	List<DetailsArticleVO> detailsQueryArticles();
 	
 	List<ArticleVO> portalQueryArticles();
 	
-	ArticleVO selectArticleById(Long articleId);
+	DetailsArticleVO selectArticleById(Long articleId);
 	
 	ArticleVO selectArticleDetailsById(Long articleId);
 	
@@ -39,5 +39,7 @@ public interface IArticleDao {
 	int updateViewingCount(@Param("articleId") Long articleId,@Param("viewingCount") Long viewingCount);
 	
 	Long selectViewingCount(Long articleId);
+	
+	Integer selectLikeNumber(Long articleId);
 	
 }

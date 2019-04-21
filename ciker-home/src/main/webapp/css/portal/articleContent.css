@@ -1,0 +1,33 @@
+.article-auth{
+	/* float: right; */
+    margin-top: 20px;
+}
+
+.article-auth-element{
+    color: #999;
+    margin-right: 20px;
+}
+.article-auth-element a:hover{
+	color: red;
+}
+
+@keyframes fade-in {  
+    0% {opacity: 0;}/*初始状态 透明度为0*/  
+    40% {opacity: 0.5;} 
+    60% {opacity: 1;}  
+    80% {opacity: 0.5;}   
+    100% {opacity: 0;}  
+}  
+@-webkit-keyframes fade-in {/*针对webkit内核*/  
+    0% {opacity: 0;}  
+    40% {opacity: 0.5;} 
+    60% {opacity: 1;}  
+    80% {opacity: 0.5;}   
+    100% {opacity: 0;}  
+}
+.title {    
+    animation: fade-in;/*动画名称*/  
+    animation-duration: 3s;/*动画持续时间*/  
+    -webkit-animation:fade-in 3s;/*针对webkit内核*/  
+}    
+

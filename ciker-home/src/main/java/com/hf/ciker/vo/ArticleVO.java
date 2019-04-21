@@ -38,6 +38,8 @@ public class ArticleVO  implements Serializable{
 	
 	private Integer commentNumber;
 	
+	private Integer viewingCount;
+	
 	public Long getArticleId() {
 		return articleId;
 	}
@@ -109,6 +111,12 @@ public class ArticleVO  implements Serializable{
 	}
 	public void setRecommend(Integer recommend) {
 		this.recommend = recommend;
+	}
+	public Integer getViewingCount() {
+		return viewingCount;
+	}
+	public void setViewingCount(Integer viewingCount) {
+		this.viewingCount = viewingCount;
 	}
 	
 }

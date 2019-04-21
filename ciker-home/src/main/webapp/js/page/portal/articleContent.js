@@ -6,9 +6,24 @@ var articleContent = {
         this.bindEvent();
     },
     bindEvent : function(){
+    	$(document).off('click','.article-auth-like');
+    	$(document).on('click','.article-auth-like',function(){
+    		var articleId = $("#articleId").val();
+    		article.updateLikeNumber({articleId:articleId},function(res){
+    			$(".article-auth-like>.count").html(res);
+    		},function(msg){
+    			$(".article-auth-like>.count").html('<p class="err-tip">加载失败，请刷新后重试</p>');
+    		});
+    	});
+    	$(document).on('click','.article-auth-comment',function(){
+    		 sessionStorage.setItem("articleId", $("#articleId").val());
+    		 window.location.hash='#commentContent';
+    	});
+    	
     },
     onLoad : function(){
     	this.onLoadHtml();
+    	this.updateViewCount();
     	this.loadArticle();
     },
     onLoadHtml:function(){
@@ -19,6 +34,13 @@ var articleContent = {
     	setTimeout( function(){
     		res.html("");
 		},5000);
+    },
+    updateLike:function(){
+    	
+    },
+    updateViewCount : function(){
+    	var data = sessionStorage.getItem("articleId");
+    	article.updateViewCount({articleId:data},function(res){},function(msg){});
     },
     loadArticle : function(){
     	var _this           = this,
