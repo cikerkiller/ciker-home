@@ -30,6 +30,8 @@ public interface IArticleDao {
 	
 	List<ArticleVO> selectArticleByMatch(String match);
 	
+	List<ArticleVO> selectArticleByName(String articleTitle);
+	
 	List<HotRankVO> queryHotRank();
 	
 	List<ArticleVO> queryRecommendArticle();

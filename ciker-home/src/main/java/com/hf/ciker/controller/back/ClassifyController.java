@@ -47,4 +47,10 @@ public class ClassifyController {
 		return classifyService.batchDeleteClassify(Arrays.asList(classifyIds));
 	}
 	
+	@RequestMapping(value="queryClassifys.do",method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse<ClassifyListVO> queryClassifys(HttpSession session,Long classifyId) {
+		return classifyService.queryClassifys(classifyId);
+	}
+	
 }

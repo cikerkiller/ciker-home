@@ -17,6 +17,7 @@ public interface IArticleService {
 	ServerResponse<ArticleVO> queryArticleById(Long articleId); 
 	
 	ServerResponse<ArticleVO> selectArticleDetailsById(Long articleId); 
+	ServerResponse<PageInfo<ArticleVO>>  selectArticleByName(Integer pageNum,Integer pageSize,String articleName); 
 	
 	ServerResponse<RecommendVO> queryRecommendArticle(); 
 	

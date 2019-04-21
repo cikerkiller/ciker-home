@@ -15,7 +15,12 @@
 .self-control{
 	display :inline-block;
 	width: 80%;
-	margin-left: 50px;
+	margin-left: 22px;
+}
+.self-select{
+	display :inline-block;
+	width: 80%;
+	margin-left: 25px;
 }
 .modal-dialog{
 	width: 80%;

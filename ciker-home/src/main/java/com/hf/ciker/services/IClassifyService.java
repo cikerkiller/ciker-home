@@ -14,6 +14,8 @@ public interface IClassifyService {
 	
 	ServerResponse<String> deleteClassify(Long classifyId);
 	
+	ServerResponse<ClassifyListVO> queryClassifys(Long classifyId);
+	
 	ServerResponse<String> batchDeleteClassify(List<Long> classifyIds);
 	
 }

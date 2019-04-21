@@ -96,6 +96,15 @@ var article = {
 			success : resolve,
 			error :reject
 		});
+	},
+	selectArticleByName   : function(param,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/back/article/selectArticleByName.do'),
+			method : 'POST',
+			data    : param,
+			success : resolve,
+			error :reject
+		});
 	}
 
 }

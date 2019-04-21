@@ -45,10 +45,10 @@ var classify = {
         		parentId = 0;
         	}
         	if(li.is(':has(ul)')){
-        		li.children('ul').append("<li><input type=\"checkbox\"/><span class=\"folder list-classify-item\" data-value=\""+parentId+"\"><input type=\"text\" class=\"new-classify-ltem\"/></span></li>");
+        		li.children('ul').append("<li><div class=\"hitarea collapsable-hitarea \"></div><input type=\"checkbox\"/><span class=\"folder list-classify-item\" data-value=\""+parentId+"\"><input type=\"text\" class=\"new-classify-ltem\"/></span></li>");
         		li.children('ul').show();
         	}else{
-        		li.append("<ul class=\"ul-classify\"><li><input type=\"checkbox\"/><span class=\"folder list-classify-item\" data-value=\""+parentId+"\"><input type=\"text\" class=\"new-classify-ltem\"/></span></li></ul>");
+        		li.append("<div class=\"hitarea collapsable-hitarea \"></div><ul class=\"ul-classify\"><li><input type=\"checkbox\"/><span class=\"folder list-classify-item\" data-value=\""+parentId+"\"><input type=\"text\" class=\"new-classify-ltem\"/></span></li></ul>");
         	}
         });
         $(document).on('click', '.op-btn-delete', function(){
@@ -59,16 +59,18 @@ var classify = {
         	if(array.length == 0){
         		return;
         	}
-        	classifyService.delClassify({
-            	cache	:	false,
-            	async	:	false,
-            	data	:   {"classifyIds":array}
-            },function(res){
-            	$("#classify-tree").html('');
-            	_this.loadClassify();
-            }, function(errMsg){
-                $(".error-msg").html('<p class="err-tip">加载失败，请刷新后重试</p>');
-            });
+        	if(confirm("确定删除？")){
+        		classifyService.delClassify({
+        			cache	:	false,
+        			async	:	false,
+        			data	:   {"classifyIds":array}
+        		},function(res){
+        			$("#classify-tree").html('');
+        			_this.loadClassify();
+        		}, function(errMsg){
+        			$(".error-msg").html('<p class="err-tip">加载失败，请刷新后重试</p>');
+        		});
+        	}
         });
         $(document).off('change', 'input[type=checkbox]');
         $(document).on('change', 'input[type=checkbox]', function(){

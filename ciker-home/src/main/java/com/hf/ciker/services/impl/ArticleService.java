@@ -155,4 +155,12 @@ public class ArticleService implements IArticleService{
 		return ServerResponse.createByError();
 	}
 
+	@Override
+	public ServerResponse<PageInfo<ArticleVO>> selectArticleByName(Integer pageNum,Integer pageSize,String articleName) {
+		PageHelper.startPage(pageNum,pageSize);
+	    List<ArticleVO> articleVOs = articleDao.selectArticleByName(articleName);
+        PageInfo<ArticleVO> pageResult = new PageInfo<ArticleVO>(articleVOs);
+			return ServerResponse.createBySuccess(pageResult);
+	}
+
 }

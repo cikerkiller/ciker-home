@@ -38,7 +38,7 @@ var articleManage = {
         $(document).on('click', '.self-model-sub', function(){
         	var summernoteHtml = $('#summernote').summernote('code');
         	var param=new Object();
-        	param.classifyId=1;
+        	param.classifyId=$(".model-article-classify-id").val();
         	param.articleTitle=$(".model-article-title").val();
         	param.content=summernoteHtml;
         	if(_this.data.articleOp.operate == _this.data.articleOpCode.update){
@@ -48,6 +48,27 @@ var articleManage = {
         		_this.articleOperate({url:"../../it/back/article/save.do",data :param });
         	}
         });
+        $(document).on('change', '.classify-select .self-select', function(){
+        	var classifyId = $(this).val();
+        	$(".model-article-classify-id").val(classifyId);
+        	if(classifyId == 0){
+        		$(".classify-select-two").hide();
+        		$(".classify-select-three").hide();
+        		return ;
+        	}
+        	_this.changeSelectHtml("二级分类");
+        	_this.queryClassifys($(".classify-select-two"),classifyId);
+        });
+        $(document).on('change', '.classify-select-two .self-select', function(){
+        	var classifyId = $(this).val();
+        	$(".model-article-classify-id").val(classifyId);
+        	if(classifyId == 0){
+        		$(".classify-select-three").hide();
+        		return ;
+        	}
+        	_this.changeSelectHtml("三级分类");
+        	_this.queryClassifys($(".classify-select-three"),classifyId);
+        });
         $(document).on('click', '.add-editor', function(){
         	// 初始化
         	$(".model-article-id").val("");
@@ -56,6 +77,7 @@ var articleManage = {
         	$(".modal-title").html("新增文档");
     		_this.data.articleOp.operate = _this.data.articleOpCode.add;
     		$("#myModal").modal('show');
+    		_this.queryClassifys( $(".classify-select"),0);
         });
         $(document).on('click', '.article-single-recommend-btn', function(){
         	var recommend = $(this).data('value');
@@ -112,6 +134,7 @@ var articleManage = {
         		$(".article-check-single").prop("checked",false);
         	}
         });
+        $(document).on('click', '.article-search', _this.searchArticle);
         // 删除事件绑定
         $(document).on('click', '.btn-del', function(){
         	var array=[];
@@ -135,6 +158,26 @@ var articleManage = {
        
         
     },
+    searchArticle : function(){
+    	var _this = this,
+    	articleName = $(".article-name").val(),
+    	$listCon        	= $('.articleDetail');
+    	articleManage.data.listParam.articleName = articleName;
+    	if(articleName==null || articleName == '' || articleName==undefined){
+    		articleManage.loadArticleList();
+    	}else{
+    		article.selectArticleByName(articleManage.data.listParam,function(res){
+    			articleManage.articleListCon($listCon,res);
+        		var onSelectPage = function(pageNum){
+        			articleManage.data.listParam.pageNum = pageNum;
+                  	articleManage.searchArticle();
+            	}
+        		articleManage.pageUtil(res,$('.articlelist-pagination'),onSelectPage)
+    		},function(msg){
+    			$listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
+    		});
+    	}
+    },
     // 文章操作
     articleOperate : function(param){
     	var _this = this;
@@ -151,6 +194,9 @@ var articleManage = {
            	 if(data.status == 0){
            		 $("#myModal").modal('hide')
            		_this.loadArticleList();
+           		$(".classify-select-two").hide();
+        		$(".classify-select-three").hide();
+        		_this.changeSelectHtml("一级分类");
            	 }else{
            		_this.showMsg($(".error-msg"),"<p class=\"err-tip\">加载失败，请刷新后重试</p>",100000);
            		 $("#myModal").modal('hide')
@@ -185,35 +231,49 @@ var articleManage = {
 			"</tr>"+
 			"{{/list}}";
     	this.pageHtml.articleDetailHtml	 	 = articleDetailHtml;
+    	this.changeSelectHtml("一级分类");
+    },
+    changeSelectHtml : function(title){
+    	this.pageHtml.classifySelectHtml = "<label>"+title+"</label><select class=\"form-control self-select\"><option value=\"0\">请选择</option>{{#childClassifies}}<option value=\"{{classifyId}}\">{{classifyName}}</option>{{/childClassifies}}</select>"
     },
     loadArticleList: function(){
     	var _this           = this,
     	articleDetailHtml   	= '',
     	$listCon        	= $('.articleDetail');
     	article.queryDetailsArticleList(_this.data.listParam,function(res){
-    		// 渲染html
-    		articleDetailHtml = ciker.renderHtml(_this.pageHtml.articleDetailHtml, res);
-    		$listCon.html(articleDetailHtml);
-    		 _this.statusChange();
-    		 _this.recommendChange();
-    		 _this.data.listParam.pageNum = 1;
-    		_this.loadPagination({
-                hasPreviousPage : res.hasPreviousPage,
-                prePage         : res.prePage,
-                hasNextPage     : res.hasNextPage,
-                nextPage        : res.nextPage,
-                pageNum         : res.pageNum,
-                pages           : res.pages
-            },{
-            	container : $('.articlelist-pagination'),
-                onSelectPage : function(pageNum){
-                	 _this.data.listParam.pageNum = pageNum;
-                    _this.loadArticleList();
-                }
-            });
+    		_this.articleListCon($listCon,res);
+    		var onSelectPage = function(pageNum){
+              	 _this.data.listParam.pageNum = pageNum;
+                 _this.loadArticleList();
+        	}
+    		 _this.pageUtil(res,$('.articlelist-pagination'),onSelectPage)
     	}, function(errMsg){
     		$listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
     	});
+    },
+    articleListCon : function($listCon,res){
+    	var _this = this;
+    	// 渲染html
+		articleDetailHtml = ciker.renderHtml(_this.pageHtml.articleDetailHtml, res);
+		$listCon.html(articleDetailHtml);
+		 _this.statusChange();
+		 _this.recommendChange();
+    },
+    pageUtil : function(res,container,onSelectPage){
+    	var _this = this;
+    	_this.data.listParam.pageNum = 1;
+    	container.html("");
+    	_this.loadPagination({
+            hasPreviousPage : res.hasPreviousPage,
+            prePage         : res.prePage,
+            hasNextPage     : res.hasNextPage,
+            nextPage        : res.nextPage,
+            pageNum         : res.pageNum,
+            pages           : res.pages
+        },{
+        	container : container,
+            onSelectPage : onSelectPage
+        });
     },
     statusChange:function(){
     	$(".article-single-status").each(function(){
@@ -223,6 +283,24 @@ var articleManage = {
     		}else{
     			$(this).html("生效");
     		}
+    	});
+    },
+    queryClassifys:function($listCon,classifyId){
+    	var _this = this,
+    	classifySelectHtml = '';
+		// 加载分类信息
+		classifyService.queryClassifys({classifyId : classifyId},function(res){
+			// 渲染html
+			classifySelectHtml = ciker.renderHtml(_this.pageHtml.classifySelectHtml, res);
+			$listCon.html(classifySelectHtml);
+			var selecthtml = $listCon.children('select').text();
+			if( selecthtml== '' || selecthtml =='请选择'){
+				$listCon.hide();
+			}else{
+				$listCon.show();
+			}
+    	},function(msg){
+    		$listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
     	});
     },
     recommendChange:function(){

@@ -24,7 +24,8 @@ var menuService = {
 		ciker.request({
 			url : ciker.getServerUrl('/it/back/menu/addMenu.do'),
 			method : 'POST',
-			async 	: param.async || true,
+			async 	: param.async || false,
+			cache 	: param.cache || false,
 			data    : param.data,
 			success : resolve,
 			error :reject
@@ -44,7 +45,8 @@ var menuService = {
 			url : ciker.getServerUrl('/it/back/menu/deleteMenu.do'),
 			method : 'POST',
 			data    : param.data,
-			async 	: param.async || true,
+			async 	: param.async || false,
+			cache	: false,
 			success : resolve,
 			error :reject
 		});
@@ -54,7 +56,8 @@ var menuService = {
 			url : ciker.getServerUrl('/it/back/menu/updateMenu.do'),
 			method : 'POST',
 			data    : param.data,
-			async 	: param.async || true,
+			async 	: param.async || false,
+			cache	: false,
 			success : resolve,
 			error :reject
 		});
@@ -82,6 +85,8 @@ var menuService = {
 		ciker.request({
 			url : ciker.getServerUrl('/it/back/menu/releaseMenu.do'),
 			method : 'POST',
+			async 	: false,
+			cache	: false,
 			data    : listParam,
 			success : resolve,
 			error :reject
@@ -91,6 +96,8 @@ var menuService = {
 		ciker.request({
 			url : ciker.getServerUrl('/it/back/menu/unReleaseMenu.do'),
 			method : 'POST',
+			async 	: false,
+			cache	: false,
 			data    : listParam,
 			success : resolve,
 			error :reject

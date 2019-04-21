@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="../../js/utils/summernote.min.js"></script>
 <script type="text/javascript" src="../../js/service/article-service.js"></script>
+<script type="text/javascript" src="../../js/service/classify-service.js"></script>
 <script type="text/javascript" src="../../js/service/pagination.js"></script>
 <script type="text/javascript" src="../../js/page/back/article.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/summernote.css" />
@@ -14,7 +15,7 @@
 	<!-- 导航头 -->
 	<div class="panel-heading">
 		<form class="form-inline">
-			<div class="form-group self-form">
+			<!-- <div class="form-group self-form">
 				<label>分类</label> <select class="form-control">
 					<option>所有</option>
 					<option>Hot Dog</option>
@@ -24,13 +25,13 @@
 					<option>Shake</option>
 					<option>Smile</option>
 				</select>
-			</div>
+			</div> -->
 
 			<div class="form-group self-form">
-				<label>文档名称</label> <input type="text" class="form-control"
-					placeholder="请输入文档名称">
+				<label>文档名称</label> 
+				<input type="text" class="form-control article-name" placeholder="请输入文档名称">
 			</div>
-			<button type="button" class="btn btn-default" id="self-systematics">
+			<button type="button" class="btn btn-default article-search" id="self-systematics">
 				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
 			</button>
 		</form>
@@ -97,20 +98,23 @@
 							</div>
 						</div>
 						<div class="panel-heading">
-							<form role="form">
+							<form role="form article-model-form">
 								<input type="hidden" class="model-article-id"/>
+								<input type="hidden" class="model-article-classify-id"/>
 								<div class="form-group">
-									<label>分类</label> 
-									<select id="self-select-one" class="form-control self-control">
-										<option>踢足球</option>
-										<option>游泳</option>
-										<option>慢跑</option>
-										<option>跳舞</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label>标题</label> 
+									<label>文章标题</label> 
 									<input type="text" class="form-control self-control model-article-title" placeholder="请输入标题">
+								</div>
+								<div class="classify-select-div">
+									<div class="form-group classify-select">
+										
+									</div>
+									<div class="form-group classify-select-two"  style="display: none">
+										
+									</div>
+									<div class="form-group classify-select-three" style="display: none">
+										
+									</div>
 								</div>
 							</form>
 						</div>

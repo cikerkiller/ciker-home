@@ -135,6 +135,7 @@ var menuListService = {
     		menuId = menuListService.saveOpParam.menuParentId;
     		menuService.addMenu({
     			async : false,
+    			cache :false,
     			data : {
     			menuParentId 	: menuId,
     			menuName		:	$(".menu-detail-input-name").val(),	
@@ -168,8 +169,8 @@ var menuListService = {
         	menuListService.saveOpParam.param=1;
     	}
 		$("#tree").html("");
-		menuListService.loadMenus();
 		$(".list-menu-body").hide();
+		menuListService.loadMenus();
 		if(menuId != undefined && menuId != 0 && param != 3){
 			$("#tree span").removeClass("menu-active");
 			$(".menu-list-node-"+menuId+">span").addClass("menu-active");

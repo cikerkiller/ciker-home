@@ -102,6 +102,12 @@
 	    OR
 	    	CONTENT LIKE CONCAT('%',#{content,jdbcType=LONGVARCHAR},'%')
   </select>
+  <select id="selectArticleByName" resultType="com.hf.ciker.vo.ArticleVO" parameterType="java.lang.String">
+	    select 
+	    <include refid="baseSql" /> 
+	    from CH_ARTICLE where 
+	    	ARTICLE_TITLE LIKE CONCAT('%',#{articleTitle,jdbcType=VARCHAR},'%')
+  </select>
   
   <update id="deleteArticle" parameterType="long">
 		update CH_ARTICLE set STATUS=-1 where ARTICLE_ID = #{articleId,jdbcType=BIGINT}

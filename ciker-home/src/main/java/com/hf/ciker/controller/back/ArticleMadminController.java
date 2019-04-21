@@ -114,4 +114,11 @@ public class ArticleMadminController {
 		return articleService.selectArticleDetailsById(articleId);
 		
 	}
+	@RequestMapping(value="selectArticleByName.do",method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse<PageInfo<ArticleVO>> selectArticleByName( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
+			@RequestParam(value="pageSize",defaultValue="10") Integer pageSize,String articleName) {
+		return articleService.selectArticleByName(pageNum,pageSize,articleName);
+		
+	}
 }
