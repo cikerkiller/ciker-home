@@ -3,9 +3,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="js/service/article-service.js"></script>
-<script type="text/javascript" src="js/page/portal/hotRank.js"></script>
-<link rel="stylesheet" type="text/css" href="css/portal/hotRank.css" />
+<script type="text/javascript" src="../js/service/article-service.js"></script>
+<script type="text/javascript" src="../js/page/portal/hotRank.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/portal/hotRank.css" />
 </head>
 <div class="col-sm-12">
 	<div class="panel panel-default hot-article">

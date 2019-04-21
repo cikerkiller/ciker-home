@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="js/page/portal/recommend.js"></script>
+<script type="text/javascript" src="../js/page/portal/recommend.js"></script>
 </head>
 <div class="col-sm-12">
 	<div class="panel panel-default">

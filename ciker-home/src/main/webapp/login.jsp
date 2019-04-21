@@ -3,12 +3,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>login-portal</title>
 <script type="text/javascript" src="js/utils/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="js/utils/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/utils/mm.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
 <style type="text/css">
 	body {
 		background: #fff url("img/login-1.jpg") no-repeat left top;
@@ -68,7 +68,7 @@
 <script type="text/javascript">
 	$(function(){
 		$("button").click(function(){
-			window.location.href="jsp/back/back-main.jsp";
+			window.location.href="jsp/portal.jsp";
 		});
 	});
 	

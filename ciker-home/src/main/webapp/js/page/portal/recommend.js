@@ -10,7 +10,7 @@ var recommend = {
         $(document).on('click', '.recommend-article', function(){
 	       	var data = $(this).data('value');
         	sessionStorage.setItem("articleId", data);
-        	$(".content-container").load("jsp/articleDetails.jsp");
+        	$(".content-container").load("../jsp/articleDetails.jsp");
         });
     },
     onLoad : function(){

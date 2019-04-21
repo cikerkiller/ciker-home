@@ -3,8 +3,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="js/service/bulletin-service.js"></script>
-<script type="text/javascript" src="js/page/portal/bulletin.js"></script>
+<script type="text/javascript" src="../js/service/bulletin-service.js"></script>
+<script type="text/javascript" src="../js/page/portal/bulletin.js"></script>
 </head>
 	<div class="col-md-12">
 		<div class="self-panel bulletin">

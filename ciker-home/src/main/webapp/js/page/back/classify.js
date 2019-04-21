@@ -52,20 +52,31 @@ var classify = {
         	}
         });
         $(document).on('click', '.op-btn-delete', function(){
-        	var parentId;
-        	var li ;
-        	if($(".classify-active")){
-        		li = $(".classify-active").parent();
-        		parentId = $(".classify-active").data('value');
-        	}else{
-        		li = $("#classify-tree>li")
-        		parentId = 0;
+        	var array = new Array();
+        	$('input[type=checkbox]:checked').each(function(i){
+        		array.push($(this).parent().children("span").data('value'));
+        	})
+        	if(array.length == 0){
+        		return;
         	}
-        	if(li.is(':has(ul)')){
-        		li.children('ul').append("<li><input type=\"checkbox\"/><span class=\"folder list-classify-item\" data-value=\""+parentId+"\"><input type=\"text\" class=\"new-classify-ltem\"/></span></li>");
-        		li.children('ul').show();
+        	classifyService.delClassify({
+            	cache	:	false,
+            	async	:	false,
+            	data	:   {"classifyIds":array}
+            },function(res){
+            	$("#classify-tree").html('');
+            	_this.loadClassify();
+            }, function(errMsg){
+                $(".error-msg").html('<p class="err-tip">加载失败，请刷新后重试</p>');
+            });
+        });
+        $(document).off('change', 'input[type=checkbox]');
+        $(document).on('change', 'input[type=checkbox]', function(){
+        	var li = $(this).parent();
+        	if($(this).prop("checked")){
+        		_this.classifyHandler(li,true);
         	}else{
-        		li.append("<ul class=\"ul-classify\"><li><input type=\"checkbox\"/><span class=\"folder list-classify-item\" data-value=\""+parentId+"\"><input type=\"text\" class=\"new-classify-ltem\"/></span></li></ul>");
+        		_this.classifyHandler(li,false);
         	}
         });
         $(document).on('focus', '.new-classify-ltem', function(){
@@ -89,6 +100,15 @@ var classify = {
         });
         
         
+    },
+    classifyHandler : function(node,checked){
+    	var _this = this;
+    	node.children("input").prop("checked",checked);
+    	if(node.is(':has(ul)')){
+    		node.children('ul').children('li').each(function(){
+    			_this.classifyHandler($(this),checked);
+    		});
+    	}
     },
     onLoad : function(){
     	this.onLoadHtml();

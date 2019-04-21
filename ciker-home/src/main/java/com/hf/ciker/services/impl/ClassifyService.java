@@ -62,4 +62,13 @@ public class ClassifyService implements IClassifyService{
 		}
 	}
 
+	@Override
+	public ServerResponse<String> batchDeleteClassify(List<Long> classifyIds) {
+		int status = classifyDao.deleteClassify(classifyIds);
+		if(status > 0) {
+			return ServerResponse.createBySuccess();
+		}
+		return ServerResponse.createByError();
+	}
+
 }

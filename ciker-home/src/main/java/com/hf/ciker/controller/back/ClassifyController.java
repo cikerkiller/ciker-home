@@ -1,9 +1,14 @@
 package com.hf.ciker.controller.back;
 
+import java.util.Arrays;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hf.ciker.common.ServerResponse;
@@ -34,6 +39,12 @@ public class ClassifyController {
 	@ResponseBody
 	public ServerResponse<String> deleteClassify(Long classifyId){
 		return classifyService.deleteClassify(classifyId);
+	}
+	
+	@RequestMapping(value="batchDeleteClassify.do",method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse<String> batchDeleteClassify(HttpSession session,@RequestParam(value = "classifyIds[]")Long[] classifyIds) {
+		return classifyService.batchDeleteClassify(Arrays.asList(classifyIds));
 	}
 	
 }

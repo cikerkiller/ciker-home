@@ -17,7 +17,7 @@ var articleList = {
         $(document).on('click', '.articile-details', function(){
 	       	var data = $(this).data('value');
         	sessionStorage.setItem("articleId", data);
-        	$(".content-container").load("jsp/articleDetails.jsp");
+        	$(".content-container").load("../jsp/articleDetails.jsp");
         });
 
        

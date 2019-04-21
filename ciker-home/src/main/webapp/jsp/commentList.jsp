@@ -3,9 +3,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="js/service/comment-service.js"></script>
-<script type="text/javascript" src="js/service/pagination.js"></script>
-<script type="text/javascript" src="js/page/portal/commentList.js"></script>
+<script type="text/javascript" src="../js/service/comment-service.js"></script>
+<script type="text/javascript" src="../js/service/pagination.js"></script>
+<script type="text/javascript" src="../js/page/portal/commentList.js"></script>
 </head>
 
 <div class="col-sm-12">
@@ -24,7 +24,7 @@
 		<div class="comment-container">
 			{{#list}}
 			<div class="panel-body comment-list">
-				<img class="comment-people" src="img/comment-people.png" />
+				<img class="comment-people" src="../img/comment-people.png" />
 				<div class="comment-body">
 					<span class="">{{commentContent}}</span>
 					<div class="comment-date">{{commentDate}}</div>

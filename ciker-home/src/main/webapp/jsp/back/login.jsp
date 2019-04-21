@@ -6,9 +6,9 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="../../js/utils/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="../../js/utils/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../js/utils/mm.js"></script>
+<script type="text/javascript" src="../../js/utils/ciker.js"></script>
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/font-awesome.css">
 <style type="text/css">
 	body {
 		background: #fff url("../../img/login-1.jpg") no-repeat left top;
@@ -39,7 +39,7 @@
 		 	background-size:100%;
 		}
 		100% {
-			background: #fff url("img/login-1.jpg") no-repeat left top;
+			background: #fff url("../../img/login-1.jpg") no-repeat left top;
 		 	background-size:100%;
 		}
 	}

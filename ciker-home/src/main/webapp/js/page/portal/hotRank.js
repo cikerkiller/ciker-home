@@ -11,7 +11,7 @@ var hotRank = {
         $(document).on('click', '.hot-rank-a', function(){
 	       	var data = $(this).data('value');
         	sessionStorage.setItem("articleId", data);
-        	$(".content-container").load("jsp/articleDetails.jsp");
+        	$(".content-container").load("../jsp/articleDetails.jsp");
         });
     },
     onLoad : function(){

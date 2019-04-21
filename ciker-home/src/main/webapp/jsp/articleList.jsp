@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="js/service/article-service.js"></script>
-<script type="text/javascript" src="js/service/pagination.js"></script>
-<script type="text/javascript" src="js/page/portal/articleList.js"></script>
+<script type="text/javascript" src="../js/service/article-service.js"></script>
+<script type="text/javascript" src="../js/service/pagination.js"></script>
+<script type="text/javascript" src="../js/page/portal/articleList.js"></script>
 </head>
 <div class="col-sm-12 articleList">
 	{{#list}}

@@ -7,8 +7,8 @@ var articleDatailsService = {
     bindEvent : function(){
     },
     onLoad : function(){
-    	$(".article-content").load("jsp/articleContent.jsp");
-    	$(".comment").load("jsp/commentList.jsp");
+    	$(".article-content").load("../jsp/articleContent.jsp");
+    	$(".comment").load("../jsp/commentList.jsp");
     }
    
 };
