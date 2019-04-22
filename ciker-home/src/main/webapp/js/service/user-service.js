@@ -12,6 +12,16 @@ var _user = {
 		});
 
 	},
+	login : function(param,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/user/back/login.do'),
+			method 	: 	'POST',
+			data	:	param,
+			success : 	resolve,
+			error :reject
+		});
+		
+	},
 	//检查登陆状态
 	checkLogin : function(resolve,reject){
 		ciker.request({

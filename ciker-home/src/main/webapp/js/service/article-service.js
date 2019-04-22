@@ -127,6 +127,17 @@ var article = {
 			success : resolve,
 			error :reject
 		});
+	},
+	selectArticleByClassifyId   : function(param,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/article/selectArticleByClassifyId.do'),
+			method : 'POST',
+			async 	: false,
+			cache	: false,
+			data    : param,
+			success : resolve,
+			error :reject
+		});
 	}
 
 }

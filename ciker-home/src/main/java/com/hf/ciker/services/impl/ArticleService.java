@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.dao.IArticleDao;
+import com.hf.ciker.dao.IClassifyDao;
 import com.hf.ciker.services.IArticleService;
 import com.hf.ciker.vo.ArticleVO;
 import com.hf.ciker.vo.DetailsArticleVO;
@@ -22,6 +23,9 @@ public class ArticleService implements IArticleService{
 	
 	@Autowired
 	private IArticleDao articleDao;
+	
+	@Autowired
+	private IClassifyDao classifyDao;
 	
 	@Override
 	public ServerResponse<String> saveArticle(ArticleVO articleVO) {
@@ -173,6 +177,16 @@ public class ArticleService implements IArticleService{
 			return ServerResponse.createBySuccess(articleVO.getLikeNumber());
 		}
 		return ServerResponse.createByError();
+	}
+
+	@Override
+	public ServerResponse<PageInfo<DetailsArticleVO>> selectArticleByClassifyId(Integer pageNum,Integer pageSize,Long classifyId) {
+		List<Long> childNodeIds = classifyDao.queryClassifyChildId(classifyId);
+		childNodeIds.add(classifyId);
+		PageHelper.startPage(pageNum,pageSize);
+		List<DetailsArticleVO> detailsArticleVOs = articleDao.selectArticleByClassifyId(childNodeIds);
+		PageInfo<DetailsArticleVO> pageResult = new PageInfo<DetailsArticleVO>(detailsArticleVOs);
+		return ServerResponse.createBySuccess(pageResult);
 	}
 
 }

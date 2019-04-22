@@ -32,6 +32,8 @@ public interface IArticleService {
 	
 	ServerResponse<Integer> updateLikeNumber(Long articleId); 
 	
+	ServerResponse<PageInfo<DetailsArticleVO>> selectArticleByClassifyId(Integer pageNum,Integer pageSize,Long classifyId);
+	
 	ServerResponse<PageInfo<DetailsArticleVO>> commonQueryArticles(Integer pageNum,Integer pageSize); 
 	
 	ServerResponse<PageInfo<DetailsArticleVO>> detailsQueryArticles(Integer pageNum,Integer pageSize); 

@@ -85,4 +85,18 @@ public class ClassifyService implements IClassifyService{
 		return ServerResponse.createBySuccess(classifyListVO);
 	}
 
+	@Override
+	public ServerResponse<ClassifyListVO> queryClassify() {
+		List<ClassifyVO> classifyS = classifyDao.queryClassify();
+		ClassifyListVO classifyListVO = new ClassifyListVO();
+		classifyListVO.setClassifyId(new Long(0));
+		for(ClassifyVO childClassify : classifyS) {
+			ClassifyListVO classifyTreeVO = new ClassifyListVO();
+			classifyTreeVO.setClassifyId(childClassify.getClassifyId());
+			classifyTreeVO.setClassifyName(childClassify.getClassifyName());
+			classifyListVO.addChildClassify(classifyTreeVO);
+		}
+		return ServerResponse.createBySuccess(classifyListVO);
+	}
+
 }

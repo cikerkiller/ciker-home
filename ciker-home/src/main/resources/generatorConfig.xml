@@ -69,7 +69,7 @@
         </javaClientGenerator>
 
 
-       <table tableName="CH_MENU" domainObjectName="MenuVO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+       <table tableName="CH_TAG" domainObjectName="TagVO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
   
 
         <!-- geelynote mybatis插件的搭建 -->

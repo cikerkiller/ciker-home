@@ -9,7 +9,7 @@ var recommend = {
         var _this = this;
         $(document).on('click', '.recommend-article', function(){
 	       	var data = $(this).data('value');
-        	sessionStorage.setItem("articleId", data);
+	       	localStorage.setItem("articleId", data);
         	$(".content-container").load("../jsp/articleDetails.jsp");
         });
     },

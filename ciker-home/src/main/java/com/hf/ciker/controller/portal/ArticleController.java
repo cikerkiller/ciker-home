@@ -54,6 +54,13 @@ public class ArticleController {
 		return articleService.updateLikeNumber(articleId);
 	}
 	
+	@RequestMapping(value="selectArticleByClassifyId.do",method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse<PageInfo<DetailsArticleVO>> selectArticleByClassifyId(  HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
+			@RequestParam(value="pageSize",defaultValue="10") Integer pageSize,Long classifyId) {
+		return articleService.selectArticleByClassifyId(pageNum,pageSize,classifyId);
+	}
+	
 	@RequestMapping(value="queryHotRank.do",method = RequestMethod.GET)
 	@ResponseBody
 	public ServerResponse<HotRankListVO> queryHotRank() {

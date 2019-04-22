@@ -11,8 +11,8 @@
 		<!-- 轮播（Carousel）指标 -->
 		<ol class="carousel-indicators">
 			{{#list}}
-			<li data-target="#myCarousel" data-slide-to="{{rowno}}"
-				class="image-no"></li> {{/list}}
+			<li data-target="#myCarousel" data-slide-to="{{rowno}}" class="image-no"></li> 
+			{{/list}}
 		</ol>
 		<!-- 轮播（Carousel）项目 -->
 		<div class="carousel-inner"></div>

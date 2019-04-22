@@ -10,7 +10,7 @@ var hotRank = {
      // 热门文章详情
         $(document).on('click', '.hot-rank-a', function(){
 	       	var data = $(this).data('value');
-        	sessionStorage.setItem("articleId", data);
+	       	localStorage.setItem("articleId", data);
         	$(".content-container").load("../jsp/articleDetails.jsp");
         });
         $(document).off('click','.hotrank-like');

@@ -10,6 +10,8 @@ public interface IClassifyDao {
 	
 	List<ClassifyVO> queryChildNode(Long parentId);
 	
+	List<ClassifyVO> queryClassify();
+	
 	int addClassify(ClassifyVO classifyVO);
 	
 	int deleteClassify(@Param("classifys") List<Long> classifys);

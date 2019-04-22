@@ -99,6 +99,27 @@
 		WHERE 
 	     t1.ARTICLE_ID = #{articleId,jdbcType=BIGINT}
   </select>
+  <select id="selectArticleByClassifyId" resultType="com.hf.ciker.vo.DetailsArticleVO" parameterType="list">
+	     SELECT 
+		    t1.ARTICLE_ID as articleId,
+		    t1.ARTICLE_TITLE as articleTitle,
+		    t1.CONTENT	as content,
+		    t4.creator as creatior,
+		    t1.LAST_UPDATE_DATE as lastUpdateDate,
+		    t1.VIEWING_COUNT as viewingCount,
+		    t1.LIKE_NUMBER as likeNumber,
+		    t3.comment_number as commentNumber
+		 FROM CH_ARTICLE t1
+		 LEFT JOIN 
+		(SELECT ARTICLE_ID,COUNT(COMMENT_CONTENT) AS COMMENT_NUMBER FROM CH_ARTICLE_COMMENT GROUP BY ARTICLE_ID) t3 ON t1.ARTICLE_ID=t3.ARTICLE_ID
+		LEFT JOIN 
+		(SELECT USER_ID,USERNAME AS creator FROM CH_USER) t4 ON t1.CREATION_BY AND t4.user_id
+		WHERE 
+	     t1.CLASSIFY_ID in
+	     <foreach collection="childNodeIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+  </select>
   
   <!-- 模糊查询 -->
   <select id="selectArticleByMatch" resultType="com.hf.ciker.vo.ArticleVO" parameterType="java.lang.String">
@@ -109,11 +130,32 @@
 	    OR
 	    	CONTENT LIKE CONCAT('%',#{content,jdbcType=LONGVARCHAR},'%')
   </select>
-  <select id="selectArticleByName" resultType="com.hf.ciker.vo.ArticleVO" parameterType="java.lang.String">
-	    select 
-	    <include refid="baseSql" /> 
-	    from CH_ARTICLE where 
-	    	ARTICLE_TITLE LIKE CONCAT('%',#{articleTitle,jdbcType=VARCHAR},'%')
+  <select id="selectArticleByName" resultType="com.hf.ciker.vo.DetailsArticleVO" parameterType="java.lang.String">
+	     SELECT 
+		    t1.ARTICLE_ID as articleId,
+		    t6.classify_name as classifyName,
+		    t1.ARTICLE_TITLE as articleTitle,
+		     CONCAT(REPLACE(LEFT(t1.CONTENT,100)," ",""),'...')	as content,
+		    t1.CREATION_DATE as creationDate,
+		    t4.creator as creatior,
+		    t1.LAST_UPDATE_DATE as lastUpdateDate,
+		    t5.lastupdateor as lastUpdator,
+		    t1.STATUS as status,
+		    t1.RECOMMEND as recommend,
+		    t1.VIEWING_COUNT as viewingCount,
+		     t1.LIKE_NUMBER as likeNumber,
+		    t3.comment_number as commentNumber
+		 FROM CH_ARTICLE t1
+		 LEFT JOIN 
+		(SELECT ARTICLE_ID,COUNT(COMMENT_CONTENT) AS COMMENT_NUMBER FROM CH_ARTICLE_COMMENT GROUP BY ARTICLE_ID) t3 ON t1.ARTICLE_ID=t3.ARTICLE_ID
+		LEFT JOIN 
+		(SELECT USER_ID,USERNAME AS creator FROM CH_USER) t4 ON t1.CREATION_BY AND t4.user_id
+		LEFT JOIN 
+		(SELECT USER_ID,USERNAME  AS lastupdateor FROM CH_USER) t5 ON t1.LAST_UPDATE_BY=t5.user_id
+		LEFT JOIN 
+		(SELECT classify_id ,classify_name FROM CH_CLASSIFY_INFO) t6 ON t1.classify_id=t6.classify_id
+	    where 
+	    	t1.ARTICLE_TITLE LIKE CONCAT('%',#{articleTitle,jdbcType=VARCHAR},'%')
   </select>
   
   <update id="deleteArticle" parameterType="long">

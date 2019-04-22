@@ -22,6 +22,8 @@ public interface IArticleDao {
 	
 	List<DetailsArticleVO> detailsQueryArticles();
 	
+	List<DetailsArticleVO> selectArticleByClassifyId(@Param("childNodeIds")List<Long> childNodeIds);
+	
 	List<ArticleVO> portalQueryArticles();
 	
 	DetailsArticleVO selectArticleById(Long articleId);

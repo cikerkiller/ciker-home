@@ -12,6 +12,9 @@
 	<select id="queryChildNode" resultType="com.hf.ciker.vo.ClassifyVO">
 		select <include refid="baseSql" /> from CH_CLASSIFY_INFO where PARENT_ID = #{parentId,jdbcType=BIGINT}
 	</select>
+	<select id="queryClassify" resultType="com.hf.ciker.vo.ClassifyVO">
+		select <include refid="baseSql" /> from CH_CLASSIFY_INFO where PARENT_ID = 0
+	</select>
 	<select id="queryClassifyChildId" resultType="long">
 		select CLASSIFY_ID from CH_CLASSIFY_INFO where PARENT_ID = #{parentId,jdbcType=BIGINT}
 	</select>

@@ -190,3 +190,34 @@ a:hover{
 	float: right;
 	top: 7px;
 }
+
+.article-body img{
+	display: block;
+    max-width: 60%;
+    max-height: 60%;
+    cursor:pointer;
+  	transition:all 0.6s ease-in-out;
+}
+.article-body img:hover{
+  display:block;
+  transform：scale(5);
+   max-width :100%;
+   max-height :60%;
+}
+::-webkit-scrollbar {
+	display: none
+}
+/* .article-auth{
+	float: right;
+    margin-top: 20px;
+}
+.article-body{
+	padding: 15px 15px 0 15px
+}
+.article-auth-element{
+    color: #999;
+    margin-right: 20px;
+}
+.article-auth-element a:hover{
+	color: red;
+} */

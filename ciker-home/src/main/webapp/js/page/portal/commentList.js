@@ -49,7 +49,7 @@ var commentList = {
     	commentListHtml   	= '',
     	$listCon        	= $('.comment-container');
     	var param = _this.data.listParam;
-    	param.articleId = sessionStorage.getItem("articleId");
+    	param.articleId = localStorage.getItem("articleId");
     	comment.commentList(param, function(res){
     		// 渲染html
     		commentListHtml = ciker.renderHtml(_this.pageHtml.commentHtml, res);

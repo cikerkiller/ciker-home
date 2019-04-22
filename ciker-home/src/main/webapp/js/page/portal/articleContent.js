@@ -16,7 +16,7 @@ var articleContent = {
     		});
     	});
     	$(document).on('click','.article-auth-comment',function(){
-    		 sessionStorage.setItem("articleId", $("#articleId").val());
+    		localStorage.setItem("articleId", $("#articleId").val());
     		 window.location.hash='#commentContent';
     	});
     	
@@ -39,14 +39,14 @@ var articleContent = {
     	
     },
     updateViewCount : function(){
-    	var data = sessionStorage.getItem("articleId");
+    	var data = localStorage.getItem("articleId");
     	article.updateViewCount({articleId:data},function(res){},function(msg){});
     },
     loadArticle : function(){
     	var _this           = this,
     	articleContentHtml   	= '',
         $listCon        	= $('.article-content-body');
-       	var data = sessionStorage.getItem("articleId");
+       	var data = localStorage.getItem("articleId");
        	article.articleDetails({articleId : data},function(res){
        		articleContentHtml = ciker.renderHtml(_this.pageHtml.articleContentHtml, res);
        		$listCon.html(articleContentHtml);

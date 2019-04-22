@@ -8,8 +8,8 @@
 <script type="text/javascript" src="../js/utils/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/utils/Hogan.js"></script>
 <script type="text/javascript" src="../js/utils/ciker.js"></script>
+<script type="text/javascript" src="../js/service/classify-service.js"></script>
 <script type="text/javascript" src="../js/page/portal/portal.js"></script>
-
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/font-awesome.css" />
 <link rel="stylesheet" type="text/css" href="../css/common.css" />
@@ -27,45 +27,22 @@
 
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-2">
-				<ul class="nav navbar-nav">
-					<li><a href="#">Java</a></li>
-					<li><a href="#">Big Data</a></li>
-					<li><a href="#">C/C++</a></li>
-					<li><a href="#">Python</a></li>
-					<li><a href="#">Linux</a></li>
-
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Web <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">JavaScript</a></li>
-							<li><a href="#">Css</a></li>
-							<li><a href="#">Html</a></li>
-							<li><a href="#">JQuery</a></li>
-							<li><a href="#">BootStrap</a></li>
-							<!-- <li role="separator" class="divider"></li> -->
-						</ul></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">DataBase <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Mysql</a></li>
-							<li><a href="#">Oracle</a></li>
-							<li><a href="#">Hbase</a></li>
-							<li><a href="#">Redis</a></li>
-						</ul></li>
+				<ul class="nav navbar-nav technique-nav">
+					{{#childClassifies}}
+					<li data-value="{{classifyId}}"><a class="technique-nav-a" href="#">{{classifyName}}</a></li>
+					{{/childClassifies}}
 				</ul>
 				<form class="navbar-form navbar-right">
 					<div class="form-group">
 						<input type="text" class="form-control search" placeholder="Search">
 					</div>
-					<button type="submit" class="btn btn-default">搜索</button>
+					<button type="submit" class="btn btn-default article-search">搜索</button>
 				</form>
 
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container toptip-container">
 	<!-- 公告 -->
 		<div class="row toptip"></div>
 	</div>

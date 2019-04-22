@@ -43,5 +43,13 @@ var classifyService = {
 			success : resolve,
 			error :reject
 		});
+	},
+	queryClassify : function(resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/classify/queryClassify.do'),
+			method : 'GET',
+			success : resolve,
+			error :reject
+		});
 	}
 }
