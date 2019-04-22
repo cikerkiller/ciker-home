@@ -6,4 +6,17 @@
 		select user_id as userId,username, password from CH_USER where username=#{username,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
 	</select>
 	
+	<select id="queryUserInfo" resultType="com.hf.ciker.vo.UserVO">
+		select 
+		USER_ID as userId,
+		USER_NAME_ZH_CN as userNameZhCn,
+		USER_NAME_EN_US as userNameEnUs,
+		GENDER as gender,
+		AGE as age,
+		ADDRESS as address,
+		EMAIL as email,
+		PHONE_NUNBER as phoneNunber
+		from CH_USER_INFO where USER_ID =#{userId,jdbcType=BIGINT}
+	</select>
+	
 </mapper>

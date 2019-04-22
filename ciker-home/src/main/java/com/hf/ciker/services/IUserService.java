@@ -1,8 +1,8 @@
 package com.hf.ciker.services;
 
 import com.hf.ciker.common.ServerResponse;
-import com.hf.ciker.vo.User;
+import com.hf.ciker.vo.UserVO;
 
 public interface IUserService {
-    ServerResponse<User> login(String username, String password);
+    ServerResponse<UserVO> login(String username, String password);
 }

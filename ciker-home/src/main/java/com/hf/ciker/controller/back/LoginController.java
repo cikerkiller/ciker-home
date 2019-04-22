@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hf.ciker.common.CikerConstant;
 import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.services.IUserService;
-import com.hf.ciker.vo.User;
+import com.hf.ciker.vo.UserVO;
 
 @Controller
 @RequestMapping("/user/back")
@@ -23,7 +23,7 @@ public class LoginController {
 	@RequestMapping(value="login.do",method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<String> login(String username, String password, HttpSession session) {
-		 ServerResponse<User> response = iUserService.login(username,password);
+		 ServerResponse<UserVO> response = iUserService.login(username,password);
         if(response.isSuccess()){
             session.setAttribute(CikerConstant.CURRENT_USER,response.getData());
             return ServerResponse.createBySuccess(response.getData().getUsername());

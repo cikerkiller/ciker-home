@@ -7,6 +7,7 @@ import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.dao.IUserDao;
 import com.hf.ciker.services.IUserService;
 import com.hf.ciker.vo.User;
+import com.hf.ciker.vo.UserVO;
 
 @Service
 public class UserService implements IUserService {
@@ -15,11 +16,12 @@ public class UserService implements IUserService {
 	private IUserDao userDao;
 	
 	@Override
-	public ServerResponse<User> login(String username, String password) {
+	public ServerResponse<UserVO> login(String username, String password) {
 		User user = userDao.selectUser(username, password);
 		if(user != null) {
-			user.setPassword("");
-			return ServerResponse.createBySuccess(user);
+			UserVO userInfo = userDao.queryUserInfo(user.getUserId());
+			userInfo.setUsername(user.getUsername());
+			return ServerResponse.createBySuccess(userInfo);
 		}
 		return ServerResponse.createByError();
 	}
