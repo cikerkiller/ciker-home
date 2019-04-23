@@ -137,6 +137,7 @@ var articleManage = {
         });
         $(document).on('click', '.article-search', _this.searchArticle);
         // 删除事件绑定
+        $(document).off('click', '.btn-del');
         $(document).on('click', '.btn-del', function(){
         	var array=[];
     		$(".article-check-single:checked").each(function(i){
