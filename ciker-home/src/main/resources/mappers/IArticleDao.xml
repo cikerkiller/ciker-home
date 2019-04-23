@@ -41,7 +41,7 @@
 	     SELECT 
 		    t1.ARTICLE_ID as articleId,
 		    t1.ARTICLE_TITLE as articleTitle,
-		    CONCAT(REPLACE(LEFT(t1.CONTENT,100)," ",""),'...')	as content,
+		    CONCAT(LEFT(LTRIM(t1.CONTENT),100),'...')	as content,
 		    t4.creator as creatior,
 		    t1.LAST_UPDATE_DATE as lastUpdateDate,
 		    t1.VIEWING_COUNT as viewingCount,
@@ -96,14 +96,14 @@
 		(SELECT ARTICLE_ID,COUNT(COMMENT_CONTENT) AS COMMENT_NUMBER FROM CH_ARTICLE_COMMENT GROUP BY ARTICLE_ID) t3 ON t1.ARTICLE_ID=t3.ARTICLE_ID
 		LEFT JOIN 
 		(SELECT USER_ID,USERNAME AS creator FROM CH_USER) t4 ON t1.CREATION_BY AND t4.user_id
-		WHERE 
+		WHERE STATUS = 1 and 
 	     t1.ARTICLE_ID = #{articleId,jdbcType=BIGINT}
   </select>
   <select id="selectArticleByClassifyId" resultType="com.hf.ciker.vo.DetailsArticleVO" parameterType="list">
 	     SELECT 
 		    t1.ARTICLE_ID as articleId,
 		    t1.ARTICLE_TITLE as articleTitle,
-		    CONCAT(REPLACE(LEFT(t1.CONTENT,100)," ",""),'...')	as content,
+		    CONCAT(LEFT(LTRIM(t1.CONTENT),100),'...')	as content,
 		    t4.creator as creatior,
 		    t1.LAST_UPDATE_DATE as lastUpdateDate,
 		    t1.VIEWING_COUNT as viewingCount,
@@ -115,6 +115,7 @@
 		LEFT JOIN 
 		(SELECT USER_ID,USERNAME AS creator FROM CH_USER) t4 ON t1.CREATION_BY AND t4.user_id
 		WHERE 
+		STATUS = 1 and  
 	     t1.CLASSIFY_ID in
 	     <foreach collection="childNodeIds" item="item" index="index" open="(" close=")" separator=",">
             #{item}
@@ -125,7 +126,7 @@
   <select id="selectArticleByMatch" resultType="com.hf.ciker.vo.ArticleVO" parameterType="java.lang.String">
 	    select 
 	    <include refid="baseSql" /> 
-	    from CH_ARTICLE where 
+	    from CH_ARTICLE where  
 	    	ARTICLE_TITLE LIKE CONCAT('%',#{articleTitle,jdbcType=VARCHAR},'%')
 	    OR
 	    	CONTENT LIKE CONCAT('%',#{content,jdbcType=LONGVARCHAR},'%')
@@ -135,7 +136,7 @@
 		    t1.ARTICLE_ID as articleId,
 		    t6.classify_name as classifyName,
 		    t1.ARTICLE_TITLE as articleTitle,
-		     CONCAT(REPLACE(LEFT(t1.CONTENT,100)," ",""),'...')	as content,
+		    CONCAT(LEFT(LTRIM(t1.CONTENT),100),'...')	as content,
 		    t1.CREATION_DATE as creationDate,
 		    t4.creator as creatior,
 		    t1.LAST_UPDATE_DATE as lastUpdateDate,
@@ -154,7 +155,7 @@
 		(SELECT USER_ID,USERNAME  AS lastupdateor FROM CH_USER) t5 ON t1.LAST_UPDATE_BY=t5.user_id
 		LEFT JOIN 
 		(SELECT classify_id ,classify_name FROM CH_CLASSIFY_INFO) t6 ON t1.classify_id=t6.classify_id
-	    where 
+	    where STATUS = 1 and  
 	    	t1.ARTICLE_TITLE LIKE CONCAT('%',#{articleTitle,jdbcType=VARCHAR},'%')
   </select>
   
@@ -226,7 +227,7 @@
     	VIEWING_COUNT		AS viewingCount,
     	
     	LIKE_NUMBER 		as likeNumber
-	    FROM CH_ARTICLE,(SELECT @rowno:=0) t ORDER BY LIKE_NUMBER DESC LIMIT 5
+	    FROM CH_ARTICLE,(SELECT @rowno:=0) t where STATUS = 1  ORDER BY LIKE_NUMBER DESC LIMIT 5
   </select>
   <select id="queryRecommendArticle" resultType="com.hf.ciker.vo.ArticleVO">
   	 SELECT 
@@ -234,7 +235,7 @@
     	
 		ARTICLE_TITLE 		AS articleTitle
 	
-	    FROM CH_ARTICLE where RECOMMEND=1 ORDER BY LAST_UPDATE_DATE DESC LIMIT 10
+	    FROM CH_ARTICLE where RECOMMEND=1  and STATUS = 1  ORDER BY LAST_UPDATE_DATE DESC LIMIT 10
   </select>
   <select id="selectArticleDetailsById" resultType="com.hf.ciker.vo.ArticleVO">
   	 SELECT 
