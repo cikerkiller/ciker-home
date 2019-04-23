@@ -21,6 +21,17 @@ var portal = {
         	var classifyId = $(this).parent().data('value');
         	_this.searchArticleByClassifyId(classifyId);
         });
+        $(document).off('click','.article-auth-like');
+    	$(document).on('click','.article-auth-like',function(){
+    		var $this = $(this);
+    		var articleId = $this.children('input').val();
+    		article.updateLikeNumber({articleId:articleId},function(res){
+    			$this.children('span').html(res);
+    		},function(msg){
+    			$this.children('span').html('<p class="err-tip">加载失败，请刷新后重试</p>');
+    		});
+    	});
+        
         $(document).off('click', '.article-search');
         $(document).on('click', '.article-search', function(){
         	var articleName = $(this).prev().children('input').val();

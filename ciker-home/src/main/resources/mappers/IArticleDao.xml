@@ -103,7 +103,7 @@
 	     SELECT 
 		    t1.ARTICLE_ID as articleId,
 		    t1.ARTICLE_TITLE as articleTitle,
-		    t1.CONTENT	as content,
+		    CONCAT(REPLACE(LEFT(t1.CONTENT,100)," ",""),'...')	as content,
 		    t4.creator as creatior,
 		    t1.LAST_UPDATE_DATE as lastUpdateDate,
 		    t1.VIEWING_COUNT as viewingCount,

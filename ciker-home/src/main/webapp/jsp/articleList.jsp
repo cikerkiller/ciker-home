@@ -37,15 +37,16 @@
 					
 				</span>
 				<span class="article-auth-element">
-					<a class="article-auth-comment" data-value="{{articleId}}">
+					<span class="article-auth-comment">
 						<i class="fa fa-comments-o"></i>
 						<span class="count">{{commentNumber}}</span>
 						评论
-					</a>
+					</span>
 					
 				</span>
 				<span class="article-auth-element">
-					<a class="article-auth-like article-list-like"  data-value="{{articleId}}">
+					<a class="article-auth-like">
+						<input type="hidden" value="{{articleId}}"/>
 						<i class="fa fa-thumbs-up"></i>
 						<span class="count">{{likeNumber}}</span>点赞
 					</a>

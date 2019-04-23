@@ -13,16 +13,7 @@ var hotRank = {
 	       	localStorage.setItem("articleId", data);
         	$(".content-container").load("../jsp/articleDetails.jsp");
         });
-        $(document).off('click','.hotrank-like');
-    	$(document).on('click','.hotrank-like',function(){
-    		var $this = $(this);
-    		var articleId = $this.children('input').val();
-    		article.updateLikeNumber({articleId:articleId},function(res){
-    			$this.children('span').html(res);
-    		},function(msg){
-    			$this.children('span').html('<p class="err-tip">加载失败，请刷新后重试</p>');
-    		});
-    	});
+       
     },
     onLoad : function(){
     	this.onLoadHtml();

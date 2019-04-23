@@ -1,5 +1,5 @@
 var conf = {
-    serverHost : ''
+    serverHost : '/ciker'
 };
 var ciker = {
 	request	: function(param){

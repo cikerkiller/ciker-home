@@ -207,7 +207,7 @@ a:hover{
 ::-webkit-scrollbar {
 	display: none
 }
-/* .article-auth{
+.article-auth{
 	float: right;
     margin-top: 20px;
 }
@@ -220,4 +220,4 @@ a:hover{
 }
 .article-auth-element a:hover{
 	color: red;
-} */
+}
