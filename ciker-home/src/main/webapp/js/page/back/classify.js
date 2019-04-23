@@ -34,6 +34,7 @@ var classify = {
         		}
         	}
         });
+        $(document).off('click', '.op-btn-add');
         $(document).on('click', '.op-btn-add', function(){
         	var parentId;
         	var li ;
@@ -51,6 +52,7 @@ var classify = {
         		li.append("<div class=\"hitarea collapsable-hitarea \"></div><ul class=\"ul-classify\"><li><input type=\"checkbox\"/><span class=\"folder list-classify-item\" data-value=\""+parentId+"\"><input type=\"text\" class=\"new-classify-ltem\"/></span></li></ul>");
         	}
         });
+        $(document).off('click', '.op-btn-delete');
         $(document).on('click', '.op-btn-delete', function(){
         	var array = new Array();
         	$('input[type=checkbox]:checked').each(function(i){
