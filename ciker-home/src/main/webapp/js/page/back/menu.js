@@ -168,8 +168,8 @@ var menuListService = {
         	$(".del-line").removeClass('del-line');
         	menuListService.saveOpParam.param=1;
     	}
+    	$(".list-menu-body").hide();
 		$("#tree").html("");
-		$(".list-menu-body").hide();
 		menuListService.loadMenus();
 		if(menuId != undefined && menuId != 0 && param != 3){
 			$("#tree span").removeClass("menu-active");

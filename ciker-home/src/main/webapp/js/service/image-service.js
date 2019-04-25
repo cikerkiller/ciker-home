@@ -38,18 +38,9 @@ var imageService = {
 			error :reject
 		});
 	},
-	batchReleaseImage : function(listParam,resolve,reject){
+	batchDeleteImage : function(listParam,resolve,reject){
 		ciker.request({
-			url : ciker.getServerUrl('/it/image/batchReleaseImage.do'),
-			method : 'POST',
-			data    : listParam,
-			success : resolve,
-			error :reject
-		});
-	},
-	batchUnReleaseImage : function(listParam,resolve,reject){
-		ciker.request({
-			url : ciker.getServerUrl('/it/image/batchUnReleaseImage.do'),
+			url : ciker.getServerUrl('/it/image/batchDeleteImage.do'),
 			method : 'POST',
 			data    : listParam,
 			success : resolve,

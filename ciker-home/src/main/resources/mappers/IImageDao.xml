@@ -15,8 +15,8 @@
 		IMAGE_CONTENT as imageContent FROM CH_IMAGE,(SELECT @rowno:=0) t WHERE IS_RELEASE=1
 	</select>
 	
-	<select id="queryImageByReleasedCount">
-		SELECT max(IMAGE_CONTENT) as imageCount FROM CH_IMAGE WHERE IS_RELEASE=1
+	<select id="queryImageByReleasedCount" resultType="int">
+		SELECT count(IMAGE_CONTENT) as imageCount FROM CH_IMAGE WHERE IS_RELEASE=1
 	</select>
 	
 	<select id="queryImages" resultType="com.hf.ciker.vo.ImageVO">
@@ -24,7 +24,7 @@
 	</select>
 	
 	<insert id="saveImage" parameterType="com.hf.ciker.vo.ImageVO" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO CH_IMAGE(IMAGE_TITLE,IMAGE_CONTENT,CREATE_BY,CREATE_DATE,IS_RELEASE) VALUES(#{imageTitle,jdbcType=VARCHAR},#{imageContent,jdbcType=VARCHAR},#{CREATE_BY,jdbcType=BIGINT},now(), #{IS_RELEASE,jdbcType=BIGINT})
+		INSERT INTO CH_IMAGE(IMAGE_TITLE,IMAGE_CONTENT,CREATE_BY,CREATE_DATE) VALUES(#{imageTitle,jdbcType=VARCHAR},#{imageContent,jdbcType=VARCHAR},#{createBy,jdbcType=BIGINT},now())
 	</insert>
 	
 	<update id="releaseImage">
@@ -41,6 +41,12 @@
             #{item}
         </foreach>
 	</update>
+	<delete id="batchDeleteImage" parameterType="list">
+	 delete from  CH_IMAGE  where IMAGE_ID in
+ 		<foreach collection="imageIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+	</delete>
 	
 	<update id="batchUnReleaseImage" parameterType="list">
 	 update CH_IMAGE set IS_RELEASE=0 where IMAGE_ID in

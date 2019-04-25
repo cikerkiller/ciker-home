@@ -17,6 +17,8 @@ public interface IImageService {
 	
 	ServerResponse<String> batchReleaseImage(List<Long> imageIds);
 	
+	ServerResponse<String> batchDeleteImage(List<Long> imageIds);
+	
 	ServerResponse<String> batchUnReleaseImage(List<Long> imageIds);
 	
 	ServerResponse<PageInfo<ImageVO>> queryImages(Integer pageNum,Integer pageSize);

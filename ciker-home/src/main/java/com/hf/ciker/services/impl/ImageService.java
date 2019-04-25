@@ -62,7 +62,7 @@ public class ImageService implements IImageService{
 		}
 		int status = imageDao.batchReleaseImage(imageIds);
 		if (status > 0) {
-			return ServerResponse.createBySuccessMessage("图片批量发布成功");
+			return ServerResponse.createBySuccess("图片批量发布成功");
 		}
 		return ServerResponse.createByErrorMessage("图片批量发布失败");
 	}
@@ -71,7 +71,7 @@ public class ImageService implements IImageService{
 	public ServerResponse<String> batchUnReleaseImage(List<Long> imageIds) {
 		int status = imageDao.batchUnReleaseImage(imageIds);
 		if (status > 0) {
-			return ServerResponse.createBySuccessMessage("图片批量下架成功");
+			return ServerResponse.createBySuccess("图片批量下架成功");
 		}
 		return ServerResponse.createByErrorMessage("图片批量下架失败");
 	}
@@ -90,6 +90,15 @@ public class ImageService implements IImageService{
 		ImageListVO imageListVO = new ImageListVO();
 		imageListVO.setList(imageByReleaseds);
 		return ServerResponse.createBySuccess(imageListVO);
+	}
+
+	@Override
+	public ServerResponse<String> batchDeleteImage(List<Long> imageIds) {
+		int status = imageDao.batchDeleteImage(imageIds);
+		if (status > 0) {
+			return ServerResponse.createBySuccess("图片删除成功");
+		}
+		return ServerResponse.createByErrorMessage("图片删除失败");
 	}
 
 }
