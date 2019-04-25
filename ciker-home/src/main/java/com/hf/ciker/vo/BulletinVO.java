@@ -2,11 +2,15 @@ package com.hf.ciker.vo;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 public class BulletinVO {
 	private Long bulletinId;
 	private String bulletinContent;
 	private Long createBy;
+	private String creator;
 	private Date createDate;
+	private String creationdate;
 	private int isBulletin;
 	public Long getBulletinId() {
 		return bulletinId;
@@ -37,6 +41,18 @@ public class BulletinVO {
 	}
 	public void setIsBulletin(int isBulletin) {
 		this.isBulletin = isBulletin;
+	}
+	public String getCreator() {
+		return creator;
+	}
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+	public String getCreationdate() {
+		return DateFormatUtils.format(createDate==null?new Date():createDate, "yyyy-MM-dd hh:mm:ss");
+	}
+	public void setCreationdate(String creationdate) {
+		this.creationdate =  creationdate;
 	}
 	
 }

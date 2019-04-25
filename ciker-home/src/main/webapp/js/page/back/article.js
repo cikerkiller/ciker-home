@@ -70,6 +70,7 @@ var articleManage = {
         	_this.changeSelectHtml("三级分类");
         	_this.queryClassifys($(".classify-select-three"),classifyId);
         });
+        $(document).off('click', '.add-editor');
         $(document).on('click', '.add-editor', function(){
         	// 初始化
         	$(".model-article-id").val("");
@@ -80,6 +81,7 @@ var articleManage = {
     		$("#myModal").modal('show');
     		_this.queryClassifys( $(".classify-select"),0);
         });
+        $(document).off('click', '.article-single-recommend-btn');
         $(document).on('click', '.article-single-recommend-btn', function(){
         	var recommend = $(this).data('value');
         	if(recommend == _this.data.recommendParam.recommend){

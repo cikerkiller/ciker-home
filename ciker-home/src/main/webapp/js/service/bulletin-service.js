@@ -13,7 +13,7 @@ var bulletin = {
 	},	
 	addBulletin : function(listParam,resolve,reject){
 		ciker.request({
-			url : ciker.getServerUrl('/it/bulletin/addBulletin.do'),
+			url : ciker.getServerUrl('/it/back/bulletin/addBulletin.do'),
 			method : 'POST',
 			data    : listParam,
 			success : resolve,
@@ -22,7 +22,7 @@ var bulletin = {
 	},
 	queryBulletins : function(listParam,resolve,reject){
 		ciker.request({
-			url : ciker.getServerUrl('/it/bulletin/queryBulletins.do'),
+			url : ciker.getServerUrl('/it/back/bulletin/queryBulletins.do'),
 			method : 'POST',
 			data    : listParam,
 			success : resolve,
@@ -31,7 +31,16 @@ var bulletin = {
 	},
 	releaseBulletin : function(listParam,resolve,reject){
 		ciker.request({
-			url : ciker.getServerUrl('/it/bulletin/releaseBulletin.do'),
+			url : ciker.getServerUrl('/it/back/bulletin/releaseBulletin.do'),
+			method : 'POST',
+			data    : listParam,
+			success : resolve,
+			error :reject
+		});
+	},
+	deleteBulletin : function(listParam,resolve,reject){
+		ciker.request({
+			url : ciker.getServerUrl('/it/back/bulletin/deleteBulletin.do'),
 			method : 'POST',
 			data    : listParam,
 			success : resolve,

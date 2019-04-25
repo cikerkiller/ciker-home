@@ -7,24 +7,33 @@
 		IS_BULLETIN=1 ORDER BY create_date DESC LIMIT 1
 	</select>
 
-	<select id="queryBulletins">
-		SELECT BULLETIN_ID as bulletinId,
-		BULLETIN_CONTENT AS bulletinContent,
-		CREATE_BY as createBy,
-		CREATE_DATE as createDate,
-		IS_BULLETIN as isBulletin FROM CH_BULLETIN ORDER BY create_date DESC
+	<select id="queryBulletins" resultType="com.hf.ciker.vo.BulletinVO">
+		SELECT t1.BULLETIN_ID as bulletinId,
+		t1.BULLETIN_CONTENT AS bulletinContent,
+		t2.creator as creator,
+		t1.CREATE_DATE as createDate,
+		IS_BULLETIN as isBulletin FROM CH_BULLETIN t1
+		LEFT JOIN 
+		(SELECT USER_ID,USERNAME AS creator FROM CH_USER) t2 ON t1.CREATE_BY = t2.user_id
+		ORDER BY create_date DESC
 	</select>
 
 	<insert id="addBulletin" parameterType="com.hf.ciker.vo.BulletinVO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into CH_BULLETIN (BULLETIN_CONTENT,
-		CREATE_BY,CREATE_DATE,IS_BULLETIN)
+		CREATE_BY,CREATE_DATE)
 		values (#{bulletinContent,jdbcType=VARCHAR},
-		#{CREATE_BY,jdbcType=BIGINT},now(), #{IS_BULLETIN,jdbcType=BIGINT})
+		#{createBy,jdbcType=BIGINT},now())
 	</insert>
 
-	<update id="releaseBulletin">
-		UPDATE CH_BULLETIN SET IS_BULLETIN=1 WHERE
+	<update id="releaseBulletin" parameterType="com.hf.ciker.vo.ArticleVO">
+		UPDATE CH_BULLETIN SET IS_BULLETIN=#{isBulletin,jdbcType=BIGINT} WHERE
 		BULLETIN_ID=#{bulletinId,jdbcType=BIGINT}
 	</update>
+	 <delete id="deleteBulletin" parameterType="list">
+		delete from CH_BULLETIN where BULLETIN_ID in
+ 		<foreach collection="bulletinIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

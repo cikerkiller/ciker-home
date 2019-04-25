@@ -40,18 +40,27 @@ public class BulletinService implements IBulletinService {
 	public ServerResponse<String> addBulletin(BulletinVO bulletinVO) {
 		int status = bulletinDao.addBulletin(bulletinVO);
 		if (status > 0) {
-			return ServerResponse.createBySuccessMessage("公告成功");
+			return ServerResponse.createBySuccess("公告成功");
 		}
 		return ServerResponse.createByErrorMessage("公告失败");
 	}
 
 	@Override
-	public ServerResponse<String> releaseBulletin(Long bulletinId) {
-		int status = bulletinDao.releaseBulletin(bulletinId);
+	public ServerResponse<String> releaseBulletin(BulletinVO bulletinVO) {
+		int status = bulletinDao.releaseBulletin(bulletinVO);
 		if (status > 0) {
-			return ServerResponse.createBySuccessMessage("公告发布成功");
+			return ServerResponse.createBySuccess("公告发布成功");
 		}
 		return ServerResponse.createByErrorMessage("公告发布失败");
+	}
+
+	@Override
+	public ServerResponse<String> deleteBulletin(List<Long> bulletinIds) {
+		int status = bulletinDao.deleteBulletin(bulletinIds);
+		if (status > 0) {
+			return ServerResponse.createBySuccess("公告删除成功");
+		}
+		return ServerResponse.createByErrorMessage("公告删除失败");
 	}
 
 }

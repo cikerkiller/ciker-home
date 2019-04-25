@@ -2,6 +2,8 @@ package com.hf.ciker.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hf.ciker.vo.BulletinVO;
 
 public interface IBulletinDao {
@@ -12,5 +14,7 @@ public interface IBulletinDao {
 	
 	int addBulletin(BulletinVO bulletinVO);
 	
-	int releaseBulletin(Long bulletinId);
+	int releaseBulletin(BulletinVO bulletinVO);
+	
+	int deleteBulletin(@Param("bulletinIds") List<Long> bulletinIds);
 }

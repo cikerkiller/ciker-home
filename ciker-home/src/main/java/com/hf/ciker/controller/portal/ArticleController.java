@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.services.IArticleService;
+import com.hf.ciker.vo.ArticleVO;
 import com.hf.ciker.vo.DetailsArticleVO;
 import com.hf.ciker.vo.HotRankListVO;
 import com.hf.ciker.vo.RecommendVO;
@@ -73,7 +74,13 @@ public class ArticleController {
 		return articleService.queryRecommendArticle();
 	}
 	
-	
+	@RequestMapping(value="searchArticleByName.do",method = RequestMethod.POST)
+	@ResponseBody
+	public ServerResponse<PageInfo<ArticleVO>> searchArticleByName( HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,
+			@RequestParam(value="pageSize",defaultValue="10") Integer pageSize,String articleName) {
+		return articleService.selectArticleByName(pageNum,pageSize,articleName);
+		
+	}
 	
 	
 }

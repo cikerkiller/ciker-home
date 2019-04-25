@@ -36,7 +36,7 @@
 					<div class="form-group">
 						<input type="text" class="form-control search" placeholder="Search">
 					</div>
-					<button type="submit" class="btn btn-default article-search">搜索</button>
+					<a type="submit" class="btn btn-default article-search">搜索</a>
 				</form>
 
 			</div>

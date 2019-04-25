@@ -39,14 +39,9 @@ var portal = {
         });
     },
     searchArticle : function(articleName){
-    	var _this = this,
-    	$listCon        	= $('.articleDetail');
-    	portal.data.listParam.articleName = articleName;
-    	if(articleName==null || articleName == '' || articleName==undefined){
-    		portal.init();
-    	}else{
-    		article.selectArticleByName(portal.data.listParam,function(res){
-    			// 渲染html
+        	portal.data.listParam.articleName=articleName;
+        	article.searchArticleByName(portal.data.listParam,function(res){
+        		// 渲染html
             	var artileListHtml = ciker.renderHtml(articleList.pageHtml.artileListHtml, res);
             	$(".content-container").html(artileListHtml);
             	$('.toptip-container').hide();
@@ -66,10 +61,11 @@ var portal = {
                         portal.searchArticle(articleName);
                     }
                 });
-    		},function(msg){
-    			$(".content-container").html('<p class="err-tip">加载失败，请刷新后重试</p>');
-    		});
-    	}
+        		
+        	},function(errMsg){
+        		$(".content-container").html('<p class="err-tip">加载失败，请刷新后重试</p>');
+        	});
+    		
     },
     searchArticleByClassifyId : function(classifyId){
     	var _this = this;
