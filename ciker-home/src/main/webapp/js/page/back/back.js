@@ -26,6 +26,14 @@ var back = {
 			_this.loadNavMenu({menuId : menuId});
 			
         });
+        $(document).on('click', '.logout', function(){
+        	$listCon        	= $('.nav-menu');
+        	_user.logout(function(res){
+        		window.location.href = "login.jsp";
+        	},function(msg){
+        		$listCon.html('<p class="err-tip">加载失败，请刷新后重试</p>');
+        	});
+        });
     },
     loadNavMenu : function(param){
     	var _this           = this,
@@ -46,7 +54,13 @@ var back = {
     },
     onLoadWelcomeHtml:function(){
     	$('.nav-menu').html("<h3>欢迎来到刺客空间!</h3>");
-    	/*$('#container').load("menu.jsp");*/
+    	var date = new Date();
+    	var year = date.getFullYear();
+    	var next;
+    	if(year == 2019){
+    		next = '?';
+    	}
+    	$('.copyright').html("<strong>Copyright &copy; "+year+"-"+next+" <a href=\"#\">hfeitech</a>.</strong> All rights reserved.");
     },
     onLoadHtml:function(){
     	this.pageHtml.menuHtml				 = 	$('.sidebar-menu').html();

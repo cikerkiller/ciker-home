@@ -15,7 +15,7 @@ import com.hf.ciker.vo.UserVO;
 
 @Controller
 @RequestMapping("/user/back")
-public class LoginController {
+public class UserController {
 	
 	 @Autowired
 	 private IUserService iUserService;
@@ -29,6 +29,12 @@ public class LoginController {
             return ServerResponse.createBySuccess(response.getData().getUsername());
         }
          return ServerResponse.createByError();
+	}
+	@RequestMapping(value="logout.do",method = RequestMethod.GET)
+	@ResponseBody
+	public ServerResponse<String> logout(HttpSession session) {
+		session.removeAttribute(CikerConstant.CURRENT_USER);
+		return ServerResponse.createBySuccess();
 	}
 	
 }

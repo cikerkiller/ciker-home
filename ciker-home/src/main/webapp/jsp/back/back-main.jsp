@@ -9,6 +9,7 @@
 <script type="text/javascript" src="../../js/utils/adminlte.js"></script>
 <script type="text/javascript" src="../../js/utils/Hogan.js"></script>
 <script type="text/javascript" src="../../js/service/menu-service.js"></script>
+<script type="text/javascript" src="../../js/service/user-service.js"></script>
 <script type="text/javascript" src="../../js/utils/ciker.js"></script>
 <script type="text/javascript" src="../../js/page/back/back.js"></script>
 
@@ -47,32 +48,13 @@
 							<ul class="dropdown-menu">
 								<li class="user-header">
 									<img src="../../img/1.png" class="img-circle" alt="User Image">
-									<p>
-										Alexander Pierce - Web Developer 
-										<small>Member since Nov. 2012</small>
-									</p>
 								</li>
-								<!-- Menu Body -->
-								<li class="user-body">
-									<div class="row">
-										<div class="col-xs-4 text-center">
-											<a href="#">Followers</a>
-										</div>
-										<div class="col-xs-4 text-center">
-											<a href="#">Sales</a>
-										</div>
-										<div class="col-xs-4 text-center">
-											<a href="#">Friends</a>
-										</div>
-									</div> 
-								</li>
-								
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="#" class="btn btn-default btn-flat">Profile</a>
+										<a href="#" class="btn btn-default btn-flat">userInfo</a>
 									</div>
 									<div class="pull-right">
-										<a href="#" class="btn btn-default btn-flat">Sign out</a>
+										<a href="#" class="btn btn-default btn-flat logout">Sign out</a>
 									</div>
 								</li>
 							</ul>
@@ -111,12 +93,7 @@
 		</div>
 		
 		<!-- Main Footer -->
-		<footer class="main-footer">
-			<!-- To the right -->
-			<div class="pull-right hidden-xs">Anything you want</div>
-			<strong>
-				Copyright &copy; 2016 <a href="#">Company</a>.
-			</strong> All rights reserved.
+		<footer class="main-footer copyright">
 		</footer>
 	</div>
 </body>

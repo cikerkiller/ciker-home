@@ -1,5 +1,8 @@
 package com.hf.ciker.dao;
 
-public interface IArticleLikeDao {
+import org.apache.ibatis.annotations.Param;
 
+public interface IArticleLikeDao {
+	int selectLikeCount(@Param("articleId")Long articleId,@Param("userId")Long userId);
+	int insertLike(@Param("articleId")Long articleId,@Param("userId")Long userId);
 }

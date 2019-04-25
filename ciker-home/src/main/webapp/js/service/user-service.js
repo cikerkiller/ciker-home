@@ -5,8 +5,8 @@ var _user = {
 	//登出
 	logout : function(resolve,reject){
 		ciker.request({
-			url : ciker.getServerUrl('/user/logout.do'),
-			method : 'POST',
+			url : ciker.getServerUrl('/user/back/logout.do'),
+			method : 'GET',
 			success : resolve,
 			error :reject
 		});
@@ -22,10 +22,9 @@ var _user = {
 		});
 		
 	},
-	//检查登陆状态
-	checkLogin : function(resolve,reject){
+	getUserInfo : function(resolve,reject){
 		ciker.request({
-			url : ciker.getServerUrl('/user/get_user_info.do'),
+			url : ciker.getServerUrl('/user/back/get_user_info.do'),
 			method : 'POST',
 			success : resolve,
 			error :reject

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hf.ciker.dao.IArticleLikeDao" >
+  <select id="selectLikeCount" resultType="int">
+    select 
+    count(1)
+    from CH_ARTICLE_LIKE
+    where ARTICLE_ID = #{articleId,jdbcType=BIGINT} and LIKE_PEOPLE_ID=#{userId,jdbcType=BIGINT}
+  </select>
+  
+  <insert id="insertLike" parameterType="com.hf.ciker.vo.ArticleLikeVO"  useGeneratedKeys="true" keyProperty="id">
+    insert into CH_ARTICLE_LIKE (ARTICLE_ID, LIKE_PEOPLE_ID, 
+      LIKE_DATE)
+    values (#{articleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      now())
+  </insert>
+</mapper>
