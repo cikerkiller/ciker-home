@@ -155,10 +155,10 @@
 		(SELECT USER_ID,USERNAME  AS lastupdateor FROM CH_USER) t5 ON t1.LAST_UPDATE_BY=t5.user_id
 		LEFT JOIN 
 		(SELECT classify_id ,classify_name FROM CH_CLASSIFY_INFO) t6 ON t1.classify_id=t6.classify_id
-	    where STATUS = 1 and  
+	    where 
 	    	t1.ARTICLE_TITLE LIKE CONCAT('%',#{articleTitle,jdbcType=VARCHAR},'%')
 	    	 OR
-	    	t1.CONTENT LIKE CONCAT('%',#{articleTitle,jdbcType=LONGVARCHAR},'%')
+	    	t1.CONTENT LIKE CONCAT('%',#{articleTitle,jdbcType=LONGVARCHAR},'%') and STATUS = 1 
   </select>
   
   <update id="deleteArticle" parameterType="long">
