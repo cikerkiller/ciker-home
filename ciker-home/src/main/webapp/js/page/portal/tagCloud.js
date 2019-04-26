@@ -7,6 +7,11 @@ var tagCloud = {
     },
     bindEvent : function(){
         var _this = this;
+        $(document).off('click','.tag-a');
+        $(document).on('click','.tag-a',function(){
+        	var tagName = $(this).text();
+        	portal.searchArticle(tagName);
+        });
     },
     onLoad : function(){
     	this.onLoadHtml();

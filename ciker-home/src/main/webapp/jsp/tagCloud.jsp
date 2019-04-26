@@ -14,7 +14,7 @@
 		<div class="divider"></div>
 		<div class="panel-body tag-cloud-body">
 			{{#tagList}}
-			<span class="label label-success"><a href="#">{{tagName}}</a></span> 
+			<span class="label label-success"><a class="tag-a" href="#">{{tagName}}</a></span> 
 			{{/tagList}}
 		</div>
 	</div>
