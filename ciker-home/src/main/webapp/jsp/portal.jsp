@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,user-scalable=yes">
 <title>portal</title>
 <script type="text/javascript" src="../js/utils/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="../js/utils/bootstrap.min.js"></script>
