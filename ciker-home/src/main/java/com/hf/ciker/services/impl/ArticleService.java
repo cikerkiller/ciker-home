@@ -164,7 +164,7 @@ public class ArticleService implements IArticleService{
 		PageHelper.startPage(pageNum,pageSize);
 	    List<ArticleVO> articleVOs = articleDao.selectArticleByName(articleName);
         PageInfo<ArticleVO> pageResult = new PageInfo<ArticleVO>(articleVOs);
-			return ServerResponse.createBySuccess(pageResult);
+		return ServerResponse.createBySuccess(pageResult);
 	}
 
 	@Override
