@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hf.ciker.dao.ITagDao">
 	<sql id="Base_Column_List">
-		TAG_ID, TAG_NAME, TAG_NUMBER, ARTICLE_ID
+		TAG_ID, TAG_NAME, TAG_NUMBER
 	</sql>
 	<select id="selectByPrimaryKey" resultType="com.hf.ciker.vo.TagVO"
 		parameterType="java.lang.Long">
@@ -16,11 +16,9 @@
 		where TAG_ID = #{tagId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.hf.ciker.vo.TagVO"  useGeneratedKeys="true" keyProperty="id">
-		insert into CH_TAG (TAG_NAME, TAG_NUMBER,
-		ARTICLE_ID)
+		insert into CH_TAG (TAG_NAME, TAG_NUMBER)
 		values (#{tagName,jdbcType=VARCHAR},
-		#{tagNumber,jdbcType=BIGINT},
-		#{articleId,jdbcType=BIGINT})
+		#{tagNumber,jdbcType=BIGINT})
 	</insert>
 	<insert id="insertSelective" parameterType="com.hf.ciker.vo.TagVO"  useGeneratedKeys="true" keyProperty="id">
 		insert into CH_TAG
@@ -31,9 +29,7 @@
 			<if test="tagNumber != null">
 				TAG_NUMBER,
 			</if>
-			<if test="articleId != null">
-				ARTICLE_ID,
-			</if>
+			
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="tagName != null">
@@ -42,9 +38,7 @@
 			<if test="tagNumber != null">
 				#{tagNumber,jdbcType=BIGINT},
 			</if>
-			<if test="articleId != null">
-				#{articleId,jdbcType=BIGINT},
-			</if>
+			
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.hf.ciker.vo.TagVO">
@@ -56,17 +50,15 @@
 			<if test="tagNumber != null">
 				TAG_NUMBER = #{tagNumber,jdbcType=BIGINT},
 			</if>
-			<if test="articleId != null">
-				ARTICLE_ID = #{articleId,jdbcType=BIGINT},
-			</if>
+			
 		</set>
 		where TAG_ID = #{tagId,jdbcType=BIGINT}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.hf.ciker.vo.TagVO">
 		update CH_TAG
 		set TAG_NAME = #{tagName,jdbcType=VARCHAR},
-		TAG_NUMBER = #{tagNumber,jdbcType=BIGINT},
-		ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+		TAG_NUMBER = #{tagNumber,jdbcType=BIGINT}
+		
 		where TAG_ID = #{tagId,jdbcType=BIGINT}
 	</update>
 	

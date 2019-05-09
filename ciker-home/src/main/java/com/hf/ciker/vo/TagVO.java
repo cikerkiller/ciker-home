@@ -8,8 +8,6 @@ public class TagVO {
 
     private Long tagNumber;
 
-    private Long articleId;
-
     public Long getTagId() {
         return tagId;
     }
@@ -32,13 +30,5 @@ public class TagVO {
 
     public void setTagNumber(Long tagNumber) {
         this.tagNumber = tagNumber;
-    }
-
-    public Long getArticleId() {
-        return articleId;
-    }
-
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
     }
 }
