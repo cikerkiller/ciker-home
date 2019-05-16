@@ -24,7 +24,8 @@ public class BackInterceptor extends HandlerInterceptorAdapter {
 			if(user != null){
 				return true;
 			}else {
-				response.sendRedirect("../../jsp/back/login.jsp");
+				response.sendRedirect("../../../jsp/back/login.jsp");
+//				request.getRequestDispatcher("../../../jsp/back/login.jsp").forward(request,response);
 				return false;
 			}
 		}else {

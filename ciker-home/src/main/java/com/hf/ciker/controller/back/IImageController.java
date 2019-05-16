@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.hf.ciker.common.CikerConstant;
 import com.hf.ciker.common.ServerResponse;
+import com.hf.ciker.services.IFileService;
 import com.hf.ciker.services.IImageService;
 import com.hf.ciker.vo.ImageListVO;
 import com.hf.ciker.vo.ImageVO;
@@ -25,6 +26,9 @@ public class IImageController {
 	
 	@Autowired
 	private IImageService imageService;
+	
+	@Autowired
+	private IFileService iFileService;
 	
 	@RequestMapping(value="saveImage.do",method = RequestMethod.POST)
 	@ResponseBody
@@ -66,4 +70,21 @@ public class IImageController {
 	public ServerResponse<ImageListVO> queryImageByReleased()  {
 		return imageService.queryImageByReleased();
 	}
+	
+	/*@RequestMapping(value="upload.do",method=RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse upload(HttpSession session,@RequestParam(value = "upload_file",required = false) MultipartFile file,HttpServletRequest request){
+        User user = (User)session.getAttribute(CikerConstant.CURRENT_USER);
+        if(user == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
+        }
+        String path = request.getSession().getServletContext().getRealPath("upload");
+        String targetFileName = iFileService.upload(file,path);
+        String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
+
+        Map fileMap = Maps.newHashMap();
+        fileMap.put("uri",targetFileName);
+        fileMap.put("url",url);
+        return ServerResponse.createBySuccess(fileMap);
+    }*/
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 import com.hf.ciker.common.CikerConstant;
+import com.hf.ciker.common.ResponseCode;
 import com.hf.ciker.common.ServerResponse;
 import com.hf.ciker.services.IArticleService;
 import com.hf.ciker.vo.ArticleVO;
@@ -87,26 +88,23 @@ public class ArticleMadminController {
 	@RequestMapping(value="recommendArticle.do",method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<String> recommendArticle( HttpSession session,@RequestParam(value="articleId")Long articleId,@RequestParam(value="recommend")Integer recommend) {
-		/*UserVO user = (UserVO) session.getAttribute(CikerConstant.CURRENT_USER);
+		UserVO user = (UserVO) session.getAttribute(CikerConstant.CURRENT_USER);
         if(user != null){
         	return articleService.recommendArticle(user.getUserId(),articleId,recommend);
         }else {
         	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "请先登陆系统");
-        }*/
-        return articleService.recommendArticle(new Long(12),articleId,recommend);
+        }
 		
 	}
 	@RequestMapping(value="changeArticleStatus.do",method = RequestMethod.POST)
 	@ResponseBody
 	public ServerResponse<String> changeArticleStatus( HttpSession session,@RequestParam(value="articleId")Long articleId,@RequestParam(value="articleStatus")Integer articleStatus) {
-		/*UserVO user = (UserVO) session.getAttribute(CikerConstant.CURRENT_USER);
+		UserVO user = (UserVO) session.getAttribute(CikerConstant.CURRENT_USER);
         if(user != null){
-        	return articleService.recommendArticle(user.getUserId(),articleId,recommend);
+        	return articleService.changeArticleStatus(user.getUserId(),articleId,articleStatus);
         }else {
         	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "请先登陆系统");
-        }*/
-		return articleService.changeArticleStatus(new Long(12),articleId,articleStatus);
-		
+        }
 	}
 	@RequestMapping(value="selectArticleDetailsById.do",method = RequestMethod.POST)
 	@ResponseBody

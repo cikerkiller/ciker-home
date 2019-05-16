@@ -13,6 +13,15 @@ var imageService = {
 	},	
 	saveImage : function(listParam,resolve,reject){
 		ciker.request({
+			url : ciker.getServerUrl('/it/image/upload.do'),
+			method : 'POST',
+			data    : listParam,
+			success : resolve,
+			error :reject
+		});
+	},
+/*	saveImage : function(listParam,resolve,reject){
+		ciker.request({
 			url : ciker.getServerUrl('/it/image/saveImage.do'),
 			method : 'POST',
 			data    : listParam,
@@ -20,7 +29,7 @@ var imageService = {
 			error :reject
 		});
 	},
-	releaseImage : function(listParam,resolve,reject){
+*/	releaseImage : function(listParam,resolve,reject){
 		ciker.request({
 			url : ciker.getServerUrl('/it/image/releaseImage.do'),
 			method : 'POST',

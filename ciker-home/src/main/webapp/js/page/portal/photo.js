@@ -8,12 +8,12 @@ var photoShow = {
     bindEvent : function(){
         var _this = this;
         $(document).on('mouseover','#myCarousel',function(){
-        	$(".self-glyphicon").show();
+        	$(".carousel-control").show();
         	$(".carousel-indicators").show();
         	$(".carousel-caption").show();
         });
         $(document).on('mouseout','#myCarousel',function(){
-        	$(".self-glyphicon").hide();
+        	$(".carousel-control").hide();
         	$(".carousel-indicators").hide();
         	$(".carousel-caption").hide();
         });

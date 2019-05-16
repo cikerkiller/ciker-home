@@ -24,6 +24,12 @@ public class TagService implements ITagService{
 		tagListVO.setTagList(tagCloud);
 		return ServerResponse.createBySuccess(tagListVO);
 	}
+
+	@Override
+	public void tagParticiple() {
+		
+		
+	}
 	
 	
 	

@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="../css/portal/articleList.css" />
 </head>
 <div class="col-sm-12 articleList">
+
 	{{#list}}
 	<div class="panel panel-default articile">
 		<div class="panel-heading">
@@ -20,30 +21,31 @@
 			<p class="article-auth">
 				<span class="article-auth-element">
 					<a class="article-auth-user">
-					<i class="fa fa-user"></i>
-					<span>{{creatior}}</span>
-				</a>
+						<i class="fa fa-user"></i>
+						<span>{{creatior}}</span>
+					</a>
 				</span>
 				<span class="article-auth-element">
 					<i class="fa fa-clock-o"></i>
 					<span class="article-auth-time">{{lastUpdateDate}}</span>
 				</span>
+				
 				<span class="article-auth-element">
 					<span class="article-auth-scan">
 						<i class="fa fa-eye"></i>
 						<span class="count">{{viewingCount}}</span>
 						浏览
 					</span>
-					
 				</span>
+				
 				<span class="article-auth-element">
 					<span class="article-auth-comment">
 						<i class="fa fa-comments-o"></i>
 						<span class="count">{{commentNumber}}</span>
 						评论
 					</span>
-					
 				</span>
+				
 				<span class="article-auth-element">
 					<a class="article-auth-like">
 						<input type="hidden" value="{{articleId}}"/>
@@ -51,9 +53,12 @@
 						<span class="count">{{likeNumber}}</span>点赞
 					</a>
 				</span>
+				
 			</p>
 		</div>
+		
 	</div>
+	
 	{{/list}}
 	<div class="pg-content">
 		<nav aria-label="Page navigation">
