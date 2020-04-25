@@ -77,7 +77,10 @@ public class FTPUtil {
         return isSuccess;
     }
 
-
+public static void main(String[] args) {
+	LogUtil.info("this a : {}", 11231);
+	
+}
 
 
 
